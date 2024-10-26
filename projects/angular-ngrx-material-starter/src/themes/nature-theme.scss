@@ -1,0 +1,14 @@
+@use '@angular/material' as mat;
+
+$anms-nature-theme: mat.define-theme(
+  (
+    color: (
+      primary: mat.$spring-green-palette,
+      tertiary: mat.$orange-palette
+    )
+  )
+);
+
+html .nature-theme {
+  @include mat.all-component-colors($anms-nature-theme);
+}

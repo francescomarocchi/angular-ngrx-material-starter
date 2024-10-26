@@ -1,0 +1,24 @@
+@use '@angular/material' as mat;
+
+$anms-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$yellow-palette
+    ),
+    typography: (
+      brand-family: '"Playwrite GB S", sans-serif',
+      plain-family: '"Playwrite GB S", sans-serif',
+      bold-weight: 900
+    ),
+    density: (
+      scale: 0
+    )
+  )
+);
+
+html {
+  @include mat.all-component-themes($anms-theme);
+  @include mat.all-component-typographies($anms-theme);
+}

@@ -1,0 +1,33 @@
+@use '@angular/material' as mat;
+
+@mixin anms-todos-container-component-theme($theme) {
+  $accent: map-get($theme, accent);
+
+  .todos-filter-menu-overlay {
+    .active {
+      color: mat.get-theme-color($theme, on-primary);
+      background-color: mat.get-theme-color($theme, primary);
+
+      .fa-icon {
+        color: mat.get-theme-color($theme, surface);
+      }
+
+      &:hover {
+        color: mat.get-theme-color($theme, on-secondary-container);
+        background-color: mat.get-theme-color($theme, secondary-container);
+      }
+    }
+  }
+
+  .todos-notification-overlay {
+    .mat-simple-snackbar {
+      align-items: center;
+
+      button {
+        border-radius: 2px;
+        background-color: mat.get-theme-color($theme, primary);
+        color: mat.get-theme-color($theme, on-primary);
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+
+@mixin anms-styles-reset-theme($theme) {
+  a {
+    color: mat.get-theme-color($theme, primary);
+
+    &:hover {
+      color: mat.get-theme-color($theme, primary-container);
+    }
+  }
+
+  code {
+    color: mat.get-theme-color($theme, secondary);
+    background-color: mat.get-theme-color($theme, secondary-container);
+  }
+
+  p {
+    a {
+      color: mat.get-theme-color($theme, primary);
+
+      &:hover {
+        color: mat.get-theme-color($theme, primary-container);
+      }
+    }
+  }
+}

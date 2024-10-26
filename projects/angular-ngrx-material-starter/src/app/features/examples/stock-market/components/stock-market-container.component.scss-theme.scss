@@ -1,0 +1,17 @@
+@use '@angular/material' as mat;
+
+@mixin anms-stock-market-container-component-theme($theme) {
+  anms-stock-market {
+    mat-card {
+      .negative {
+        color: mat.get-theme-color($theme, on-primary);
+      }
+    }
+
+    .error-state {
+      fa-icon {
+        color: mat.get-theme-color($theme, on-primary);
+      }
+    }
+  }
+}

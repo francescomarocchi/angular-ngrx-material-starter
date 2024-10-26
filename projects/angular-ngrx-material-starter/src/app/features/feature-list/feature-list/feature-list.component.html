@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 rtl class="main-heading">{{ 'anms.features.title' | translate }}</h1>
+    </div>
+  </div>
+  <div class="row align-items-end">
+    @for (feature of features; track feature) {
+      <div class="col-md-6 col-lg-4" [ngClass]="routeAnimationsElements">
+        <mat-card>
+          <mat-card-title>
+            @if (feature.version) {
+              <code>{{ feature.version }}</code>
+            }{{ feature.name | translate }}
+          </mat-card-title>
+          <mat-card-subtitle rtl>
+            {{ feature.description | translate }}
+          </mat-card-subtitle>
+          <mat-card-actions>
+            @if (feature.github) {
+              <a mat-button [href]="feature.github" rel="noopener noreferrer" target="_blank">
+                <fa-icon [icon]="['fab','github']"></fa-icon>
+              </a>
+            }
+            <a mat-button [href]="feature.documentation" rel="noopener noreferrer" target="_blank">
+              <fa-icon icon="book"></fa-icon>
+              {{ 'anms.features.documentation' | translate }}
+            </a>
+            @if (feature.medium) {
+              <a mat-button [href]="feature.medium" rel="noopener noreferrer" target="_blank">
+                <fa-icon [icon]="['fab','medium-m']"></fa-icon>
+                {{ 'anms.features.guide' | translate }}
+              </a>
+            }
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    }
+  </div>
+</div>

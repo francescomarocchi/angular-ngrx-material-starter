@@ -1,0 +1,53 @@
+@use '@angular/material' as mat;
+
+@mixin anms-about-component-theme($theme) {
+  anms-about {
+    .background {
+      color: mat.get-theme-color($theme, on-primary);
+      background-color: mat.get-theme-color($theme, primary);
+
+      .gradient {
+        &::before {
+          background: linear-gradient(
+            to bottom,
+            transparent 0%,
+            mat.get-theme-color($theme, surface) 100%
+          );
+        }
+      }
+    }
+
+    .actions {
+      a {
+        color: mat.get-theme-color($theme, primary);
+        background-color: mat.get-theme-color($theme, primary-container);
+
+        &:hover {
+          color: mat.get-theme-color($theme, on-primary);
+          background-color: mat.get-theme-color($theme, primary);
+        }
+      }
+    }
+
+    .follow-releases,
+    .contributors {
+      p {
+        background-color: mat.get-theme-color($theme, surface);
+
+        a {
+          color: mat.get-theme-color($theme, on-surface);
+
+          &:hover {
+            color: mat.get-theme-color($theme, secondary);
+          }
+        }
+      }
+    }
+
+    .contributors {
+      img {
+        border-color: mat.get-theme-color($theme, primary-container) !important;
+      }
+    }
+  }
+}

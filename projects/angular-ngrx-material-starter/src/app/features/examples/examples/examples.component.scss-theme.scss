@@ -1,0 +1,22 @@
+@use '@angular/material' as mat;
+
+@mixin anms-examples-component-theme($theme) {
+  anms-examples {
+    .nav-responsive {
+      border-bottom: 1px solid mat.get-theme-color($theme, primary);
+
+      mat-select {
+        line-height: 48px;
+        margin: 0 20px;
+        width: 100%;
+      }
+    }
+  }
+
+  .nav-responsive-overlay {
+    .active {
+      color: mat.get-theme-color($theme, on-primary);
+      background-color: mat.get-theme-color($theme, primary);
+    }
+  }
+}

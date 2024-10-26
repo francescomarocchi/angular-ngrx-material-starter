@@ -1,0 +1,52 @@
+@use '@angular/material' as mat;
+
+@mixin anms-app-component-theme($theme) {
+  mat-sidenav-container {
+    mat-toolbar {
+      color: mat.get-theme-color($theme, primary);
+      background-color: mat.get-theme-color($theme, primary-container);
+
+      button {
+        &.active {
+          color: mat.get-theme-color($theme, primary-container);
+          background-color: mat.get-theme-color($theme, primary);
+        }
+      }
+
+      .link {
+        color: mat.get-theme-color($theme, primary);
+      }
+    }
+
+    mat-sidenav {
+      .mat-list-item {
+        &.active {
+          color: mat.get-theme-color($theme, primary);
+          background-color: mat.get-theme-color($theme, primary-container);
+
+          &:hover {
+            background-color: mat.get-theme-color(
+              $theme,
+              on-primary-container
+            ) !important;
+          }
+        }
+      }
+    }
+
+    .footer {
+      color: mat.get-theme-color($theme, primary);
+      background-color: mat.get-theme-color($theme, primary-container);
+
+      .links,
+      .signature {
+        a {
+          color: mat.get-theme-color($theme, primary);
+          &:hover {
+            color: mat.get-theme-color($theme, on-primary-container);
+          }
+        }
+      }
+    }
+  }
+}

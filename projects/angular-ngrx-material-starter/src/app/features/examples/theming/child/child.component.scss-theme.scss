@@ -1,0 +1,13 @@
+@use '@angular/material' as mat;
+
+@mixin anms-child-component-theme($theme) {
+  anms-child {
+    > div {
+      border-color: mat.get-theme-color($theme, secondary);
+
+      > h2 {
+        color: mat.get-theme-color($theme, secondary);
+      }
+    }
+  }
+}

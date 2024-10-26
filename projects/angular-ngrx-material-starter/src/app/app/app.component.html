@@ -1,0 +1,155 @@
+<div [class]="'theme-wrapper ' + (theme$ | async)">
+
+  <mat-sidenav-container>
+
+    <mat-sidenav #sidenav mode="push">
+      <div class="branding"><img [alt]="logo" [src]="logo" />
+        <span>{{ 'anms.title.short' | translate }}</span></div>
+      <mat-nav-list>
+        @for (item of navigationSideMenu; track item) {
+          <a mat-list-item (click)="sidenav.close()" [routerLink]="[item.link]"
+             routerLinkActive="active">
+            {{ item.label | translate }}
+          </a>
+        }
+        <a href="https://github.com/tomastrajan/angular-ngrx-material-starter" mat-list-item rel="noopener noreferrer"
+           target="_blank">
+          Github
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <div class="wrapper">
+
+      <div [class.mat-elevation-z4]="(stickyHeader$ | async)"
+           [style.position]="(stickyHeader$ | async) ? 'fixed' : 'inherit'"
+           class="toolbar">
+        <mat-toolbar color="on-primary">
+          <button (click)="sidenav.open()" class="d-md-none" mat-icon-button>
+            <fa-icon icon="bars"></fa-icon>
+
+          </button>
+
+          <span class="branding spacer center d-inline d-sm-none" routerLink="">
+            <img [alt]="logo" [src]="logo" /></span>
+          <span class="branding spacer center d-none d-sm-inline d-md-none" routerLink=""><img [alt]="logo"
+                                                                                               [src]="logo" /> {{
+              'anms.title.short' | translate
+            }}</span>
+          <span class="branding spacer d-none d-md-inline" routerLink=""><img [alt]="logo" [src]="logo" /> {{
+              'anms.title.long' | translate
+            }}</span>
+
+          <span class="d-none d-md-inline">
+              @for (item of navigation; track item) {
+                <button mat-button class="nav-button" [routerLink]="[item.link]"
+                        routerLinkActive="active">
+                  {{ item.label | translate }}
+                </button>
+              }
+            </span>
+
+          @if (!(isAuthenticated$ | async)) {
+            <button mat-button mat-stroked-button color="accent" (click)="onLoginClick()">
+              {{ 'anms.menu.login' | translate }}
+            </button>
+          }
+
+          @if ((isAuthenticated$ | async)) {
+            <button class="link"
+                    mat-icon-button
+                    [matMenuTriggerFor]="toolbarUserMenu">
+              <fa-icon icon="user-circle"></fa-icon>
+            </button>
+          }
+          <mat-menu #toolbarUserMenu="matMenu">
+            <button (click)="onLogoutClick()" mat-menu-item>
+              <mat-icon>
+                <fa-icon icon="power-off"></fa-icon>
+              </mat-icon>
+              <span>{{ 'anms.menu.logout' | translate }}</span>
+            </button>
+          </mat-menu>
+
+          <button class="link d-none d-sm-inline" mat-icon-button routerLink="settings">
+            <fa-icon icon="cog"></fa-icon>
+          </button>
+
+          <a [matTooltip]="'anms.header.github' | translate"
+             class="link d-none d-sm-inline"
+             href="https://github.com/tomastrajan/angular-ngrx-material-starter"
+             mat-icon-button
+             matTooltipPosition="before"
+             rel="noopener noreferrer" target="_blank">
+            <fa-icon [icon]="['fab','github']"></fa-icon>
+          </a>
+
+          @if (language$ | async; as language) {
+            <span>
+                <mat-select [ngModel]="language" (selectionChange)="onLanguageSelect($event)" [panelWidth]="150">
+                  @for (l of languages; track l) {
+                    <mat-option [value]="l">
+                      {{ l.toUpperCase() }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </span>
+          }
+        </mat-toolbar>
+      </div>
+
+      <div [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig?.data?.title" class="content">
+        <router-outlet #o="outlet"></router-outlet>
+      </div>
+
+      <div class="footer">
+        <div class="row">
+          <div class="col-sm-12 links">
+            <a href="https://www.github.com/tomastrajan" rel="noopener noreferrer" target="_blank">
+              <fa-icon [icon]="['fab','github']"></fa-icon>
+              <span>Github</span>
+            </a>
+            <a href="https://www.medium.com/@tomastrajan" rel="noopener noreferrer" target="_blank">
+              <fa-icon [icon]="['fab','medium-m']"></fa-icon>
+              <span>Medium</span>
+            </a>
+            <a href="https://www.twitter.com/tomastrajan" rel="noopener noreferrer" target="_blank">
+              <fa-icon [icon]="['fab','twitter']"></fa-icon>
+              <span>Twitter</span>
+            </a>
+            <a href="https://www.youtube.com/channel/UC7XgRHIVoqnh3U5Vmly9ofQ"
+               rel="noopener noreferrer" target="_blank">
+              <fa-icon [icon]="['fab','youtube']"></fa-icon>
+              <span>Youtube</span>
+            </a>
+            <a href="https://www.instagram.com/tomastrajan" rel="noopener noreferrer" target="_blank">
+              <fa-icon [icon]="['fab','instagram']"></fa-icon>
+              <span>Instagram</span>
+            </a>
+            <a href="https://www.slides.com/tomastrajan" rel="noopener noreferrer" target="_blank">
+              <fa-icon icon="play-circle"></fa-icon>
+              <span>Slides</span>
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 signature">
+            &#169; <span class="year">{{ year }}</span> - Tomas Trajan
+            <br class="d-block d-sm-none">
+            <a [matTooltip]="'anms.footer.changelog' | translate"
+               href="https://github.com/tomastrajan/angular-ngrx-material-starter/blob/master/CHANGELOG.md"
+               matTooltipPosition="before">
+              <fa-icon icon="rocket"></fa-icon>
+              {{ version }} @if (!isProd) {
+              <span>[{{ envName }}]</span>
+            }
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </mat-sidenav-container>
+
+</div>

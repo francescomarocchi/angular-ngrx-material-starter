@@ -1,0 +1,33 @@
+@use '@angular/material' as mat;
+
+@mixin anms-notifications-component-theme($theme) {
+  .mat-mdc-raised-button.error,
+  .error-notification-overlay .mat-mdc-snackbar-surface {
+    color: mat.get-theme-color($theme, error);
+    background-color: mat.get-theme-color($theme, error-container);
+  }
+
+  .mat-mdc-raised-button.information,
+  .info-notification-overlay .mat-mdc-snackbar-surface {
+    color: mat.get-theme-color($theme, on-secondary);
+    background-color: mat.get-theme-color($theme, secondary);
+  }
+
+  .mat-mdc-raised-button.success,
+  .success-notification-overlay .mat-mdc-snackbar-surface {
+    color: mat.get-theme-color($theme, on-primary);
+    background-color: mat.get-theme-color($theme, primary);
+  }
+
+  .mat-mdc-raised-button.warning,
+  .warning-notification-overlay .mat-mdc-snackbar-surface {
+    color: mat.get-theme-color($theme, tertiary);
+    background-color: mat.get-theme-color($theme, tertiary-container);
+  }
+
+  .mat-mdc-raised-button.default,
+  .default-notification-overlay .mat-mdc-snackbar-surface {
+    color: mat.get-theme-color($theme, on-primary-container);
+    background-color: mat.get-theme-color($theme, primary-container);
+  }
+}
