@@ -9,8 +9,25 @@ import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParentComponent implements OnInit {
-  themeSrc: string = require('!raw-loader!./parent.component.scss-theme.scss')
-    .default;
+  themeSrc = `@use '@angular/material' as mat;
+
+@mixin anms-parent-component-theme($theme) {
+  anms-parent {
+    > .container {
+      > .row {
+        > .col-md-6 {
+          > .example {
+            border-color: mat.get-theme-color($theme, error);
+
+            > h1 {
+              color: mat.get-theme-color($theme, error);
+            }
+          }
+        }
+      }
+    }
+  }
+}`;
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
 
   constructor() {}
