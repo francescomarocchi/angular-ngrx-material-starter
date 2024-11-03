@@ -23,47 +23,50 @@ import {
 } from '../../../core/settings/settings.actions';
 import { selectSettings } from '../../../core/settings/settings.selectors';
 import { SettingsState } from '../../../core/settings/settings.model';
+import { provideExperimentalZonelessChangeDetection } from '@angular/core';
+import SpyInstance = jest.SpyInstance;
 
 describe('SettingsComponent', () => {
   let component: SettingsContainerComponent;
   let fixture: ComponentFixture<SettingsContainerComponent>;
   let store: MockStore;
-  let dispatchSpy;
+  let dispatchSpy: SpyInstance;
   let mockSelectSettings: MemoizedSelector<{}, SettingsState>;
 
   const getThemeSelectArrow = () =>
-    fixture.debugElement.queryAll(By.css('.mat-select-trigger'))[1];
+    fixture.debugElement.queryAll(By.css('.mat-mdc-select-trigger'))[1];
   const getSelectOptions = () =>
     fixture.debugElement.queryAll(By.css('mat-option'));
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          FontAwesomeModule,
-          SharedModule,
-          NoopAnimationsModule,
-          TranslateModule.forRoot()
-        ],
-        providers: [provideMockStore()],
-        declarations: [SettingsContainerComponent]
-      }).compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        FontAwesomeModule,
+        SharedModule,
+        NoopAnimationsModule,
+        TranslateModule.forRoot()
+      ],
+      providers: [
+        provideMockStore(),
+        provideExperimentalZonelessChangeDetection()
+      ],
+      declarations: [SettingsContainerComponent]
+    }).compileComponents();
 
-      TestBed.inject(FaIconLibrary).addIcons(faBars);
+    TestBed.inject(FaIconLibrary).addIcons(faBars);
 
-      store = TestBed.inject(MockStore);
-      mockSelectSettings = store.overrideSelector(
-        selectSettings,
-        {} as SettingsState
-      );
-      fixture = TestBed.createComponent(SettingsContainerComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    })
-  );
+    store = TestBed.inject(MockStore);
+    mockSelectSettings = store.overrideSelector(
+      selectSettings,
+      {} as SettingsState
+    );
+    fixture = TestBed.createComponent(SettingsContainerComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
   it('should dispatch change sticky header on sticky header toggle', () => {
-    dispatchSpy = spyOn(store, 'dispatch');
+    dispatchSpy = jest.spyOn(store, 'dispatch');
     const componentDebug = fixture.debugElement;
     const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[0];
 
@@ -77,7 +80,7 @@ describe('SettingsComponent', () => {
   });
 
   it('should dispatch change theme action on theme selection', () => {
-    dispatchSpy = spyOn(store, 'dispatch');
+    dispatchSpy = jest.spyOn(store, 'dispatch');
     getThemeSelectArrow().triggerEventHandler('click', {});
 
     fixture.detectChanges();
@@ -93,7 +96,7 @@ describe('SettingsComponent', () => {
   });
 
   it('should dispatch change auto night mode on night mode toggle', () => {
-    dispatchSpy = spyOn(store, 'dispatch');
+    dispatchSpy = jest.spyOn(store, 'dispatch');
     const componentDebug = fixture.debugElement;
     const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[1];
 
@@ -107,7 +110,7 @@ describe('SettingsComponent', () => {
   });
 
   it('should dispatch change animations page', () => {
-    dispatchSpy = spyOn(store, 'dispatch');
+    dispatchSpy = jest.spyOn(store, 'dispatch');
     const componentDebug = fixture.debugElement;
     const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[2];
 
@@ -121,7 +124,7 @@ describe('SettingsComponent', () => {
   });
 
   it('should dispatch change animations elements', () => {
-    dispatchSpy = spyOn(store, 'dispatch');
+    dispatchSpy = jest.spyOn(store, 'dispatch');
     const componentDebug = fixture.debugElement;
     const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[3];
 
@@ -141,7 +144,7 @@ describe('SettingsComponent', () => {
     store.refreshState();
     fixture.detectChanges();
 
-    dispatchSpy = spyOn(store, 'dispatch');
+    dispatchSpy = jest.spyOn(store, 'dispatch');
     const componentDebug = fixture.debugElement;
     const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[2];
 

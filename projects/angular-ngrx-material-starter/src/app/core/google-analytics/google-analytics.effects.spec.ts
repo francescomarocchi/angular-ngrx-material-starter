@@ -19,25 +19,25 @@ describe('GoogleAnalyticsEffects', () => {
         snapshot: {}
       },
       events: {
-        pipe() {}
+        pipe: jest.fn()
       }
     };
 
-    (<any>window).ga = jasmine.createSpy('ga');
+    (<any>window).ga = jest.fn();
   });
 
   afterAll(() => {
     (<any>window).ga = ga;
   });
 
-  it('should not dispatch action', function () {
+  it('should not dispatch action', () => {
     const effect = new GoogleAnalyticsEffects(router);
     const metadata = getEffectsMetadata(effect);
 
     expect(metadata.pageView?.dispatch).toEqual(false);
   });
 
-  it('should call google analytics', function () {
+  it('should call google analytics', () => {
     scheduler.run((helpers) => {
       const { cold } = helpers;
 

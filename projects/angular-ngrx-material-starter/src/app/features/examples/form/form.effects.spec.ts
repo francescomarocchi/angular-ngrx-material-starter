@@ -1,4 +1,3 @@
-import * as assert from 'assert';
 import { Actions, getEffectsMetadata } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
@@ -10,16 +9,16 @@ import { Form } from './form.model';
 import { actionFormUpdate } from './form.actions';
 
 const scheduler = new TestScheduler((actual, expected) =>
-  assert.deepStrictEqual(actual, expected)
+  expect(actual).toEqual(expected)
 );
 
 describe('FormEffects', () => {
-  let localStorageService: LocalStorageService;
+  let localStorageService: jest.Mocked<LocalStorageService>;
 
   beforeEach(() => {
-    localStorageService = jasmine.createSpyObj('LocalStorageService', [
-      'setItem'
-    ]);
+    localStorageService = {
+      setItem: jest.fn()
+    } as unknown as jest.Mocked<LocalStorageService>;
   });
 
   describe('persistForm', () => {

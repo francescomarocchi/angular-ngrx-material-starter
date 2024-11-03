@@ -17,7 +17,7 @@ describe('Form Actions', () => {
       form: testForm
     });
     expect(action.type).toEqual(actionFormUpdate.type);
-    expect(action.form).toEqual(jasmine.objectContaining(testForm));
+    expect(action.form).toEqual(expect.objectContaining(testForm));
   });
 
   it('should create ActionFormReset action', () => {

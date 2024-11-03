@@ -5,23 +5,19 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../../shared/shared.module';
 
 import { FeatureListComponent } from './feature-list.component';
+import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 
 describe('FeatureListComponent', () => {
   let component: FeatureListComponent;
   let fixture: ComponentFixture<FeatureListComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          SharedModule,
-          NoopAnimationsModule,
-          TranslateModule.forRoot()
-        ],
-        declarations: [FeatureListComponent]
-      }).compileComponents();
-    })
-  );
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()],
+      declarations: [FeatureListComponent],
+      providers: [provideExperimentalZonelessChangeDetection()]
+    }).compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FeatureListComponent);

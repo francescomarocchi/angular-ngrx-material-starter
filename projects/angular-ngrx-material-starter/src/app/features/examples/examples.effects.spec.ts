@@ -18,9 +18,9 @@ const scheduler = new TestScheduler((actual, expected) =>
 
 describe('SettingsEffects', () => {
   let router: any;
-  let titleService: jasmine.SpyObj<TitleService>;
-  let translateService: jasmine.SpyObj<TranslateService>;
-  let store: jasmine.SpyObj<Store<State>>;
+  let titleService: jest.Mocked<TitleService>;
+  let translateService: jest.Mocked<TranslateService>;
+  let store: jest.Mocked<Store<State>>;
 
   beforeEach(() => {
     router = {
@@ -30,13 +30,19 @@ describe('SettingsEffects', () => {
         }
       },
       events: {
-        pipe() {}
+        pipe: jest.fn()
       }
     };
 
-    titleService = jasmine.createSpyObj('TitleService', ['setTitle']);
-    translateService = jasmine.createSpyObj('TranslateService', ['use']);
-    store = jasmine.createSpyObj('store', ['pipe']);
+    titleService = {
+      setTitle: jest.fn()
+    } as unknown as jest.Mocked<TitleService>;
+    translateService = {
+      use: jest.fn()
+    } as unknown as jest.Mocked<TranslateService>;
+    store = {
+      pipe: jest.fn()
+    } as unknown as jest.Mocked<Store<State>>;
   });
 
   describe('setTranslateServiceLanguage', () => {

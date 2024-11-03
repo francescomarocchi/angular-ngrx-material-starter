@@ -3,13 +3,21 @@ import { TestBed } from '@angular/core/testing';
 import { NotificationService } from './notification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Overlay } from '@angular/cdk/overlay';
+import { provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('NotificationsService', () => {
   let service: NotificationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NotificationService, MatSnackBar, Overlay]
+      imports: [NoopAnimationsModule],
+      providers: [
+        NotificationService,
+        MatSnackBar,
+        Overlay,
+        provideExperimentalZonelessChangeDetection()
+      ]
     });
     service = TestBed.inject<NotificationService>(NotificationService);
   });
@@ -19,31 +27,31 @@ describe('NotificationsService', () => {
   });
 
   it('default method should be executable', () => {
-    spyOn(service, 'default');
+    jest.spyOn(service, 'default');
     service.default('default message');
     expect(service.default).toHaveBeenCalled();
   });
 
   it('info method should be executable', () => {
-    spyOn(service, 'info');
+    jest.spyOn(service, 'info');
     service.info('info message');
     expect(service.info).toHaveBeenCalled();
   });
 
   it('success method should be executable', () => {
-    spyOn(service, 'success');
+    jest.spyOn(service, 'success');
     service.success('success message');
     expect(service.success).toHaveBeenCalled();
   });
 
   it('warning method should be executable', () => {
-    spyOn(service, 'warn');
+    jest.spyOn(service, 'warn');
     service.warn('warning message');
     expect(service.warn).toHaveBeenCalled();
   });
 
   it('error method should be executable', () => {
-    spyOn(service, 'error');
+    jest.spyOn(service, 'error');
     service.error('error message');
     expect(service.error).toHaveBeenCalled();
   });

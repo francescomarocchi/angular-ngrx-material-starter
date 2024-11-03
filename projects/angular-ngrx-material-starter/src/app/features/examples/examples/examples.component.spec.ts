@@ -12,35 +12,35 @@ import {
   provideHttpClient,
   withInterceptorsFromDi
 } from '@angular/common/http';
+import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 
 describe('ExamplesComponent', () => {
   let component: ExamplesComponent;
   let fixture: ComponentFixture<ExamplesComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [ExamplesComponent],
-        imports: [
-          SharedModule,
-          NoopAnimationsModule,
-          RouterTestingModule,
-          TranslateModule.forRoot()
-        ],
-        providers: [
-          provideMockStore({
-            initialState: {
-              auth: {
-                isAuthenticated: false
-              }
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [ExamplesComponent],
+      imports: [
+        SharedModule,
+        NoopAnimationsModule,
+        RouterTestingModule,
+        TranslateModule.forRoot()
+      ],
+      providers: [
+        provideMockStore({
+          initialState: {
+            auth: {
+              isAuthenticated: false
             }
-          }),
-          provideHttpClient(withInterceptorsFromDi()),
-          provideHttpClientTesting()
-        ]
-      }).compileComponents();
-    })
-  );
+          }
+        }),
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+        provideExperimentalZonelessChangeDetection()
+      ]
+    }).compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ExamplesComponent);

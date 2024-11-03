@@ -13,14 +13,16 @@ const scheduler = new TestScheduler((actual, expected) =>
 );
 
 describe('AuthEffects', () => {
-  let localStorageService: jasmine.SpyObj<LocalStorageService>;
-  let router: jasmine.SpyObj<Router>;
+  let localStorageService: jest.Mocked<LocalStorageService>;
+  let router: jest.Mocked<Router>;
 
   beforeEach(() => {
-    localStorageService = jasmine.createSpyObj('LocalStorageService', [
-      'setItem'
-    ]);
-    router = jasmine.createSpyObj('Router', ['navigateByUrl']);
+    localStorageService = {
+      setItem: jest.fn()
+    } as unknown as jest.Mocked<LocalStorageService>;
+    router = {
+      navigateByUrl: jest.fn()
+    } as unknown as jest.Mocked<Router>;
   });
 
   describe('login', () => {
@@ -66,11 +68,11 @@ describe('AuthEffects', () => {
         const actions = new Actions(source);
         const effect = new AuthEffects(actions, localStorageService, router);
 
-        effect.login.subscribe(() => {
+        effect.logout.subscribe(() => {
           expect(localStorageService.setItem).toHaveBeenCalledWith(AUTH_KEY, {
             isAuthenticated: false
           });
-          expect(router.navigate).toHaveBeenCalledWith(['']);
+          expect(router.navigateByUrl).toHaveBeenCalledWith(['']);
         });
       });
     });

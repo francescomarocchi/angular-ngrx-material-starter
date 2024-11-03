@@ -1,4 +1,3 @@
-import * as assert from 'assert';
 import { Actions } from '@ngrx/effects';
 import { of, throwError } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
@@ -18,15 +17,19 @@ import { RunHelpers } from 'rxjs/internal/testing/TestScheduler';
 const symbol = 'TSLA';
 
 describe('StockMarketEffects', () => {
-  let localStorage: jasmine.SpyObj<LocalStorageService>;
-  let stockMarket: jasmine.SpyObj<StockMarketService>;
+  let localStorage: jest.Mocked<LocalStorageService>;
+  let stockMarket: jest.Mocked<StockMarketService>;
   let scheduler: TestScheduler;
 
   beforeEach(() => {
-    localStorage = jasmine.createSpyObj('localStorageService', ['setItem']);
-    stockMarket = jasmine.createSpyObj('stockMarketService', ['retrieveStock']);
+    localStorage = {
+      setItem: jest.fn()
+    } as unknown as jest.Mocked<LocalStorageService>;
+    stockMarket = {
+      retrieveStock: jest.fn()
+    } as unknown as jest.Mocked<StockMarketService>;
     scheduler = new TestScheduler((actual, expected) =>
-      assert.deepStrictEqual(actual, expected)
+      expect(actual).toEqual(expected)
     );
   });
 
@@ -65,7 +68,7 @@ describe('StockMarketEffects', () => {
       const expected = '--s--s--s';
       const actions = new Actions(source);
 
-      stockMarket.retrieveStock.and.returnValue(of(stock));
+      stockMarket.retrieveStock.mockReturnValue(of(stock));
 
       const effects = new StockMarketEffects(
         actions,
@@ -106,7 +109,7 @@ describe('StockMarketEffects', () => {
       const expected = '--e';
       const actions = new Actions(source);
 
-      stockMarket.retrieveStock.and.returnValue(throwError(error));
+      stockMarket.retrieveStock.mockReturnValue(throwError(error));
 
       const effects = new StockMarketEffects(
         actions,

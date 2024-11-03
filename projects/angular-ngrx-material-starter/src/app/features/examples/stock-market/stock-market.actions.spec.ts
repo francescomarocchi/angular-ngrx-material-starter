@@ -29,7 +29,7 @@ describe('Stock Market Actions', () => {
     const action = actionStockMarketRetrieveSuccess({ stock });
     expect(action.type).toEqual(actionStockMarketRetrieveSuccess.type);
     expect(action.stock).toEqual(
-      jasmine.objectContaining({
+      expect.objectContaining({
         ...stock
       })
     );

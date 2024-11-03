@@ -8,32 +8,34 @@ import { SharedModule } from '../../../../shared/shared.module';
 
 import { CrudComponent } from './crud.component';
 import { selectAllBooks, selectSelectedBook } from '../books.selectors';
+import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 
 describe('CrudComponent', () => {
   let component: CrudComponent;
   let fixture: ComponentFixture<CrudComponent>;
   let store: MockStore;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          SharedModule,
-          NoopAnimationsModule,
-          RouterTestingModule,
-          TranslateModule.forRoot()
-        ],
-        providers: [provideMockStore()],
-        declarations: [CrudComponent]
-      }).compileComponents();
-      store = TestBed.inject(MockStore);
-      store.overrideSelector(selectAllBooks, []);
-      store.overrideSelector(selectSelectedBook, undefined);
-      fixture = TestBed.createComponent(CrudComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    })
-  );
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        SharedModule,
+        NoopAnimationsModule,
+        RouterTestingModule,
+        TranslateModule.forRoot()
+      ],
+      providers: [
+        provideMockStore(),
+        provideExperimentalZonelessChangeDetection()
+      ],
+      declarations: [CrudComponent]
+    }).compileComponents();
+    store = TestBed.inject(MockStore);
+    store.overrideSelector(selectAllBooks, []);
+    store.overrideSelector(selectSelectedBook, undefined);
+    fixture = TestBed.createComponent(CrudComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
   it('should create', () => {
     expect(component).toBeTruthy();
   });

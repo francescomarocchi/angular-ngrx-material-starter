@@ -1,6 +1,9 @@
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
-import { Component } from '@angular/core';
+import {
+  Component,
+  provideExperimentalZonelessChangeDetection
+} from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SharedModule } from '../../shared.module';
@@ -20,7 +23,7 @@ describe('BigInputActionComponent', () => {
   const getButton = () => fixture.debugElement.query(By.css('button'));
   const getIcon = () => fixture.debugElement.query(By.css('mat-icon'));
   const getLabel = () =>
-    fixture.debugElement.query(By.css('.mat-button-wrapper > span'));
+    fixture.debugElement.query(By.css('.mdc-button__label > span'));
 
   function createHostComponent(
     template: string
@@ -35,7 +38,8 @@ describe('BigInputActionComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       declarations: [HostComponent],
-      imports: [SharedModule, NoopAnimationsModule]
+      imports: [SharedModule, NoopAnimationsModule],
+      providers: [provideExperimentalZonelessChangeDetection()]
     })
   );
 
@@ -81,7 +85,7 @@ describe('BigInputActionComponent', () => {
     const template =
       '<anms-big-input-action (action)="actionHandler()"></anms-big-input-action>';
     fixture = createHostComponent(template);
-    spyOn(component, 'actionHandler').and.callThrough();
+    jest.spyOn(component, 'actionHandler').mockImplementation();
     getButton().triggerEventHandler('click', {});
     expect(component.actionHandler).toHaveBeenCalled();
   });

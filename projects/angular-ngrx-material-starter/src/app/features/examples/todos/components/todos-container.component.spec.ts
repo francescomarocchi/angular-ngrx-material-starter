@@ -19,12 +19,13 @@ import {
   selectTodos,
   selectTodosFilter
 } from '../todos.selectors';
+import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 
 describe('TodosComponent', () => {
   let store: MockStore;
   let component: TodosContainerComponent;
   let fixture: ComponentFixture<TodosContainerComponent>;
-  let dispatchSpy: jasmine.Spy;
+  let dispatchSpy: jest.SpyInstance;
   let mockSelectTodos: MemoizedSelector<any, Todo[]>;
   let mockSelectTodosFilter: MemoizedSelector<any, TodosFilter>;
   let mockSelectRemoveDoneTodosDisabled: MemoizedSelector<any, boolean>;
@@ -64,7 +65,10 @@ describe('TodosComponent', () => {
     TestBed.configureTestingModule({
       imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()],
       declarations: [TodosContainerComponent],
-      providers: [provideMockStore()]
+      providers: [
+        provideMockStore(),
+        provideExperimentalZonelessChangeDetection()
+      ]
     });
 
     store = TestBed.inject(MockStore);
@@ -79,7 +83,7 @@ describe('TodosComponent', () => {
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.loader(fixture);
 
-    dispatchSpy = spyOn(store, 'dispatch');
+    dispatchSpy = jest.spyOn(store, 'dispatch');
   });
 
   it('should be created with 0 todos', () => {
@@ -106,7 +110,7 @@ describe('TodosComponent', () => {
     mockSelectRemoveDoneTodosDisabled.setResult(false);
     store.refreshState();
     fixture.detectChanges();
-    dispatchSpy.calls.reset();
+    dispatchSpy.mockClear();
 
     const removeDoneTodosButton = await getRemoveDoneTodosButton();
     await removeDoneTodosButton.click();
@@ -119,7 +123,7 @@ describe('TodosComponent', () => {
 
   it('should dispatch add todo action', async () => {
     fixture.detectChanges();
-    dispatchSpy.calls.reset();
+    dispatchSpy.mockClear();
 
     const keyUpEvent = new KeyboardEvent('keyup', {
       bubbles: true,
@@ -136,11 +140,11 @@ describe('TodosComponent', () => {
 
     expect(getTodoInput().nativeElement.value).toBe('');
     expect(dispatchSpy).toHaveBeenCalledTimes(1);
-    expect(dispatchSpy.calls.mostRecent().args[0].name).toBe('hello world');
+    expect(dispatchSpy.mock.calls[0][0].name).toBe('hello world');
   });
 
   it('should dispatch filter todo action', async () => {
-    dispatchSpy.calls.reset();
+    dispatchSpy.mockClear();
 
     const openFilterButton = await getOpenFilterButton();
     await openFilterButton.click();
@@ -158,7 +162,7 @@ describe('TodosComponent', () => {
     mockSelectTodos.setResult([{ id: '1', name: 'test 1', done: true }]);
     store.refreshState();
     fixture.detectChanges();
-    dispatchSpy.calls.reset();
+    dispatchSpy.mockClear();
 
     getTodoItem().nativeElement.click();
     fixture.detectChanges();

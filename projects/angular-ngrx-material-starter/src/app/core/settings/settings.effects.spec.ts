@@ -24,13 +24,13 @@ const scheduler = new TestScheduler((actual, expected) =>
 
 describe('SettingsEffects', () => {
   let router: any;
-  let localStorageService: jasmine.SpyObj<LocalStorageService>;
-  let overlayContainer: jasmine.SpyObj<OverlayContainer>;
-  let titleService: jasmine.SpyObj<TitleService>;
-  let animationsService: jasmine.SpyObj<AnimationsService>;
-  let translateService: jasmine.SpyObj<TranslateService>;
-  let store: jasmine.SpyObj<Store<AppState>>;
-  let ngZone: jasmine.SpyObj<NgZone>;
+  let localStorageService: jest.Mocked<LocalStorageService>;
+  let overlayContainer: jest.Mocked<OverlayContainer>;
+  let titleService: jest.Mocked<TitleService>;
+  let animationsService: jest.Mocked<AnimationsService>;
+  let translateService: jest.Mocked<TranslateService>;
+  let store: jest.Mocked<Store<AppState>>;
+  let ngZone: jest.Mocked<NgZone>;
 
   beforeEach(() => {
     router = {
@@ -38,23 +38,31 @@ describe('SettingsEffects', () => {
         snapshot: {}
       },
       events: {
-        pipe() {}
+        pipe: jest.fn()
       }
     };
-    localStorageService = jasmine.createSpyObj('LocalStorageService', [
-      'setItem'
-    ]);
-    overlayContainer = jasmine.createSpyObj('OverlayContainer', [
-      'getContainerElement'
-    ]);
-    titleService = jasmine.createSpyObj('TitleService', ['setTitle']);
-    animationsService = jasmine.createSpyObj('AnimationsService', [
-      'updateRouteAnimationType'
-    ]);
-    translateService = jasmine.createSpyObj('TranslateService', ['use']);
-    store = jasmine.createSpyObj('store', ['pipe']);
-    ngZone = jasmine.createSpyObj('mockNgZone', ['run', 'runOutsideAngular']);
-    ngZone.run.and.callFake((fn) => fn());
+    localStorageService = {
+      setItem: jest.fn()
+    } as unknown as jest.Mocked<LocalStorageService>;
+    overlayContainer = {
+      getContainerElement: jest.fn()
+    } as unknown as jest.Mocked<OverlayContainer>;
+    titleService = {
+      setTitle: jest.fn()
+    } as unknown as jest.Mocked<TitleService>;
+    animationsService = {
+      updateRouteAnimationType: jest.fn()
+    } as unknown as jest.Mocked<AnimationsService>;
+    translateService = {
+      use: jest.fn()
+    } as unknown as jest.Mocked<TranslateService>;
+    store = {
+      pipe: jest.fn()
+    } as unknown as jest.Mocked<Store<AppState>>;
+    ngZone = {
+      run: jest.fn((fn) => fn()),
+      runOutsideAngular: jest.fn()
+    } as unknown as jest.Mocked<NgZone>;
   });
 
   it('should call methods on LocalStorageService for PERSIST action', () => {
@@ -72,7 +80,7 @@ describe('SettingsEffects', () => {
         pageAnimationsDisabled: true,
         hour: 12
       };
-      store.pipe.and.returnValue(of(settings));
+      store.pipe.mockReturnValue(of(settings));
       const persistAction = actionSettingsChangeTheme({ theme: 'DEFAULT' });
       const source = cold('a', { a: persistAction });
       const actions = new Actions(source);

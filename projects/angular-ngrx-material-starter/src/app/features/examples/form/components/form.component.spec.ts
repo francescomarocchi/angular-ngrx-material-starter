@@ -1,4 +1,3 @@
-import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
@@ -15,12 +14,13 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
+import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 
 describe('FormComponent', () => {
   let store: MockStore;
   let component: FormComponent;
   let fixture: ComponentFixture<FormComponent>;
-  let dispatchSpy: jasmine.Spy;
+  let dispatchSpy: jest.SpyInstance;
   let loader: HarnessLoader;
 
   const getInput = (fieldName: string) =>
@@ -42,7 +42,11 @@ describe('FormComponent', () => {
     TestBed.configureTestingModule({
       imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()],
       declarations: [FormComponent],
-      providers: [provideMockStore(), NotificationService]
+      providers: [
+        provideMockStore(),
+        NotificationService,
+        provideExperimentalZonelessChangeDetection()
+      ]
     });
 
     store = TestBed.inject(MockStore);
@@ -52,7 +56,7 @@ describe('FormComponent', () => {
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.loader(fixture);
 
-    dispatchSpy = spyOn(store, 'dispatch');
+    dispatchSpy = jest.spyOn(store, 'dispatch');
   });
 
   it('should save form', async () => {
@@ -63,8 +67,8 @@ describe('FormComponent', () => {
     await saveButton.click();
 
     expect(dispatchSpy).toHaveBeenCalledTimes(1);
-    expect(dispatchSpy.calls.mostRecent().args[0].type).toBe('[Form] Update');
-    expect(dispatchSpy.calls.mostRecent().args[0].form).toEqual({
+    expect(dispatchSpy.mock.calls[0][0].type).toBe('[Form] Update');
+    expect(dispatchSpy.mock.calls[0][0].form).toEqual({
       autosave: false,
       username: 'tomastrajan',
       password: '',
@@ -85,7 +89,7 @@ describe('FormComponent', () => {
     const usernameValue = await usernameInput.getValue();
 
     expect(dispatchSpy).toHaveBeenCalledTimes(1);
-    expect(dispatchSpy.calls.mostRecent().args[0].type).toBe('[Form] Reset');
+    expect(dispatchSpy.mock.calls[0][0].type).toBe('[Form] Reset');
     expect(usernameValue).toBe('');
   });
 });

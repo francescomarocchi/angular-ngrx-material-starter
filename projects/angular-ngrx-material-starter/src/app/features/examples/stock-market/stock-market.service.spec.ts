@@ -1,11 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { StockMarketService } from './stock-market.service';
+import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 
 describe('StockMarketService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [StockMarketService]
+      providers: [
+        StockMarketService,
+        provideExperimentalZonelessChangeDetection()
+      ]
     });
   });
 
@@ -27,12 +31,17 @@ describe('StockMarketService', () => {
         changePercent: '0.81'
       };
 
-      service.retrieveStock('TSLA').subscribe((stock) => {
-        expect(stock.symbol).toBe(expectedStock.symbol);
-        expect(stock.exchange).toBe(expectedStock.primaryExchange);
-        expect(stock.changePercent).toBe(expectedStock.changePercent);
-        expect(stock.last).toBe(expectedStock.latestPrice);
-      }, fail);
+      service.retrieveStock('TSLA').subscribe(
+        (stock) => {
+          expect(stock.symbol).toBe(expectedStock.symbol);
+          expect(stock.exchange).toBe(expectedStock.primaryExchange);
+          expect(stock.changePercent).toBe(expectedStock.changePercent);
+          expect(stock.last).toBe(expectedStock.latestPrice);
+        },
+        (err) => {
+          throw new Error(err);
+        }
+      );
     }
   ));
 });

@@ -4,7 +4,7 @@ import { actionBooksDeleteOne, actionBooksUpsertOne } from './books.actions';
 
 describe('BookReducer', () => {
   const TEST_INITIAL_STATE: BookState = {
-    ids: ['123'],
+    ids: ['firstBook'],
     entities: {
       firstBook: {
         id: '123',
@@ -16,14 +16,14 @@ describe('BookReducer', () => {
     }
   };
 
-  it('should return the default state', () => {
+  test('should return the default state', () => {
     const action = {} as any;
     const state = bookReducer(undefined, action);
 
     expect(state).toBe(initialState);
   });
 
-  it('should add a book', () => {
+  test('should add a book', () => {
     const action = actionBooksUpsertOne({
       book: {
         id: '1234',
@@ -38,7 +38,7 @@ describe('BookReducer', () => {
     expect(state.entities['1234']?.title).toEqual('test');
   });
 
-  it('should update a book', () => {
+  test('should update a book', () => {
     const id = TEST_INITIAL_STATE.ids[0] as string;
     const action = actionBooksUpsertOne({
       book: {
@@ -51,7 +51,7 @@ describe('BookReducer', () => {
 
     const state = bookReducer(TEST_INITIAL_STATE, action);
     expect(state.entities[id]).toEqual(
-      jasmine.objectContaining({
+      expect.objectContaining({
         title: 'updated',
         author: 'updated',
         description: 'updated'
@@ -59,7 +59,7 @@ describe('BookReducer', () => {
     );
   });
 
-  it('should remove a book', () => {
+  test('should remove a book', () => {
     const id = TEST_INITIAL_STATE.ids[0] as string;
     const action = actionBooksDeleteOne({ id });
     const state = bookReducer(TEST_INITIAL_STATE, action);

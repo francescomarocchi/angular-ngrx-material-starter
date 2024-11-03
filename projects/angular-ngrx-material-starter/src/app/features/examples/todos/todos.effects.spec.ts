@@ -16,12 +16,16 @@ const scheduler = new TestScheduler((actual, expected) =>
 );
 
 describe('TodosEffects', () => {
-  let localStorage: jasmine.SpyObj<LocalStorageService>;
-  let store: jasmine.SpyObj<Store<State>>;
+  let localStorage: jest.Mocked<LocalStorageService>;
+  let store: jest.Mocked<Store<State>>;
 
   beforeEach(() => {
-    localStorage = jasmine.createSpyObj('LocalStorageService', ['setItem']);
-    store = jasmine.createSpyObj('store', ['pipe']);
+    localStorage = {
+      setItem: jest.fn()
+    } as unknown as jest.Mocked<LocalStorageService>;
+    store = {
+      pipe: jest.fn()
+    } as unknown as jest.Mocked<Store<State>>;
   });
 
   describe('persistTodos', () => {
@@ -41,7 +45,7 @@ describe('TodosEffects', () => {
           items: [{ id: '1', name: 'Test ToDo', done: false }],
           filter: 'ALL'
         };
-        store.pipe.and.returnValue(of(todosState));
+        store.pipe.mockReturnValue(of(todosState));
         const persistAction = actionTodosToggle({ id: 'a' });
         const source = cold('a', { a: persistAction });
         const actions = new Actions(source);

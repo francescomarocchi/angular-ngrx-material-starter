@@ -7,6 +7,7 @@ import { AppState } from '../core.state';
 import { AuthGuardService } from './auth-guard.service';
 import { AuthState } from './auth.models';
 import { selectIsAuthenticated } from './auth.selectors';
+import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 
 describe('AuthGuardService', () => {
   let authGuardService: AuthGuardService;
@@ -14,7 +15,11 @@ describe('AuthGuardService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthGuardService, provideMockStore()]
+      providers: [
+        AuthGuardService,
+        provideMockStore(),
+        provideExperimentalZonelessChangeDetection()
+      ]
     });
     authGuardService = TestBed.inject<AuthGuardService>(AuthGuardService);
     store = TestBed.inject(MockStore);

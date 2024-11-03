@@ -18,6 +18,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "optimization": false,
             "outputPath": {
               "base": "dist/angular-ngrx-material-starter"
             },
@@ -103,34 +104,6 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "buildTarget": "angular-ngrx-material-starter:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/angular-ngrx-material-starter/src/test.ts",
-            "polyfills": "projects/angular-ngrx-material-starter/src/polyfills.ts",
-            "tsConfig": "projects/angular-ngrx-material-starter/tsconfig.spec.json",
-            "karmaConfig": "projects/angular-ngrx-material-starter/karma.conf.js",
-            "assets": [
-              "projects/angular-ngrx-material-starter/src/favicon.ico",
-              "projects/angular-ngrx-material-starter/src/assets"
-            ],
-            "styles": [
-              "projects/angular-ngrx-material-starter/src/styles-app-loading.scss",
-              "projects/angular-ngrx-material-starter/src/styles.scss"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "test": {
-              "fileReplacements": [
-                {
-                  "replace": "projects/angular-ngrx-material-starter/src/environments/environment.ts",
-                  "with": "projects/angular-ngrx-material-starter/src/environments/environment.test.ts"
-                }
-              ]
-            }
           }
         },
         "e2e": {

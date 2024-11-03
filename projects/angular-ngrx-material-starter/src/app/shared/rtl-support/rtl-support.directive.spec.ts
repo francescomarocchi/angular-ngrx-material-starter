@@ -1,5 +1,9 @@
 import { By } from '@angular/platform-browser';
-import { Component, DebugElement } from '@angular/core';
+import {
+  Component,
+  DebugElement,
+  provideExperimentalZonelessChangeDetection
+} from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
@@ -35,7 +39,8 @@ describe('RtlSupportDirective', () => {
             currentLang: 'he',
             onLangChange: languageSubject.asObservable()
           }
-        }
+        },
+        provideExperimentalZonelessChangeDetection()
       ]
     }).createComponent(TestComponent);
 

@@ -15,39 +15,40 @@ import {
 import { SharedModule } from '../shared/shared.module';
 
 import { AppComponent } from './app.component';
+import { MatCardModule } from '@angular/material/card';
+import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 
 describe('AppComponent', () => {
   let store: MockStore;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          SharedModule,
-          MatSidenavModule,
-          MatToolbarModule,
-          RouterTestingModule,
-          NoopAnimationsModule,
-          TranslateModule.forRoot()
-        ],
-        providers: [provideMockStore()],
-        declarations: [AppComponent]
-      }).compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        SharedModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatCardModule,
+        RouterTestingModule,
+        NoopAnimationsModule,
+        TranslateModule.forRoot()
+      ],
+      providers: [
+        provideMockStore(),
+        provideExperimentalZonelessChangeDetection()
+      ],
+      declarations: [AppComponent]
+    }).compileComponents();
 
-      store = TestBed.inject(MockStore);
-      store.overrideSelector(selectIsAuthenticated, false);
-      store.overrideSelector(selectSettingsStickyHeader, true);
-      store.overrideSelector(selectSettingsLanguage, 'en');
-      store.overrideSelector(selectEffectiveTheme, 'default');
-    })
-  );
+    store = TestBed.inject(MockStore);
+    store.overrideSelector(selectIsAuthenticated, false);
+    store.overrideSelector(selectSettingsStickyHeader, true);
+    store.overrideSelector(selectSettingsLanguage, 'en');
+    store.overrideSelector(selectEffectiveTheme, 'default');
+  });
 
-  it(
-    'should create the app',
-    waitForAsync(() => {
-      const fixture = TestBed.createComponent(AppComponent);
-      const app = fixture.debugElement.componentInstance;
-      expect(app).toBeTruthy();
-    })
-  );
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
+  });
 });

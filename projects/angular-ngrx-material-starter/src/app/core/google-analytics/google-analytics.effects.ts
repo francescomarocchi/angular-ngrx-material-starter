@@ -12,8 +12,8 @@ export class GoogleAnalyticsEffects {
           (event): event is NavigationEnd => event instanceof NavigationEnd
         ),
         tap((event: NavigationEnd) => {
-          (<any>window).ga('set', 'page', event.urlAfterRedirects);
-          (<any>window).ga('send', 'pageview');
+          // (<any>window).ga('set', 'page', event.urlAfterRedirects);
+          // (<any>window).ga('send', 'pageview');
         })
       ),
     { dispatch: false }

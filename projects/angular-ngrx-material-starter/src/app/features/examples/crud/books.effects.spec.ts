@@ -1,4 +1,3 @@
-import * as assert from 'assert';
 import { Store } from '@ngrx/store';
 import { EMPTY, of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
@@ -11,7 +10,7 @@ import { BooksEffects, BOOKS_KEY } from './books.effects';
 import { actionBooksDeleteOne, actionBooksUpsertOne } from './books.actions';
 
 const scheduler = new TestScheduler((actual, expected) =>
-  assert.deepStrictEqual(actual, expected)
+  expect(actual).toEqual(expected)
 );
 
 describe('BooksEffects', () => {
@@ -25,13 +24,13 @@ describe('BooksEffects', () => {
           title: 'Title'
         }
       },
-      ids: ['1']
+      ids: ['firstBook']
     };
     let localStorage: LocalStorageService;
     let store: Store<any>;
 
     beforeEach(() => {
-      localStorage = jasmine.createSpyObj('localStorage', ['setItem']);
+      localStorage = { setItem: jest.fn() } as any;
       store = of({
         examples: {
           books: booksState
@@ -39,7 +38,7 @@ describe('BooksEffects', () => {
       }) as any;
     });
 
-    it('should not dispatch any actions', () => {
+    test('should not dispatch any actions', () => {
       const actions = new Actions(EMPTY);
       const effects = new BooksEffects(actions, store, localStorage);
       const metadata = getEffectsMetadata(effects);
@@ -47,7 +46,7 @@ describe('BooksEffects', () => {
       expect(metadata.persistBooks?.dispatch).toEqual(false);
     });
 
-    it('should call setItem on LocalStorageService for delete one action', () => {
+    test('should call setItem on LocalStorageService for delete one action', () => {
       scheduler.run((helpers) => {
         const { cold } = helpers;
         const action = actionBooksDeleteOne({ id: '1' });
@@ -64,7 +63,7 @@ describe('BooksEffects', () => {
       });
     });
 
-    it('should call setItem on LocalStorageService for upsert one action', () => {
+    test('should call setItem on LocalStorageService for upsert one action', () => {
       scheduler.run((helpers) => {
         const { cold } = helpers;
         const action = actionBooksUpsertOne({ book: {} as any });

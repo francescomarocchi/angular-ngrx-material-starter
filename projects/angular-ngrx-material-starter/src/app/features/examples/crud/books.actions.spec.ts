@@ -12,7 +12,7 @@ describe('Books Actions', () => {
     });
     expect(action.type).toEqual(actionBooksUpsertOne.type);
     expect(action.book).toEqual(
-      jasmine.objectContaining({
+      expect.objectContaining({
         id: '1',
         title: 'test',
         author: 'test',

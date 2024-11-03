@@ -1,13 +1,16 @@
 import { TestBed } from '@angular/core/testing';
-
 import { LocalStorageService } from './local-storage.service';
+import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 
 describe('LocalStorageService', () => {
   let service: LocalStorageService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LocalStorageService]
+      providers: [
+        LocalStorageService,
+        provideExperimentalZonelessChangeDetection()
+      ]
     });
     service = TestBed.inject<LocalStorageService>(LocalStorageService);
   });
@@ -19,7 +22,7 @@ describe('LocalStorageService', () => {
   });
 
   it('testLocalStorage should be executable', () => {
-    spyOn(service, 'testLocalStorage');
+    jest.spyOn(service, 'testLocalStorage');
     service.testLocalStorage();
     expect(service.testLocalStorage).toHaveBeenCalled();
   });
