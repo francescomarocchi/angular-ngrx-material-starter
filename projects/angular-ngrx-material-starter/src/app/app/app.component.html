@@ -1,5 +1,5 @@
+@let isAuthenticated = (isAuthenticated$ | async) ?? false;
 <div [class]="'theme-wrapper ' + (theme$ | async)">
-
   <mat-sidenav-container>
 
     <mat-sidenav #sidenav mode="push">
@@ -49,13 +49,13 @@
               }
             </span>
 
-          @if (!(isAuthenticated$ | async)) {
+          @if (!isAuthenticated) {
             <button mat-button mat-stroked-button color="accent" (click)="onLoginClick()">
               {{ 'anms.menu.login' | translate }}
             </button>
           }
 
-          @if ((isAuthenticated$ | async)) {
+          @if (isAuthenticated) {
             <button class="link"
                     mat-icon-button
                     [matMenuTriggerFor]="toolbarUserMenu">
