@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+
+:host {
+  display: block;
+  margin: 2rem;
+}
+
+.mat-column-position {
+  width: 2rem;
+  border-right: 1px solid currentColor;
+  padding-right: 1.5rem;
+  text-align: center;
+}
+
+.mat-column-name {
+  padding-left: 1rem;
+  font-size: 1.25rem;
+}
+
+.mat-column-weight {
+  font-style: italic;
+}
+
+.mat-column-symbol {
+  width: 2rem;
+  text-align: center;
+  font-weight: bold;
+}

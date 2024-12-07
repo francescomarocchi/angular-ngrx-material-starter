@@ -1,0 +1,8 @@
+@use '@angular/material' as mat;
+
+@mixin anms-tables-component-theme($theme) {
+  .mat-mdc-header-row {
+    background-color: mat.get-theme-color($theme, secondary);
+    color: mat.get-theme-color($theme, on-secondary);
+  }
+}

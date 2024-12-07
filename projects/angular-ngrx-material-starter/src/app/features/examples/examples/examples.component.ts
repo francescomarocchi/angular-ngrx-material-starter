@@ -1,5 +1,5 @@
+import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import {
@@ -16,7 +16,7 @@ import { State } from '../examples.state';
   animations: [routeAnimations],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExamplesComponent implements OnInit {
+export class ExamplesComponent {
   isAuthenticated$: Observable<boolean> | undefined;
 
   examples = [
@@ -25,13 +25,14 @@ export class ExamplesComponent implements OnInit {
     { link: 'theming', label: 'anms.examples.menu.theming' },
     { link: 'crud', label: 'anms.examples.menu.crud' },
     { link: 'form', label: 'anms.examples.menu.form' },
+    { link: 'tables', label: 'anms.examples.menu.tables' },
     { link: 'notifications', label: 'anms.examples.menu.notifications' },
     { link: 'authenticated', label: 'anms.examples.menu.auth', auth: true }
   ];
 
-  constructor(private store: Store<State>) {}
-
-  ngOnInit(): void {
-    this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
+  constructor(private store: Store<State>) {
+    effect(() => {
+      this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
+    });
   }
 }
