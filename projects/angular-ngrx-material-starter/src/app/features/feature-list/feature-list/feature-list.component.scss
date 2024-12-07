@@ -1,4 +1,5 @@
-@import '../../../../styles-variables';
+@use '../../../../styles-variables' as vars;
+@use 'sass:map';
 
 .container {
   margin-top: 20px;
@@ -26,7 +27,7 @@ mat-card {
     min-height: 60px;
   }
 
-  @media (max-width: map-get($grid-breakpoints, sm)) {
+  @media (max-width: map.get(vars.$grid-breakpoints, sm)) {
     mat-card-subtitle {
       min-height: auto;
     }

@@ -1,4 +1,5 @@
-@import '../../../../styles-variables';
+@use '../../../../styles-variables' as vars;
+@use 'sass:map';
 
 nav {
   margin-bottom: 20px;
@@ -8,7 +9,7 @@ nav {
     padding: 0 15px;
   }
 
-  @media (max-width: map-get($grid-breakpoints, md)) {
+  @media (max-width: map.get(vars.$grid-breakpoints, md)) {
     .mat-tab-link {
       min-width: 0;
     }

@@ -7,7 +7,7 @@ const config: Config = {
   coverageProvider: 'v8',
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
-  testEnvironment: 'jsdom',
+  testEnvironment: '@happy-dom/jest-environment',
   verbose: true,
   moduleFileExtensions: ['ts', 'html', 'js', 'json'],
   transform: {

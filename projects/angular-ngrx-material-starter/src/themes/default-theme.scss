@@ -18,7 +18,7 @@ $anms-theme: mat.define-theme(
   )
 );
 
-html {
+body {
   @include mat.all-component-themes($anms-theme);
   @include mat.all-component-typographies($anms-theme);
 }

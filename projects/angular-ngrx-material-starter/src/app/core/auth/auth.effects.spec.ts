@@ -21,7 +21,7 @@ describe('AuthEffects', () => {
       setItem: jest.fn()
     } as unknown as jest.Mocked<LocalStorageService>;
     router = {
-      navigateByUrl: jest.fn()
+      navigate: jest.fn()
     } as unknown as jest.Mocked<Router>;
   });
 
@@ -72,7 +72,7 @@ describe('AuthEffects', () => {
           expect(localStorageService.setItem).toHaveBeenCalledWith(AUTH_KEY, {
             isAuthenticated: false
           });
-          expect(router.navigateByUrl).toHaveBeenCalledWith(['']);
+          expect(router.navigate).toHaveBeenCalledWith(['']);
         });
       });
     });

@@ -1,7 +1,8 @@
 @use '@angular/material' as mat;
+@use 'sass:map';
 
 @mixin anms-todos-container-component-theme($theme) {
-  $accent: map-get($theme, accent);
+  $accent: map.get($theme, accent);
 
   .todos-filter-menu-overlay {
     .active {
