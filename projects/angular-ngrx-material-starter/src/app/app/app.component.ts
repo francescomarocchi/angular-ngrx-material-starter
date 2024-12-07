@@ -26,7 +26,8 @@ import {
   selector: 'anms-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [routeAnimations]
+  animations: [routeAnimations],
+  standalone: false
 })
 export class AppComponent implements OnInit {
   isProd = env.production;

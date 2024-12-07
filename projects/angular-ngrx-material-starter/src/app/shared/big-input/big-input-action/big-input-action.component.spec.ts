@@ -10,7 +10,9 @@ import { SharedModule } from '../../shared.module';
 
 @Component({
   selector: 'anms-host-for-test',
-  template: ''
+  template: '',
+  imports: [SharedModule],
+  standalone: true
 })
 class HostComponent {
   actionHandler = () => {};
@@ -37,7 +39,6 @@ describe('BigInputActionComponent', () => {
 
   beforeEach(() =>
     TestBed.configureTestingModule({
-      declarations: [HostComponent],
       imports: [SharedModule, NoopAnimationsModule],
       providers: [provideExperimentalZonelessChangeDetection()]
     })

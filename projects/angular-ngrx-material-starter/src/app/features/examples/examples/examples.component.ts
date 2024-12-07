@@ -14,7 +14,8 @@ import { State } from '../examples.state';
   templateUrl: './examples.component.html',
   styleUrls: ['./examples.component.scss'],
   animations: [routeAnimations],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class ExamplesComponent {
   isAuthenticated$: Observable<boolean> | undefined;

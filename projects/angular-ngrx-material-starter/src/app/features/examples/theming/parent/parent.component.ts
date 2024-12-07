@@ -6,7 +6,8 @@ import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
   selector: 'anms-parent',
   templateUrl: './parent.component.html',
   styleUrls: ['./parent.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class ParentComponent implements OnInit {
   themeSrc = `@use '@angular/material' as mat;

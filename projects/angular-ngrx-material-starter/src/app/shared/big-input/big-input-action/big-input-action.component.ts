@@ -12,7 +12,8 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
   selector: 'anms-big-input-action',
   templateUrl: './big-input-action.component.html',
   styleUrls: ['./big-input-action.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class BigInputActionComponent {
   @Input()

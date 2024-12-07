@@ -12,7 +12,6 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
   templateUrl: './tables.component.html',
   styleUrls: ['./tables.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MatTableModule, MatPaginatorModule]
 })
 export class TablesComponent {

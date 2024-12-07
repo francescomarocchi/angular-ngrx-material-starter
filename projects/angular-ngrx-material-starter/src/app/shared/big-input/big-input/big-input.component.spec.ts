@@ -7,6 +7,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SharedModule } from '../../shared.module';
+import { BigInputComponent } from './big-input.component';
 
 @Component({
   selector: 'anms-host-for-test',
@@ -19,7 +20,9 @@ import { SharedModule } from '../../shared.module';
       (keyup.escape)="onKeyEvent($event)"
     >
     </anms-big-input>
-  `
+  `,
+  standalone: true,
+  imports: [SharedModule]
 })
 class HostComponent {
   newValue = '';
@@ -35,8 +38,7 @@ describe('BigInputComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HostComponent],
-      imports: [SharedModule, NoopAnimationsModule],
+      imports: [SharedModule, NoopAnimationsModule, HostComponent],
       providers: [provideExperimentalZonelessChangeDetection()]
     });
     fixture = TestBed.createComponent(HostComponent);

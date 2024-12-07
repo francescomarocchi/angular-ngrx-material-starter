@@ -16,7 +16,8 @@ import { selectSelectedBook, selectAllBooks } from '../books.selectors';
   selector: 'anms-crud',
   templateUrl: './crud.component.html',
   styleUrls: ['./crud.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class CrudComponent {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;

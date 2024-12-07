@@ -10,6 +10,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RtlSupportDirective } from './rtl-support.directive';
 import { BehaviorSubject, of } from 'rxjs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from '../shared.module';
 
 @Component({
   template: `
@@ -17,7 +18,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     <h2 rtl>The Default (Gray)</h2>
     <h2>No Highlight</h2>
     <div rtl>Vasili</div>
-  `
+  `,
+  imports: [SharedModule]
 })
 class TestComponent {}
 
@@ -30,8 +32,7 @@ describe('RtlSupportDirective', () => {
   beforeEach(() => {
     languageSubject = new BehaviorSubject({ lang: 'he' });
     fixture = TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, TranslateModule.forRoot()],
-      declarations: [RtlSupportDirective, TestComponent],
+      imports: [NoopAnimationsModule, TranslateModule.forRoot(), TestComponent],
       providers: [
         {
           provide: TranslateService,

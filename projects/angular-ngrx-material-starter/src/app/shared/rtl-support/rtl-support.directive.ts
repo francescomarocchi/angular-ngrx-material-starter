@@ -4,7 +4,8 @@ import { Subscription } from 'rxjs';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: '[rtl]'
+  selector: '[rtl]',
+  standalone: false
 })
 export class RtlSupportDirective implements OnInit, OnDestroy {
   private subscription: Subscription | undefined;
