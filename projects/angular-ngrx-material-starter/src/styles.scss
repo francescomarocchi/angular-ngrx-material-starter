@@ -19,8 +19,6 @@
 @use './app/shared/big-input/big-input/big-input.component.scss-theme' as *;
 @use './app/features/examples/notifications/components/notifications.component.scss-theme'
   as *;
-@use './app/features/examples/tables/components/tables.component.scss-theme'
-  as *;
 @use './app/features/examples/todos/components/todos-container.component.scss-theme'
   as *;
 @use './app/features/examples/stock-market/components/stock-market-container.component.scss-theme'
@@ -29,10 +27,11 @@
 @use './app/features/examples/theming/child/child.component.scss-theme' as *;
 @use './app/features/examples/examples/examples.component.scss-theme' as *;
 
-@include mat.all-component-typographies(); // not clear what doing...
+@include mat.all-component-typographies();
 @include mat.elevation-classes();
 @include mat.app-background();
 
+// Custom Components Theme - TODO: destroy and use variables!
 @mixin custom-components-theme($theme) {
   @include anms-styles-reset-theme($theme);
   @include anms-app-component-theme($theme);
@@ -44,7 +43,6 @@
   @include anms-parent-component-theme($theme);
   @include anms-child-component-theme($theme);
   @include anms-examples-component-theme($theme);
-  @include anms-tables-component-theme($theme);
 }
 
 .default-theme {

@@ -21,4 +21,5 @@ $anms-theme: mat.define-theme(
 body {
   @include mat.all-component-themes($anms-theme);
   @include mat.all-component-typographies($anms-theme);
+  @include mat.system-level-colors($anms-theme);
 }

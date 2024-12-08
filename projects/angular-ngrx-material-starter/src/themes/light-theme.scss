@@ -11,4 +11,5 @@ $anms-light-theme: mat.define-theme(
 
 html .light-theme {
   @include mat.all-component-colors($anms-light-theme);
+  @include mat.system-level-colors($anms-light-theme);
 }

@@ -11,4 +11,5 @@ $anms-nature-theme: mat.define-theme(
 
 html .nature-theme {
   @include mat.all-component-colors($anms-nature-theme);
+  @include mat.system-level-colors($anms-nature-theme);
 }

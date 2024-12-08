@@ -13,4 +13,5 @@ $anms-black-theme: mat.define-theme(
 html .black-theme {
   @include mat.all-component-colors($anms-black-theme);
   @include mat.strong-focus-indicators-theme($anms-black-theme);
+  @include mat.system-level-colors($anms-black-theme);
 }
