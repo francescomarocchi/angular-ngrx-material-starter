@@ -1,4 +1,5 @@
-@import '../../styles-variables';
+@use '../../styles-variables' as vars;
+@use 'sass:map';
 
 .theme-wrapper {
   height: 100%;
@@ -55,7 +56,7 @@ mat-sidenav-container {
       font-size: 14px;
     }
 
-    @media (max-width: map-get($grid-breakpoints, lg)) {
+    @media (max-width: map.get(vars.$grid-breakpoints, lg)) {
       .nav-button {
         min-width: 0;
         padding: 0 10px;
@@ -112,13 +113,13 @@ mat-sidenav-container {
             }
           }
 
-          @media (min-width: map-get($grid-breakpoints, lg)) {
+          @media (min-width: map.get(vars.$grid-breakpoints, lg)) {
             a {
               padding: 20px 10px;
             }
           }
 
-          @media (max-width: map-get($grid-breakpoints, md)) {
+          @media (max-width: map.get(vars.$grid-breakpoints, md)) {
             a {
               padding: 20px;
 
@@ -129,14 +130,14 @@ mat-sidenav-container {
             }
           }
 
-          @media (max-width: map-get($grid-breakpoints, sm)) {
+          @media (max-width: map.get(vars.$grid-breakpoints, sm)) {
             a {
               padding: 20px 5px;
             }
           }
         }
 
-        @media (min-width: map-get($grid-breakpoints, sm)) {
+        @media (min-width: map.get(vars.$grid-breakpoints, sm)) {
           .signature {
             position: relative;
 
@@ -150,7 +151,7 @@ mat-sidenav-container {
     }
   }
 
-  @media (max-width: $toolbar-breakpoint) {
+  @media (max-width: vars.$toolbar-breakpoint) {
     .content {
       margin-top: 56px !important;
     }

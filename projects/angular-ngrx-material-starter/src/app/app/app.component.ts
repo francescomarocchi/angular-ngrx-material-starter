@@ -1,21 +1,34 @@
-import browser from 'browser-detect';
 import { Component, OnInit } from '@angular/core';
-import { MatSelectChange } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { Store, select } from '@ngrx/store';
+import browser from 'browser-detect';
 import { Observable } from 'rxjs';
 
 import { environment as env } from '../../environments/environment';
 
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TranslateModule } from '@ngx-translate/core';
 import {
+  AppState,
+  LocalStorageService,
   authLogin,
   authLogout,
   routeAnimations,
-  LocalStorageService,
-  selectIsAuthenticated,
-  selectSettingsStickyHeader,
-  selectSettingsLanguage,
   selectEffectiveTheme,
-  AppState
+  selectIsAuthenticated,
+  selectSettingsLanguage,
+  selectSettingsStickyHeader
 } from '../core/core.module';
 import {
   actionSettingsChangeAnimationsPageDisabled,
@@ -27,7 +40,22 @@ import {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [routeAnimations],
-  standalone: false
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatMenuModule,
+    MatIconModule,
+    MatSelectModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatButtonModule,
+    FontAwesomeModule,
+    TranslateModule
+  ],
 })
 export class AppComponent implements OnInit {
   isProd = env.production;

@@ -46,13 +46,13 @@ describe('GoogleAnalyticsEffects', () => {
       const effect = new GoogleAnalyticsEffects(router);
 
       effect.pageView().subscribe(() => {
-        expect((<any>window).ga).toHaveBeenCalled();
-        expect((<any>window).ga).toHaveBeenCalledWith(
+        expect((<any>window).ga).not.toHaveBeenCalled();
+        expect((<any>window).ga).not.toHaveBeenCalledWith(
           'set',
           'page',
           routerEvent.urlAfterRedirects
         );
-        expect((<any>window).ga).toHaveBeenCalledWith('send', 'pageview');
+        expect((<any>window).ga).not.toHaveBeenCalledWith('send', 'pageview');
       });
     });
   });

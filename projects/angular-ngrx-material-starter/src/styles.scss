@@ -2,34 +2,36 @@
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 
-@import 'https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap';
+@use 'styles-variables';
 
-@import 'styles-variables';
+@use 'bootstrap/scss/bootstrap-reboot';
+@use 'bootstrap/scss/bootstrap-grid';
+@use './styles-reset' as *;
+@use './styles-reset.scss-theme' as *;
 
-@import 'bootstrap/scss/bootstrap-reboot';
-@import 'bootstrap/scss/bootstrap-grid';
-@import 'styles-reset';
+@use './themes/default-theme' as *;
+@use './themes/light-theme' as *;
+@use './themes/black-theme' as *;
+@use './themes/nature-theme' as *;
+
+@use './app/app/app.component.scss-theme' as *;
+@use './app/features/about/about/about.component.scss-theme' as *;
+@use './app/shared/big-input/big-input/big-input.component.scss-theme' as *;
+@use './app/features/examples/notifications/components/notifications.component.scss-theme'
+  as *;
+@use './app/features/examples/tables/components/tables.component.scss-theme'
+  as *;
+@use './app/features/examples/todos/components/todos-container.component.scss-theme'
+  as *;
+@use './app/features/examples/stock-market/components/stock-market-container.component.scss-theme'
+  as *;
+@use './app/features/examples/theming/parent/parent.component.scss-theme' as *;
+@use './app/features/examples/theming/child/child.component.scss-theme' as *;
+@use './app/features/examples/examples/examples.component.scss-theme' as *;
 
 @include mat.all-component-typographies(); // not clear what doing...
 @include mat.elevation-classes();
 @include mat.app-background();
-
-@import './themes/default-theme';
-@import './themes/light-theme';
-@import './themes/black-theme';
-@import './themes/nature-theme';
-
-@import 'styles-reset.scss-theme';
-@import './app/app/app.component.scss-theme';
-@import './app/features/about/about/about.component.scss-theme';
-@import './app/shared/big-input/big-input/big-input.component.scss-theme';
-@import './app/features/examples/notifications/components/notifications.component.scss-theme';
-@import './app/features/examples/tables/components/tables.component.scss-theme';
-@import './app/features/examples/todos/components/todos-container.component.scss-theme';
-@import './app/features/examples/stock-market/components/stock-market-container.component.scss-theme';
-@import './app/features/examples/theming/parent/parent.component.scss-theme';
-@import './app/features/examples/theming/child/child.component.scss-theme';
-@import './app/features/examples/examples/examples.component.scss-theme';
 
 @mixin custom-components-theme($theme) {
   @include anms-styles-reset-theme($theme);
