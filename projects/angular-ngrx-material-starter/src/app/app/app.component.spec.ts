@@ -36,7 +36,6 @@ describe('AppComponent', () => {
         provideMockStore(),
         provideExperimentalZonelessChangeDetection()
       ],
-      declarations: [AppComponent]
     }).compileComponents();
 
     store = TestBed.inject(MockStore);
