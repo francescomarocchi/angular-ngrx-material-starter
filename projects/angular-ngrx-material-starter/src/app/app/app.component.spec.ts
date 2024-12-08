@@ -17,25 +17,19 @@ import { SharedModule } from '../shared/shared.module';
 import { AppComponent } from './app.component';
 import { MatCardModule } from '@angular/material/card';
 import { provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideRouter } from '@angular/router';
 
 describe('AppComponent', () => {
   let store: MockStore;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        SharedModule,
-        MatSidenavModule,
-        MatToolbarModule,
-        MatCardModule,
-        RouterTestingModule,
-        NoopAnimationsModule,
-        TranslateModule.forRoot()
-      ],
+      imports: [NoopAnimationsModule, TranslateModule.forRoot()],
       providers: [
+        provideRouter([]),
         provideMockStore(),
         provideExperimentalZonelessChangeDetection()
-      ],
+      ]
     }).compileComponents();
 
     store = TestBed.inject(MockStore);

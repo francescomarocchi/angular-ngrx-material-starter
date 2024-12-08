@@ -6,17 +6,35 @@ import {
 } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDropList,
+  moveItemInArray
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'anms-tables',
   templateUrl: './tables.component.html',
   styleUrls: ['./tables.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatTableModule, MatPaginatorModule]
+  imports: [MatTableModule, MatPaginatorModule, CdkDropList, CdkDrag]
 })
 export class TablesComponent {
-  protected columns = ['position', 'name', 'weight', 'symbol'];
-  protected dataSource = new MatTableDataSource<PeriodicElement>(list);
+  protected readonly columns = ['position', 'name', 'weight', 'symbol'];
+  protected readonly dataSource = new MatTableDataSource<PeriodicElement>(list);
+  protected readonly items = [
+    'Zero',
+    'One',
+    'Two',
+    'Three',
+    'Four',
+    'Five',
+    'Six',
+    'Seven',
+    'Eight',
+    'Nine'
+  ];
 
   private paginator = viewChild(MatPaginator);
 
@@ -24,6 +42,10 @@ export class TablesComponent {
     effect(() => {
       this.dataSource.paginator = this.paginator() ?? null;
     });
+  }
+
+  protected drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
   }
 }
 
