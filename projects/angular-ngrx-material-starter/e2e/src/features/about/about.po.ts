@@ -1,19 +1,22 @@
-import { browser, by, element } from 'protractor';
+import { Page } from '@playwright/test';
 
 export class AboutPage {
-  navigateTo() {
-    return browser.get('/about');
+  constructor(private page: Page) {}
+
+  async navigateTo() {
+    await this.page.goto('/about');
   }
 
-  getParagraphText() {
-    return element(by.css('h1')).getText();
+  async getParagraphText() {
+    return await this.page.textContent('h1');
   }
 
-  getGettingStarted() {
-    return element(by.css('.get-started'));
+  async getGettingStarted() {
+    return await this.page.$('.get-started');
   }
 
-  getActionButton(idx) {
-    return element.all(by.css('.actions a')).get(idx);
+  async getActionButton(idx: number) {
+    const buttons = await this.page.$$('.actions a');
+    return buttons[idx];
   }
 }

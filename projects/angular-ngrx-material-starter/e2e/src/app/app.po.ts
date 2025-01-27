@@ -1,17 +1,18 @@
-import { browser, by, element } from 'protractor';
+import { Page } from '@playwright/test';
 
 export class AppPage {
-  navigateTo() {
-    return browser.get('/');
+  constructor(private page: Page) {}
+
+  async navigateTo() {
+    await this.page.goto('/');
   }
 
-  getCurrentYear() {
-    return element(by.css('.signature .year')).getText();
+  async getCurrentYear() {
+    return await this.page.textContent('.signature .year');
   }
 
-  getAllMenus() {
-    return element
-      .all(by.css('mat-toolbar button.nav-button'))
-      .map((elm) => elm.getText());
+  async getAllMenus() {
+    const menuElements = await this.page.$$('mat-toolbar button.nav-button');
+    return Promise.all(menuElements.map((elm) => elm.textContent()));
   }
 }

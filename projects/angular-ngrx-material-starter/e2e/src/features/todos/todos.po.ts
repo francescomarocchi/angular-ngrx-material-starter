@@ -1,19 +1,21 @@
-import { browser, by, element } from 'protractor';
+import { Page } from '@playwright/test';
 
 export class TodosPage {
-  navigateTo() {
-    return browser.get('#/examples/todos');
+  constructor(private page: Page) {}
+
+  async navigateTo() {
+    await this.page.goto('#/examples/todos');
   }
 
-  getInput() {
-    return element(by.css('anms-big-input input'));
+  async getInput() {
+    return this.page.locator('anms-big-input input');
   }
 
-  getAddTodoButton() {
-    return element(by.css('anms-big-input-action button'));
+  async getAddTodoButton() {
+    return this.page.locator('anms-big-input-action button');
   }
 
-  getResults() {
-    return element.all(by.css('mat-card.todo'));
+  async getResults() {
+    return this.page.locator('mat-card.todo');
   }
 }

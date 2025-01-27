@@ -110,9 +110,8 @@
           "builder": "@angular-devkit/build-angular:extract-i18n"
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "playwright-ng-schematics:playwright",
           "options": {
-            "protractorConfig": "projects/angular-ngrx-material-starter/e2e/protractor.conf.js",
             "devServerTarget": "angular-ngrx-material-starter:serve"
           },
           "configurations": {
