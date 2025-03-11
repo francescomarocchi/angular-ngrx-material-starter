@@ -11,6 +11,7 @@ test.describe('App', () => {
 
   test('should redirect to "about" route', async ({ page: browserPage }) => {
     await page.navigateTo();
+    await browserPage.waitForURL('**/about');
     expect(browserPage.url()).toContain('about');
   });
 

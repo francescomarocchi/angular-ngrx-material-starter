@@ -31,7 +31,7 @@ const config: Config = {
   collectCoverageFrom: ['src/**/*.ts', '!src/**/*.module.ts', '!src/main.ts'],
   resetMocks: true,
   restoreMocks: true,
-  testPathIgnorePatterns: ['/node_modules/', '/dist/']
+  testPathIgnorePatterns: ['/node_modules/', '/dist/', '/e2e/']
 };
 
 export default config;

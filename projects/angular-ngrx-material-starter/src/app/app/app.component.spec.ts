@@ -1,10 +1,7 @@
+import { TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateModule } from '@ngx-translate/core';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { TranslateModule } from '@ngx-translate/core';
 
 import {
   selectEffectiveTheme,
@@ -12,12 +9,10 @@ import {
   selectSettingsLanguage,
   selectSettingsStickyHeader
 } from '../core/core.module';
-import { SharedModule } from '../shared/shared.module';
 
-import { AppComponent } from './app.component';
-import { MatCardModule } from '@angular/material/card';
 import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   let store: MockStore;

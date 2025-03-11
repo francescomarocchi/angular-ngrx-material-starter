@@ -43,9 +43,7 @@
           <span class="d-none d-md-inline">
               @for (item of navigation; track item) {
                 <button mat-button class="nav-button" [routerLink]="[item.link]"
-                        routerLinkActive="active">
-                  {{ item.label | translate }}
-                </button>
+                        routerLinkActive="active">{{ item.label | translate }}</button>
               }
             </span>
 
