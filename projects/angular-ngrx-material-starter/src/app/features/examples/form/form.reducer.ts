@@ -10,7 +10,7 @@ const reducer = createReducer(
   initialState,
   on(actionFormUpdate, (state, { form }) => ({
     ...state,
-    form: { ...form, password: '*'.repeat(form.password.length) }
+    form: { ...form, password: '*'.repeat(form.password?.length ?? 0) }
   })),
   on(actionFormReset, () => initialState)
 );
