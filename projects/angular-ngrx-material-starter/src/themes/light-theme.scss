@@ -5,11 +5,23 @@ $anms-light-theme: mat.define-theme(
     color: (
       primary: mat.$red-palette,
       tertiary: mat.$yellow-palette
+    ),
+    typography: (
+      plain-family: 'Tektur, sans-serif',
+      brand-family: 'Tektur, sans-serif',
+      bold-weight: 900,
+      medium-weight: 500,
+      regular-weight: 300
+    ),
+    density: (
+      scale: -2
     )
   )
 );
 
 html .light-theme {
+  @include mat.all-component-typographies($anms-light-theme);
+  @include mat.all-component-densities($anms-light-theme);
   @include mat.all-component-colors($anms-light-theme);
   @include mat.system-level-colors($anms-light-theme);
 }

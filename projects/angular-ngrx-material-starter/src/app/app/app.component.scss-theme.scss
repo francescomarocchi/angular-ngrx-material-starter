@@ -1,6 +1,13 @@
 @use '@angular/material' as mat;
+@use '../../styles-variables' as vars;
+
+@function get-density-value($density, $default, $increment) {
+  @return calc($default + ($density * $increment));
+}
 
 @mixin anms-app-component-theme($theme) {
+  $density: mat.get-theme-density($theme);
+
   mat-sidenav-container {
     mat-toolbar {
       color: mat.get-theme-color($theme, primary);
@@ -46,6 +53,24 @@
             color: mat.get-theme-color($theme, on-primary-container);
           }
         }
+      }
+    }
+  }
+
+  mat-sidenav-content {
+    .wrapper {
+      .content {
+        margin-top: calc(
+          64px + #{get-density-value($density, 0px, 4px)}
+        ) !important;
+      }
+    }
+
+    @media (max-width: vars.$toolbar-breakpoint) {
+      .content {
+        margin-top: calc(
+          56px + #{get-density-value($density, 0px, 4px)}
+        ) !important;
       }
     }
   }
