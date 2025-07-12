@@ -1,7 +1,7 @@
 import {
   enableProdMode,
   importProvidersFrom,
-  provideExperimentalZonelessChangeDetection
+  provideZonelessChangeDetection
 } from '@angular/core';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +20,6 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(BrowserAnimationsModule),
     importProvidersFrom(CoreModule),
     importProvidersFrom(AppRoutingModule),
-    provideExperimentalZonelessChangeDetection()
+    provideZonelessChangeDetection()
   ]
 });
