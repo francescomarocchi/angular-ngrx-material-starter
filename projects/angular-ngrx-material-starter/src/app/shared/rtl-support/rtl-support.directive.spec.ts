@@ -2,7 +2,7 @@ import { By } from '@angular/platform-browser';
 import {
   Component,
   DebugElement,
-  provideExperimentalZonelessChangeDetection
+  provideZonelessChangeDetection
 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -41,7 +41,7 @@ describe('RtlSupportDirective', () => {
             onLangChange: languageSubject.asObservable()
           }
         },
-        provideExperimentalZonelessChangeDetection()
+        provideZonelessChangeDetection()
       ]
     }).createComponent(TestComponent);
 

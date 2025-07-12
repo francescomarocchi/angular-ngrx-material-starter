@@ -10,7 +10,7 @@ import {
   selectSettingsStickyHeader
 } from '../core/core.module';
 
-import { provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { AppComponent } from './app.component';
 
@@ -23,7 +23,7 @@ describe('AppComponent', () => {
       providers: [
         provideRouter([]),
         provideMockStore(),
-        provideExperimentalZonelessChangeDetection()
+        provideZonelessChangeDetection()
       ]
     }).compileComponents();
 

@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../../shared/shared.module';
 
 import { FeatureListComponent } from './feature-list.component';
-import { provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('FeatureListComponent', () => {
   let component: FeatureListComponent;
@@ -15,7 +15,7 @@ describe('FeatureListComponent', () => {
     TestBed.configureTestingModule({
       imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()],
       declarations: [FeatureListComponent],
-      providers: [provideExperimentalZonelessChangeDetection()]
+      providers: [provideZonelessChangeDetection()]
     }).compileComponents();
   });
 

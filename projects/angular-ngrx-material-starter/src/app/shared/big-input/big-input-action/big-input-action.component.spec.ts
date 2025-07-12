@@ -1,9 +1,6 @@
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
-import {
-  Component,
-  provideExperimentalZonelessChangeDetection
-} from '@angular/core';
+import { Component, provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SharedModule } from '../../shared.module';
@@ -40,7 +37,7 @@ describe('BigInputActionComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       imports: [SharedModule, NoopAnimationsModule],
-      providers: [provideExperimentalZonelessChangeDetection()]
+      providers: [provideZonelessChangeDetection()]
     })
   );
 
