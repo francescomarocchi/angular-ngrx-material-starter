@@ -1,5 +1,5 @@
 import { Title } from '@angular/platform-browser';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs/operators';
@@ -10,10 +10,8 @@ import { environment as env } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class TitleService {
-  constructor(
-    private translateService: TranslateService,
-    private title: Title
-  ) {}
+  private translateService = inject(TranslateService);
+  private title = inject(Title);
 
   setTitle(
     snapshot: ActivatedRouteSnapshot,

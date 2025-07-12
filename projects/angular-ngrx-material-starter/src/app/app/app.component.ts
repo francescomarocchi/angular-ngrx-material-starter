@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { Store, select } from '@ngrx/store';
 import browser from 'browser-detect';
@@ -55,9 +55,12 @@ import {
     MatButtonModule,
     FontAwesomeModule,
     TranslateModule
-  ],
+  ]
 })
 export class AppComponent implements OnInit {
+  private store = inject<Store<AppState>>(Store);
+  private storageService = inject(LocalStorageService);
+
   isProd = env.production;
   envName = env.envName;
   version = env.versions.app;
@@ -78,11 +81,6 @@ export class AppComponent implements OnInit {
   stickyHeader$: Observable<boolean> | undefined;
   language$: Observable<string> | undefined;
   theme$: Observable<string> | undefined;
-
-  constructor(
-    private store: Store<AppState>,
-    private storageService: LocalStorageService
-  ) {}
 
   private static isIEorEdgeOrSafari() {
     return ['ie', 'edge', 'safari'].includes(browser().name || '');

@@ -1,14 +1,12 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, inject } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
-  constructor(
-    private readonly snackBar: MatSnackBar,
-    private readonly zone: NgZone
-  ) {}
+  private readonly snackBar = inject(MatSnackBar);
+  private readonly zone = inject(NgZone);
 
   default(message: string) {
     this.show(message, {

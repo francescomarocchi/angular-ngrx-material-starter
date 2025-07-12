@@ -1,5 +1,5 @@
 import { ActivationEnd, Router } from '@angular/router';
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, inject } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { select, Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -41,6 +41,16 @@ const INIT = of('anms-init-effect-trigger');
 
 @Injectable()
 export class SettingsEffects {
+  private actions$ = inject(Actions);
+  private store = inject<Store<State>>(Store);
+  private router = inject(Router);
+  private overlayContainer = inject(OverlayContainer);
+  private localStorageService = inject(LocalStorageService);
+  private titleService = inject(TitleService);
+  private animationsService = inject(AnimationsService);
+  private translateService = inject(TranslateService);
+  private ngZone = inject(NgZone);
+
   hour = 0;
 
   changeHour = this.ngZone.runOutsideAngular(() =>
@@ -148,16 +158,4 @@ export class SettingsEffects {
       ),
     { dispatch: false }
   );
-
-  constructor(
-    private actions$: Actions,
-    private store: Store<State>,
-    private router: Router,
-    private overlayContainer: OverlayContainer,
-    private localStorageService: LocalStorageService,
-    private titleService: TitleService,
-    private animationsService: AnimationsService,
-    private translateService: TranslateService,
-    private ngZone: NgZone
-  ) {}
 }

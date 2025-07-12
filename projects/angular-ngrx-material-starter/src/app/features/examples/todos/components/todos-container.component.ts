@@ -1,5 +1,10 @@
 import { selectTodosFilter } from './../todos.selectors';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  inject
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { select, Store } from '@ngrx/store';
@@ -24,18 +29,16 @@ import { State } from '../../examples.state';
   standalone: false
 })
 export class TodosContainerComponent implements OnInit {
+  store = inject<Store<State>>(Store);
+  snackBar = inject(MatSnackBar);
+  translateService = inject(TranslateService);
+  private notificationService = inject(NotificationService);
+
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   todos$: Observable<Todo[]> | undefined;
   filter$: Observable<TodosFilter> | undefined;
   removeDoneDisabled$: Observable<boolean> = observableOf(false);
   newTodo = '';
-
-  constructor(
-    public store: Store<State>,
-    public snackBar: MatSnackBar,
-    public translateService: TranslateService,
-    private notificationService: NotificationService
-  ) {}
 
   get isAddTodoDisabled() {
     return this.newTodo.length < 4;

@@ -1,19 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, Optional, SkipSelf, ErrorHandler } from '@angular/core';
+import { ErrorHandler, NgModule, inject } from '@angular/core';
 import {
-  HttpClient,
   HTTP_INTERCEPTORS,
+  HttpClient,
   provideHttpClient,
+  withFetch,
   withInterceptorsFromDi
 } from '@angular/common/http';
 import {
-  StoreRouterConnectingModule,
-  RouterStateSerializer
+  RouterStateSerializer,
+  StoreRouterConnectingModule
 } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {
   FaIconLibrary,
@@ -33,12 +34,12 @@ import { environment } from '../../environments/environment';
 
 import {
   AppState,
-  reducers,
   metaReducers,
+  reducers,
   selectRouterState
 } from './core.state';
 import { AuthEffects } from './auth/auth.effects';
-import { selectIsAuthenticated, selectAuth } from './auth/auth.selectors';
+import { selectAuth, selectIsAuthenticated } from './auth/auth.selectors';
 import { authLogin, authLogout } from './auth/auth.actions';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { TitleService } from './title/title.service';
@@ -55,24 +56,24 @@ import { GoogleAnalyticsEffects } from './google-analytics/google-analytics.effe
 import { NotificationService } from './notifications/notification.service';
 import { SettingsEffects } from './settings/settings.effects';
 import {
-  selectSettingsLanguage,
   selectEffectiveTheme,
+  selectSettingsLanguage,
   selectSettingsStickyHeader
 } from './settings/settings.selectors';
 import { MatButtonModule } from '@angular/material/button';
 import {
-  faCog,
   faBars,
-  faRocket,
+  faCog,
+  faPlayCircle,
   faPowerOff,
-  faUserCircle,
-  faPlayCircle
+  faRocket,
+  faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faGithub,
+  faInstagram,
   faMediumM,
   faTwitter,
-  faInstagram,
   faYoutube
 } from '@fortawesome/free-brands-svg-icons';
 
@@ -163,16 +164,14 @@ export function httpLoaderFactory(http: HttpClient) {
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: AppErrorHandler },
     { provide: RouterStateSerializer, useClass: CustomSerializer },
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(withInterceptorsFromDi(), withFetch())
   ]
 })
 export class CoreModule {
-  constructor(
-    @Optional()
-    @SkipSelf()
-    parentModule: CoreModule,
-    faIconLibrary: FaIconLibrary
-  ) {
+  constructor() {
+    const parentModule = inject(CoreModule, { optional: true, skipSelf: true });
+    const faIconLibrary = inject(FaIconLibrary);
+
     if (parentModule) {
       throw new Error('CoreModule is already loaded. Import only in AppModule');
     }

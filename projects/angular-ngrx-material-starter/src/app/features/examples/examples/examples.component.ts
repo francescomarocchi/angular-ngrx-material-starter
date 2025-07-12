@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject
+} from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -18,6 +23,8 @@ import { State } from '../examples.state';
   standalone: false
 })
 export class ExamplesComponent {
+  private store = inject<Store<State>>(Store);
+
   isAuthenticated$: Observable<boolean> | undefined;
 
   examples = [
@@ -31,7 +38,7 @@ export class ExamplesComponent {
     { link: 'authenticated', label: 'anms.examples.menu.auth', auth: true }
   ];
 
-  constructor(private store: Store<State>) {
+  constructor() {
     effect(() => {
       this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
     });

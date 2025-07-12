@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { tap } from 'rxjs/operators';
 
@@ -10,6 +10,9 @@ export const FORM_KEY = 'EXAMPLES.FORM';
 
 @Injectable()
 export class FormEffects {
+  private actions$ = inject(Actions);
+  private localStorageService = inject(LocalStorageService);
+
   persistForm = createEffect(
     () =>
       this.actions$.pipe(
@@ -20,9 +23,4 @@ export class FormEffects {
       ),
     { dispatch: false }
   );
-
-  constructor(
-    private actions$: Actions,
-    private localStorageService: LocalStorageService
-  ) {}
 }

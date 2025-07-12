@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { createEffect } from '@ngrx/effects';
 import { tap, filter } from 'rxjs/operators';
 
 @Injectable()
 export class GoogleAnalyticsEffects {
+  private router = inject(Router);
+
   pageView = createEffect(
     () => () =>
       this.router.events.pipe(
@@ -18,6 +20,4 @@ export class GoogleAnalyticsEffects {
       ),
     { dispatch: false }
   );
-
-  constructor(private router: Router) {}
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ofType, createEffect, Actions } from '@ngrx/effects';
 import { tap } from 'rxjs/operators';
@@ -11,6 +11,10 @@ export const AUTH_KEY = 'AUTH';
 
 @Injectable()
 export class AuthEffects {
+  private actions$ = inject(Actions);
+  private localStorageService = inject(LocalStorageService);
+  private router = inject(Router);
+
   login = createEffect(
     () =>
       this.actions$.pipe(
@@ -35,10 +39,4 @@ export class AuthEffects {
       ),
     { dispatch: false }
   );
-
-  constructor(
-    private actions$: Actions,
-    private localStorageService: LocalStorageService,
-    private router: Router
-  ) {}
 }

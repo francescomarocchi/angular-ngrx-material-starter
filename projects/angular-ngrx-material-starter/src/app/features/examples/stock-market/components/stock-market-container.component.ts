@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  inject
+} from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -18,10 +23,10 @@ import { State } from '../../examples.state';
   standalone: false
 })
 export class StockMarketContainerComponent implements OnInit {
+  store = inject<Store<State>>(Store);
+
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   stocks$: Observable<StockMarketState> | undefined;
-
-  constructor(public store: Store<State>) {}
 
   ngOnInit() {
     this.stocks$ = this.store.pipe(select(selectStockMarket));

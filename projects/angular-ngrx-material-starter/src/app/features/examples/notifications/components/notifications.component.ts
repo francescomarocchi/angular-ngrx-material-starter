@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject
+} from '@angular/core';
 
 import {
   ROUTE_ANIMATIONS_ELEMENTS,
@@ -13,9 +18,9 @@ import {
   standalone: false
 })
 export class NotificationsComponent implements OnInit {
-  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+  private readonly notificationService = inject(NotificationService);
 
-  constructor(private readonly notificationService: NotificationService) {}
+  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
 
   ngOnInit() {}
 

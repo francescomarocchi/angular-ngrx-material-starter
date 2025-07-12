@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -115,7 +115,9 @@ import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
   ]
 })
 export class SharedModule {
-  constructor(faIconLibrary: FaIconLibrary) {
+  constructor() {
+    const faIconLibrary = inject(FaIconLibrary);
+
     faIconLibrary.addIcons(
       faGithub,
       faMediumM,
