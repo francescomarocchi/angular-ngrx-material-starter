@@ -1,15 +1,15 @@
 import { ActivationEnd, Router } from '@angular/router';
-import { Injectable, NgZone, inject } from '@angular/core';
+import { inject, Injectable, NgZone } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { select, Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 import { combineLatest, merge, of } from 'rxjs';
 import {
-  tap,
-  withLatestFrom,
   distinctUntilChanged,
-  filter
+  filter,
+  tap,
+  withLatestFrom
 } from 'rxjs/operators';
 
 import { selectSettingsState } from '../core.state';
@@ -22,16 +22,16 @@ import {
   actionSettingsChangeAnimationsPage,
   actionSettingsChangeAnimationsPageDisabled,
   actionSettingsChangeAutoNightMode,
+  actionSettingsChangeHour,
   actionSettingsChangeLanguage,
-  actionSettingsChangeTheme,
   actionSettingsChangeStickyHeader,
-  actionSettingsChangeHour
+  actionSettingsChangeTheme
 } from './settings.actions';
 import {
   selectEffectiveTheme,
-  selectSettingsLanguage,
+  selectElementsAnimations,
   selectPageAnimations,
-  selectElementsAnimations
+  selectSettingsLanguage
 } from './settings.selectors';
 import { State } from './settings.model';
 
@@ -49,21 +49,16 @@ export class SettingsEffects {
   private titleService = inject(TitleService);
   private animationsService = inject(AnimationsService);
   private translateService = inject(TranslateService);
-  private ngZone = inject(NgZone);
 
   hour = 0;
 
-  changeHour = this.ngZone.runOutsideAngular(() =>
-    setInterval(() => {
-      const hour = new Date().getHours();
-      if (hour !== this.hour) {
-        this.hour = hour;
-        this.ngZone.run(() =>
-          this.store.dispatch(actionSettingsChangeHour({ hour }))
-        );
-      }
-    }, 60_000)
-  );
+  changeHour = setInterval(() => {
+    const hour = new Date().getHours();
+    if (hour !== this.hour) {
+      this.hour = hour;
+      this.store.dispatch(actionSettingsChangeHour({ hour }));
+    }
+  }, 60_000);
 
   persistSettings = createEffect(
     () =>

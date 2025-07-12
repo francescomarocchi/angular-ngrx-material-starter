@@ -1,5 +1,5 @@
 import { Actions } from '@ngrx/effects';
-import { of, throwError } from 'rxjs';
+import { EMPTY, of, throwError } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
 import { LocalStorageService } from '../../../core/core.module';
@@ -13,6 +13,9 @@ import { StockMarketEffects, STOCK_MARKET_KEY } from './stock-market.effects';
 import { Stock } from './stock-market.model';
 import { StockMarketService } from './stock-market.service';
 import { RunHelpers } from 'rxjs/internal/testing/TestScheduler';
+import { TestBed } from '@angular/core/testing';
+import { provideMockActions } from '@ngrx/effects/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 const symbol = 'TSLA';
 
@@ -20,6 +23,7 @@ describe('StockMarketEffects', () => {
   let localStorage: jest.Mocked<LocalStorageService>;
   let stockMarket: jest.Mocked<StockMarketService>;
   let scheduler: TestScheduler;
+  let effects: StockMarketEffects;
 
   beforeEach(() => {
     localStorage = {
@@ -31,6 +35,16 @@ describe('StockMarketEffects', () => {
     scheduler = new TestScheduler((actual, expected) =>
       expect(actual).toEqual(expected)
     );
+
+    TestBed.configureTestingModule({
+      providers: [
+        provideZonelessChangeDetection(),
+        StockMarketEffects,
+        { provide: LocalStorageService, useValue: localStorage },
+        { provide: StockMarketService, useValue: stockMarket },
+        provideMockActions(() => EMPTY)
+      ]
+    });
   });
 
   it('should emit ActionStockMarketRetrieveSuccess on success', (done) => {
@@ -70,11 +84,9 @@ describe('StockMarketEffects', () => {
 
       stockMarket.retrieveStock.mockReturnValue(of(stock));
 
-      const effects = new StockMarketEffects(
-        actions,
-        localStorage,
-        stockMarket
-      );
+      TestBed.overrideProvider(Actions, { useValue: actions });
+
+      effects = TestBed.inject(StockMarketEffects);
 
       expectObservable(effects.retrieveStock({ debounce: 2 })).toBe(
         expected,
@@ -111,11 +123,9 @@ describe('StockMarketEffects', () => {
 
       stockMarket.retrieveStock.mockReturnValue(throwError(error));
 
-      const effects = new StockMarketEffects(
-        actions,
-        localStorage,
-        stockMarket
-      );
+      TestBed.overrideProvider(Actions, { useValue: actions });
+
+      effects = TestBed.inject(StockMarketEffects);
 
       expectObservable(effects.retrieveStock({ debounce: 0 })).toBe(
         expected,
