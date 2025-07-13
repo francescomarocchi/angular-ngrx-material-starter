@@ -7,7 +7,7 @@
   <div class="row" [ngClass]="routeAnimationsElements" rtl>
     @if (stocks$ | async; as stocks) {
       <div class="col-md-6 col-lg-3">
-        <form autocomplete="false">
+        <form autocomplete="off">
           <mat-form-field>
             <input matInput [placeholder]="'anms.examples.stocks.symbol' | translate"
               [value]="stocks.symbol"

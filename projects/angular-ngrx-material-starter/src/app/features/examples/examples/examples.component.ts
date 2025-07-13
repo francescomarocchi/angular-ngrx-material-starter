@@ -4,7 +4,7 @@ import {
   effect,
   inject
 } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import {
@@ -23,11 +23,13 @@ import { State } from '../examples.state';
   standalone: false
 })
 export class ExamplesComponent {
-  private store = inject<Store<State>>(Store);
-
   isAuthenticated$: Observable<boolean> | undefined;
 
-  examples = [
+  examples: {
+    label: string;
+    link: string;
+    auth?: boolean;
+  }[] = [
     { link: 'todos', label: 'anms.examples.menu.todos' },
     { link: 'stock-market', label: 'anms.examples.menu.stocks' },
     { link: 'theming', label: 'anms.examples.menu.theming' },
@@ -37,6 +39,8 @@ export class ExamplesComponent {
     { link: 'notifications', label: 'anms.examples.menu.notifications' },
     { link: 'authenticated', label: 'anms.examples.menu.auth', auth: true }
   ];
+
+  private store = inject<Store<State>>(Store);
 
   constructor() {
     effect(() => {

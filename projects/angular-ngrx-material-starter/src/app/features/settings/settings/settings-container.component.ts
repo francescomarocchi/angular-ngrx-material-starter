@@ -30,8 +30,6 @@ import { selectSettings } from '../../../core/settings/settings.selectors';
   standalone: false
 })
 export class SettingsContainerComponent implements OnInit {
-  private store = inject<Store<State>>(Store);
-
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   settings$: Observable<SettingsState> | undefined;
 
@@ -53,6 +51,8 @@ export class SettingsContainerComponent implements OnInit {
     { value: 'he', label: 'עברית' },
     { value: 'ar', label: 'اللغة العربية' }
   ];
+
+  private store = inject<Store<State>>(Store);
 
   ngOnInit() {
     this.settings$ = this.store.pipe(select(selectSettings));

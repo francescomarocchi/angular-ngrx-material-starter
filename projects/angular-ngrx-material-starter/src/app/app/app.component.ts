@@ -58,9 +58,6 @@ import {
   ]
 })
 export class AppComponent implements OnInit {
-  private store = inject<Store<AppState>>(Store);
-  private storageService = inject(LocalStorageService);
-
   isProd = env.production;
   envName = env.envName;
   version = env.versions.app;
@@ -81,6 +78,9 @@ export class AppComponent implements OnInit {
   stickyHeader$: Observable<boolean> | undefined;
   language$: Observable<string> | undefined;
   theme$: Observable<string> | undefined;
+
+  private store = inject<Store<AppState>>(Store);
+  private storageService = inject(LocalStorageService);
 
   private static isIEorEdgeOrSafari() {
     return ['ie', 'edge', 'safari'].includes(browser().name || '');
