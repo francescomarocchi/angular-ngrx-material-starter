@@ -1,9 +1,8 @@
 import {
   Component,
-  Output,
-  EventEmitter,
   ChangeDetectionStrategy,
-  input
+  input,
+  output
 } from '@angular/core';
 
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -23,12 +22,12 @@ export class BigInputActionComponent {
   readonly label = input('');
   readonly color = input('');
 
-  @Output()
-  action = new EventEmitter<void>();
+  readonly action = output<void>();
 
   hasFocus = false;
 
   onClick() {
+    // TODO: The 'emit' function requires a mandatory void argument
     this.action.emit();
   }
 }

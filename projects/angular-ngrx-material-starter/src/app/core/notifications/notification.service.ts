@@ -6,7 +6,6 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 })
 export class NotificationService {
   private readonly snackBar = inject(MatSnackBar);
-  private readonly zone = inject(NgZone);
 
   default(message: string) {
     this.show(message, {
@@ -44,8 +43,6 @@ export class NotificationService {
   }
 
   private show(message: string, configuration: MatSnackBarConfig) {
-    // Need to open snackBar from Angular zone to prevent issues with its position per
-    // https://stackoverflow.com/questions/50101912/snackbar-position-wrong-when-use-errorhandler-in-angular-5-and-material
-    this.zone.run(() => this.snackBar.open(message, undefined, configuration));
+    this.snackBar.open(message, undefined, configuration);
   }
 }

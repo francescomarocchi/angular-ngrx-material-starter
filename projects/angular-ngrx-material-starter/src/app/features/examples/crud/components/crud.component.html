@@ -16,7 +16,7 @@
       @if (!isEditing) {
         <button type="button" mat-fab color="primary" class="add" [ngClass]="routeAnimationsElements"
                 (click)="addNew()">
-          <fa-icon icon="plus"></fa-icon>
+          <fa-icon icon="plus" />
         </button>
       }
     </div>
@@ -29,19 +29,16 @@
               @if (!isEditing) {
                 <button mat-icon-button color="accent" (click)="edit(selectedBook)">
                   <fa-icon icon="edit" [matTooltip]="'anms.examples.crud.tooltip.edit' | translate"
-                           matTooltipPosition="above">
-                  </fa-icon>
+                           matTooltipPosition="above" />
                 </button>
               }
               <button mat-icon-button color="warn" (click)="delete(selectedBook)">
                 <fa-icon icon="trash" [matTooltip]="'anms.examples.crud.tooltip.delete' | translate"
-                         matTooltipPosition="above">
-                </fa-icon>
+                         matTooltipPosition="above" />
               </button>
               <button mat-icon-button (click)="deselect()">
                 <fa-icon icon="times" [matTooltip]="'anms.examples.crud.tooltip.deselect' | translate"
-                         matTooltipPosition="above">
-                </fa-icon>
+                         matTooltipPosition="above" />
               </button>
             </span>
           }
@@ -102,7 +99,7 @@
         @if (selectedBook$ | async; as selectedBook) {
           <div [ngClass]="routeAnimationsElements">
             <h3>{{ selectedBook.title }}</h3>
-            <mat-divider></mat-divider>
+            <mat-divider />
             <p>{{ selectedBook.description }}</p>
             <i>{{ selectedBook.author }}</i>
           </div>

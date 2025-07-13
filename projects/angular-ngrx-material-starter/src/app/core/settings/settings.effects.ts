@@ -1,5 +1,5 @@
 import { ActivationEnd, Router } from '@angular/router';
-import { inject, Injectable, NgZone } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { select, Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';

@@ -5,7 +5,7 @@ import { Actions } from '@ngrx/effects';
 import { TestScheduler } from 'rxjs/testing';
 import { Store } from '@ngrx/store';
 import { EMPTY, of } from 'rxjs';
-import { NgZone, provideZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 import {
   AnimationsService,
