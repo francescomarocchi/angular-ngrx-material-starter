@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { ErrorHandler, NgModule, inject } from '@angular/core';
 import {
   HTTP_INTERCEPTORS,
   HttpClient,
@@ -7,60 +6,35 @@ import {
   withFetch,
   withInterceptorsFromDi
 } from '@angular/common/http';
-import {
-  RouterStateSerializer,
-  StoreRouterConnectingModule
-} from '@ngrx/router-store';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ErrorHandler, NgModule, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   FaIconLibrary,
   FontAwesomeModule
 } from '@fortawesome/angular-fontawesome';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatListModule } from '@angular/material/list';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { FormsModule } from '@angular/forms';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { environment } from '../../environments/environment';
 
-import {
-  AppState,
-  metaReducers,
-  reducers,
-  selectRouterState
-} from './core.state';
-import { AuthEffects } from './auth/auth.effects';
-import { selectAuth, selectIsAuthenticated } from './auth/auth.selectors';
-import { authLogin, authLogout } from './auth/auth.actions';
-import { AuthGuardService } from './auth/auth-guard.service';
-import { TitleService } from './title/title.service';
-import {
-  ROUTE_ANIMATIONS_ELEMENTS,
-  routeAnimations
-} from './animations/route.animations';
-import { AnimationsService } from './animations/animations.service';
-import { AppErrorHandler } from './error-handler/app-error-handler.service';
-import { CustomSerializer } from './router/custom-serializer';
-import { LocalStorageService } from './local-storage/local-storage.service';
-import { HttpErrorInterceptor } from './http-interceptors/http-error.interceptor';
-import { GoogleAnalyticsEffects } from './google-analytics/google-analytics.effects';
-import { NotificationService } from './notifications/notification.service';
-import { SettingsEffects } from './settings/settings.effects';
-import {
-  selectEffectiveTheme,
-  selectSettingsLanguage,
-  selectSettingsStickyHeader
-} from './settings/settings.selectors';
 import { MatButtonModule } from '@angular/material/button';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import {
+  faGithub,
+  faInstagram,
+  faMediumM,
+  faTwitter,
+  faYoutube
+} from '@fortawesome/free-brands-svg-icons';
 import {
   faBars,
   faCog,
@@ -69,30 +43,40 @@ import {
   faRocket,
   faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
+import { AnimationsService } from './animations/animations.service';
 import {
-  faGithub,
-  faInstagram,
-  faMediumM,
-  faTwitter,
-  faYoutube
-} from '@fortawesome/free-brands-svg-icons';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+  ROUTE_ANIMATIONS_ELEMENTS,
+  routeAnimations
+} from './animations/route.animations';
+import { AuthGuardService } from './auth/auth-guard.service';
+import { authLogin, authLogout } from './auth/auth.actions';
+import { selectAuth, selectIsAuthenticated } from './auth/auth.selectors';
+import { AppState } from './core.state';
+import { AppErrorHandler } from './error-handler/app-error-handler.service';
+import { HttpErrorInterceptor } from './http-interceptors/http-error.interceptor';
+import { LocalStorageService } from './local-storage/local-storage.service';
+import { NotificationService } from './notifications/notification.service';
+import {
+  selectEffectiveTheme,
+  selectSettingsLanguage,
+  selectSettingsStickyHeader
+} from './settings/settings.selectors';
+import { TitleService } from './title/title.service';
 
 export {
+  AnimationsService,
+  AppState,
+  AuthGuardService,
+  LocalStorageService,
+  NotificationService,
+  ROUTE_ANIMATIONS_ELEMENTS,
   TitleService,
-  selectAuth,
   authLogin,
   authLogout,
   routeAnimations,
-  AppState,
-  LocalStorageService,
-  selectIsAuthenticated,
-  ROUTE_ANIMATIONS_ELEMENTS,
-  AnimationsService,
-  AuthGuardService,
-  selectRouterState,
-  NotificationService,
+  selectAuth,
   selectEffectiveTheme,
+  selectIsAuthenticated,
   selectSettingsLanguage,
   selectSettingsStickyHeader
 };
@@ -138,14 +122,6 @@ export function httpLoaderFactory(http: HttpClient) {
     MatTooltipModule,
     MatSnackBarModule,
     MatButtonModule,
-    // ngrx
-    StoreModule.forRoot(reducers, { metaReducers }),
-    StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([
-      AuthEffects,
-      SettingsEffects,
-      GoogleAnalyticsEffects
-    ]),
     environment.production
       ? []
       : StoreDevtoolsModule.instrument({
@@ -168,7 +144,6 @@ export function httpLoaderFactory(http: HttpClient) {
     },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: AppErrorHandler },
-    { provide: RouterStateSerializer, useClass: CustomSerializer },
     provideHttpClient(withInterceptorsFromDi(), withFetch())
   ]
 })
