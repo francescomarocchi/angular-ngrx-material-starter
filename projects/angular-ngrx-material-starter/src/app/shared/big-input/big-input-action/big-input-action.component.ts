@@ -18,7 +18,7 @@ export class BigInputActionComponent {
   readonly disabled = input(false);
   readonly fontSet = input('');
   readonly fontIcon = input('');
-  readonly faIcon = input.required<IconProp>();
+  readonly faIcon = input<IconProp>();
   readonly label = input('');
   readonly color = input('');
 

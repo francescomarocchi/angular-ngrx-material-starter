@@ -3,7 +3,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {
+  provideTranslateHttpLoader,
+  TranslateHttpLoader
+} from '@ngx-translate/http-loader';
 
 import { environment } from '../../../environments/environment';
 import { SharedModule } from '../../shared/shared.module';
@@ -32,24 +35,15 @@ import { ParentComponent } from './theming/parent/parent.component';
 import { TodosContainerComponent } from './todos/components/todos-container.component';
 import { TodosEffects } from './todos/todos.effects';
 
-export function httpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(
-    http,
-    `${environment.i18nPrefix}/assets/i18n/examples/`,
-    '.json'
-  );
-}
-
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     SharedModule,
     TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpLoaderFactory,
-        deps: [HttpClient]
-      },
+      loader: provideTranslateHttpLoader({
+        prefix: `${environment.i18nPrefix}/assets/i18n/examples/`,
+        suffix: '.json'
+      }),
       isolate: true
     }),
     RouterLink,

@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { Store, select } from '@ngrx/store';
-import browser from 'browser-detect';
 import { Observable } from 'rxjs';
 
 import { environment as env } from '../../environments/environment';
@@ -82,13 +81,9 @@ export class AppComponent implements OnInit {
   private store = inject<Store<AppState>>(Store);
   private storageService = inject(LocalStorageService);
 
-  private static isIEorEdgeOrSafari() {
-    return ['ie', 'edge', 'safari'].includes(browser().name || '');
-  }
-
   ngOnInit(): void {
     this.storageService.testLocalStorage();
-    if (AppComponent.isIEorEdgeOrSafari()) {
+    if (AppComponent.isIeOrEdgeOrSafari()) {
       this.store.dispatch(
         actionSettingsChangeAnimationsPageDisabled({
           pageAnimationsDisabled: true
@@ -114,5 +109,17 @@ export class AppComponent implements OnInit {
     this.store.dispatch(
       actionSettingsChangeLanguage({ language: event.value })
     );
+  }
+
+  static isIeOrEdgeOrSafari() {
+    const userAgent = navigator.userAgent;
+    const isIE11 =
+      userAgent.includes('Trident/7.0') && userAgent.includes('rv:11.0');
+    const isEdgeLegacy =
+      userAgent.includes('Edge/') && !userAgent.includes('Edg/');
+    const isSafari =
+      userAgent.includes('Safari') && !userAgent.includes('Chrome');
+
+    return isIE11 || isEdgeLegacy || isSafari;
   }
 }

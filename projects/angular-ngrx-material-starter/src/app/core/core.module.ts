@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import {
   HTTP_INTERCEPTORS,
-  HttpClient,
   provideHttpClient,
   withFetch,
   withInterceptorsFromDi
 } from '@angular/common/http';
-import { ErrorHandler, NgModule, inject } from '@angular/core';
+import { ErrorHandler, inject, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -21,8 +20,8 @@ import {
   FontAwesomeModule
 } from '@fortawesome/angular-fontawesome';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { environment } from '../../environments/environment';
 
@@ -67,27 +66,19 @@ export {
   AnimationsService,
   AppState,
   AuthGuardService,
+  authLogin,
+  authLogout,
   LocalStorageService,
   NotificationService,
   ROUTE_ANIMATIONS_ELEMENTS,
-  TitleService,
-  authLogin,
-  authLogout,
   routeAnimations,
   selectAuth,
   selectEffectiveTheme,
   selectIsAuthenticated,
   selectSettingsLanguage,
-  selectSettingsStickyHeader
+  selectSettingsStickyHeader,
+  TitleService
 };
-
-export function httpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(
-    http,
-    `${environment.i18nPrefix}/assets/i18n/`,
-    '.json'
-  );
-}
 
 @NgModule({
   declarations: [],
@@ -130,11 +121,10 @@ export function httpLoaderFactory(http: HttpClient) {
     // 3rd party
     FontAwesomeModule,
     TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpLoaderFactory,
-        deps: [HttpClient]
-      }
+      loader: provideTranslateHttpLoader({
+        prefix: `${environment.i18nPrefix}/assets/i18n/`,
+        suffix: '.json'
+      })
     })
   ],
   providers: [
