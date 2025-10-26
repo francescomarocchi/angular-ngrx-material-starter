@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { AppState } from '../core.state';
   providedIn: 'root'
 })
 export class AuthGuardService {
-  constructor(private store: Store<AppState>) {}
+  private store = inject<Store<AppState>>(Store);
 
   canActivate(): Observable<boolean> {
     return this.store.pipe(select(selectIsAuthenticated));

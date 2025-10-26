@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 
 @Component({
   selector: 'anms-big-input',
@@ -8,14 +8,11 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
   standalone: false
 })
 export class BigInputComponent {
-  @Input()
-  placeholder = '';
+  readonly placeholder = input('');
 
-  @Input()
-  value = '';
+  readonly value = input('');
 
-  @Input()
-  disabled = false;
+  readonly disabled = input(false);
 
   hasFocus = false;
 }

@@ -19,7 +19,7 @@ import {
   selectTodos,
   selectTodosFilter
 } from '../todos.selectors';
-import { provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('TodosComponent', () => {
   let store: MockStore;
@@ -65,10 +65,7 @@ describe('TodosComponent', () => {
     TestBed.configureTestingModule({
       imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()],
       declarations: [TodosContainerComponent],
-      providers: [
-        provideMockStore(),
-        provideExperimentalZonelessChangeDetection()
-      ]
+      providers: [provideMockStore(), provideZonelessChangeDetection()]
     });
 
     store = TestBed.inject(MockStore);

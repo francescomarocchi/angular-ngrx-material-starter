@@ -14,7 +14,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
-import { provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('FormComponent', () => {
   let store: MockStore;
@@ -45,7 +45,7 @@ describe('FormComponent', () => {
       providers: [
         provideMockStore(),
         NotificationService,
-        provideExperimentalZonelessChangeDetection()
+        provideZonelessChangeDetection()
       ]
     });
 

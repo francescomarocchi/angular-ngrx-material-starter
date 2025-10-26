@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { NotificationService } from './notification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Overlay } from '@angular/cdk/overlay';
-import { provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('NotificationsService', () => {
@@ -16,7 +16,7 @@ describe('NotificationsService', () => {
         NotificationService,
         MatSnackBar,
         Overlay,
-        provideExperimentalZonelessChangeDetection()
+        provideZonelessChangeDetection()
       ]
     });
     service = TestBed.inject<NotificationService>(NotificationService);

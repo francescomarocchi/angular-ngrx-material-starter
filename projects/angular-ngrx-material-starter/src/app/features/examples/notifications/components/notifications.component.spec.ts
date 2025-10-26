@@ -6,7 +6,7 @@ import { NotificationService } from '../../../../core/core.module';
 import { SharedModule } from '../../../../shared/shared.module';
 
 import { NotificationsComponent } from './notifications.component';
-import { provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('NotificationsComponent', () => {
   let component: NotificationsComponent;
@@ -15,10 +15,7 @@ describe('NotificationsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()],
-      providers: [
-        NotificationService,
-        provideExperimentalZonelessChangeDetection()
-      ],
+      providers: [NotificationService, provideZonelessChangeDetection()],
       declarations: [NotificationsComponent]
     }).compileComponents();
   });

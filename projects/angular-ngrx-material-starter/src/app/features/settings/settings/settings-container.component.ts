@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  inject
+} from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Store, select } from '@ngrx/store';
@@ -47,7 +52,7 @@ export class SettingsContainerComponent implements OnInit {
     { value: 'ar', label: 'اللغة العربية' }
   ];
 
-  constructor(private store: Store<State>) {}
+  private store = inject<Store<State>>(Store);
 
   ngOnInit() {
     this.settings$ = this.store.pipe(select(selectSettings));

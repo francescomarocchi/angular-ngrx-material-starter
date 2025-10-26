@@ -1,11 +1,11 @@
-<button mat-raised-button color="color" [disabled]="disabled" (click)="onClick()">
-  @if (fontSet && fontIcon && !faIcon) {
-    <mat-icon [fontSet]="fontSet" [fontIcon]="fontIcon"></mat-icon>
+<button mat-raised-button color="color" [disabled]="disabled()" (click)="onClick()">
+  @if (fontSet() && fontIcon() && !faIcon()) {
+    <mat-icon [fontSet]="fontSet()" [fontIcon]="fontIcon()" />
   }
-  @if (faIcon) {
-    <fa-icon [icon]="faIcon"></fa-icon>
+  @if (faIcon()) {
+    <fa-icon [icon]="faIcon()" />
   }
-  @if (label) {
-    <span>{{label}}</span>
+  @if (label()) {
+    <span>{{label()}}</span>
   }
 </button>

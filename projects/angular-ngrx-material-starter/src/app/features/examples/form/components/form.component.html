@@ -4,13 +4,7 @@
       <h1 class="main-heading">{{ 'anms.examples.form.title' | translate }}</h1>
     </div>
   </div>
-  <!--
-       this is a so called "ngLet" directive, which is a
-       custom directive that allows us to define a local
-       variable in a template
-  -->
-  @if (formValueChanges$ | async; as updatedForm) {
-  }
+
   <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="row justify-content-center">
       <div class="col-md-8">
@@ -63,8 +57,8 @@
           <div class="row">
             <mat-form-field class="col" [ngClass]="routeAnimationsElements">
               <input matInput formControlName="birthday" [matDatepicker]="picker" placeholder="{{ 'anms.examples.form.placeholder5' | translate }}">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
+              <mat-datepicker-toggle matSuffix [for]="picker" />
+              <mat-datepicker #picker />
               @if (form.get('birthday')?.hasError('required')) {
                 <mat-error>
                   {{ 'anms.examples.form.placeholder5' | translate }}
@@ -104,7 +98,7 @@
             <div class="col">
               <label>{{ 'anms.examples.form.text2' | translate }}</label>
               <br>
-                <mat-slider thumbLabel tickInterval="1" min="1" max="10">
+                <mat-slider min="1" max="10">
                 <input matSliderThumb formControlName="rating" />
               </mat-slider>
               </div>

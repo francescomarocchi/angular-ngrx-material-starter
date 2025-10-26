@@ -1,7 +1,7 @@
 import * as assert from 'assert';
 import { Store } from '@ngrx/store';
 import { Actions, getEffectsMetadata } from '@ngrx/effects';
-import { of } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
 import { LocalStorageService } from '../../../core/core.module';
@@ -10,6 +10,9 @@ import { State } from '../examples.state';
 import { actionTodosToggle } from './todos.actions';
 import { TodosEffects, TODOS_KEY } from './todos.effects';
 import { TodosState } from './todos.model';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { provideMockActions } from '@ngrx/effects/testing';
+import { TestBed } from '@angular/core/testing';
 
 const scheduler = new TestScheduler((actual, expected) =>
   assert.deepStrictEqual(actual, expected)
@@ -18,6 +21,7 @@ const scheduler = new TestScheduler((actual, expected) =>
 describe('TodosEffects', () => {
   let localStorage: jest.Mocked<LocalStorageService>;
   let store: jest.Mocked<Store<State>>;
+  let effect: TodosEffects;
 
   beforeEach(() => {
     localStorage = {
@@ -26,12 +30,26 @@ describe('TodosEffects', () => {
     store = {
       pipe: jest.fn()
     } as unknown as jest.Mocked<Store<State>>;
+
+    TestBed.configureTestingModule({
+      providers: [
+        provideZonelessChangeDetection(),
+        TodosEffects,
+        { provide: LocalStorageService, useValue: localStorage },
+        { provide: Store, useValue: store },
+        provideMockActions(() => EMPTY)
+      ]
+    });
   });
 
   describe('persistTodos', () => {
     it('should not dispatch any action', () => {
       const actions$ = new Actions();
-      const effect = new TodosEffects(actions$, store, localStorage);
+
+      TestBed.overrideProvider(Actions, { useValue: actions$ });
+
+      effect = TestBed.inject(TodosEffects);
+
       const metadata = getEffectsMetadata(effect);
 
       expect(metadata.persistTodos?.dispatch).toEqual(false);
@@ -49,7 +67,10 @@ describe('TodosEffects', () => {
         const persistAction = actionTodosToggle({ id: 'a' });
         const source = cold('a', { a: persistAction });
         const actions = new Actions(source);
-        const effect = new TodosEffects(actions, store, localStorage);
+
+        TestBed.overrideProvider(Actions, { useValue: actions });
+
+        effect = TestBed.inject(TodosEffects);
 
         effect.persistTodos.subscribe(() => {
           expect(localStorage.setItem).toHaveBeenCalledWith(

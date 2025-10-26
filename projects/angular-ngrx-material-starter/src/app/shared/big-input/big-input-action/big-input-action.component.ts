@@ -1,9 +1,8 @@
 import {
   Component,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  input,
+  output
 } from '@angular/core';
 
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -16,25 +15,19 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
   standalone: false
 })
 export class BigInputActionComponent {
-  @Input()
-  disabled = false;
-  @Input()
-  fontSet = '';
-  @Input()
-  fontIcon = '';
-  @Input()
-  faIcon: IconProp | undefined;
-  @Input()
-  label = '';
-  @Input()
-  color = '';
+  readonly disabled = input(false);
+  readonly fontSet = input('');
+  readonly fontIcon = input('');
+  readonly faIcon = input<IconProp>();
+  readonly label = input('');
+  readonly color = input('');
 
-  @Output()
-  action = new EventEmitter<void>();
+  readonly action = output<void>();
 
   hasFocus = false;
 
   onClick() {
+    // TODO: The 'emit' function requires a mandatory void argument
     this.action.emit();
   }
 }

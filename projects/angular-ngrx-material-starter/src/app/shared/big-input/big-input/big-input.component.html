@@ -1,9 +1,9 @@
 <mat-card class="big-input"
           [ngClass]="{ 'has-focus': hasFocus }">
-  <input [disabled]="disabled"
-         [placeholder]="placeholder"
-         [value]="value"
+  <input [disabled]="disabled()"
+         [placeholder]="placeholder()"
+         [value]="value()"
          (blur)="hasFocus = false"
          (focus)="hasFocus = true" />
-  <ng-content></ng-content>
+  <ng-content />
 </mat-card>

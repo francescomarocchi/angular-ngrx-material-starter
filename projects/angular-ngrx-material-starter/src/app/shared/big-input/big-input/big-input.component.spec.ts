@@ -1,7 +1,7 @@
 import {
   Component,
   DebugElement,
-  provideExperimentalZonelessChangeDetection
+  provideZonelessChangeDetection
 } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -39,7 +39,7 @@ describe('BigInputComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule, NoopAnimationsModule, HostComponent],
-      providers: [provideExperimentalZonelessChangeDetection()]
+      providers: [provideZonelessChangeDetection()]
     });
     fixture = TestBed.createComponent(HostComponent);
     component = fixture.componentInstance;

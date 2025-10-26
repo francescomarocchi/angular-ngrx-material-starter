@@ -6,7 +6,7 @@ import { SharedModule } from '../../../../shared/shared.module';
 
 import { ChildComponent } from '../child/child.component';
 import { ParentComponent } from './parent.component';
-import { provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ParentComponent', () => {
   let component: ParentComponent;
@@ -16,7 +16,7 @@ describe('ParentComponent', () => {
     TestBed.configureTestingModule({
       imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()],
       declarations: [ParentComponent, ChildComponent],
-      providers: [provideExperimentalZonelessChangeDetection()]
+      providers: [provideZonelessChangeDetection()]
     }).compileComponents();
   });
 

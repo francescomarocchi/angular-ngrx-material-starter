@@ -1,4 +1,10 @@
-import { Directive, ElementRef, OnInit, OnDestroy } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  OnInit,
+  OnDestroy,
+  inject
+} from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
@@ -8,8 +14,14 @@ import { Subscription } from 'rxjs';
   standalone: false
 })
 export class RtlSupportDirective implements OnInit, OnDestroy {
+  private el = inject(ElementRef);
+  translate = inject(TranslateService);
+
   private subscription: Subscription | undefined;
-  constructor(private el: ElementRef, public translate: TranslateService) {
+  constructor() {
+    const el = this.el;
+    const translate = this.translate;
+
     el.nativeElement.style.textAlign =
       translate.currentLang === 'he' || translate.currentLang === 'ar'
         ? 'right'

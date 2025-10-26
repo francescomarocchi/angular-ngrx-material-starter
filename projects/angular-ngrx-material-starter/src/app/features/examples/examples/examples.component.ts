@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject
+} from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import {
@@ -20,7 +25,11 @@ import { State } from '../examples.state';
 export class ExamplesComponent {
   isAuthenticated$: Observable<boolean> | undefined;
 
-  examples = [
+  examples: {
+    label: string;
+    link: string;
+    auth?: boolean;
+  }[] = [
     { link: 'todos', label: 'anms.examples.menu.todos' },
     { link: 'stock-market', label: 'anms.examples.menu.stocks' },
     { link: 'theming', label: 'anms.examples.menu.theming' },
@@ -31,7 +40,9 @@ export class ExamplesComponent {
     { link: 'authenticated', label: 'anms.examples.menu.auth', auth: true }
   ];
 
-  constructor(private store: Store<State>) {
+  private store = inject<Store<State>>(Store);
+
+  constructor() {
     effect(() => {
       this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
     });

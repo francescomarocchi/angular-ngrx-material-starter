@@ -1,34 +1,56 @@
 import * as assert from 'assert';
 import { Router } from '@angular/router';
 import { Actions, getEffectsMetadata } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
+import { provideMockActions } from '@ngrx/effects/testing';
+import { ReplaySubject } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { authLogin, authLogout } from './auth.actions';
-import { AuthEffects, AUTH_KEY } from './auth.effects';
+import { AUTH_KEY, AuthEffects } from './auth.effects';
+import { TestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 const scheduler = new TestScheduler((actual, expected) =>
   assert.deepStrictEqual(actual, expected)
 );
 
 describe('AuthEffects', () => {
+  let actions$: ReplaySubject<Actions>;
   let localStorageService: jest.Mocked<LocalStorageService>;
   let router: jest.Mocked<Router>;
+  let effect: AuthEffects;
 
   beforeEach(() => {
+    actions$ = new ReplaySubject<Actions>(1);
     localStorageService = {
       setItem: jest.fn()
     } as unknown as jest.Mocked<LocalStorageService>;
     router = {
       navigate: jest.fn()
     } as unknown as jest.Mocked<Router>;
+
+    TestBed.configureTestingModule({
+      providers: [
+        provideZonelessChangeDetection(),
+        AuthEffects,
+        provideMockActions(() => actions$),
+        {
+          provide: LocalStorageService,
+          useValue: localStorageService
+        },
+        {
+          provide: Router,
+          useValue: router
+        }
+      ]
+    });
+
+    effect = TestBed.inject(AuthEffects);
   });
 
   describe('login', () => {
     it('should not dispatch any action', () => {
-      const actions = new Actions(EMPTY);
-      const effect = new AuthEffects(actions, localStorageService, router);
       const metadata = getEffectsMetadata(effect);
 
       expect(metadata.login?.dispatch).toEqual(false);
@@ -39,8 +61,6 @@ describe('AuthEffects', () => {
         const { cold } = helpers;
         const loginAction = authLogin();
         const source = cold('a', { a: loginAction });
-        const actions = new Actions(source);
-        const effect = new AuthEffects(actions, localStorageService, router);
 
         effect.login.subscribe(() => {
           expect(localStorageService.setItem).toHaveBeenCalledWith(AUTH_KEY, {
@@ -53,8 +73,6 @@ describe('AuthEffects', () => {
 
   describe('logout', () => {
     it('should not dispatch any action', () => {
-      const actions = new Actions(EMPTY);
-      const effect = new AuthEffects(actions, localStorageService, router);
       const metadata = getEffectsMetadata(effect);
 
       expect(metadata.logout?.dispatch).toEqual(false);
@@ -65,8 +83,6 @@ describe('AuthEffects', () => {
         const { cold } = helpers;
         const logoutAction = authLogout();
         const source = cold('a', { a: logoutAction });
-        const actions = new Actions(source);
-        const effect = new AuthEffects(actions, localStorageService, router);
 
         effect.logout.subscribe(() => {
           expect(localStorageService.setItem).toHaveBeenCalledWith(AUTH_KEY, {

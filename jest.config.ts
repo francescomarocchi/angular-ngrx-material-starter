@@ -20,7 +20,7 @@ const config: Config = {
     ]
   },
   testMatch: ['**/+(*.)+(spec).+(ts|js)?(x)'],
-  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
+  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$|uuid)'],
   moduleNameMapper: {
     '^@app/(.*)$': '<rootDir>/src/app/$1',
     '^@environments/(.*)$': '<rootDir>/src/environments/$1',

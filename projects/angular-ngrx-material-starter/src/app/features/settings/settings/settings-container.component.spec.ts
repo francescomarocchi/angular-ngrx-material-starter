@@ -23,7 +23,7 @@ import {
 } from '../../../core/settings/settings.actions';
 import { selectSettings } from '../../../core/settings/settings.selectors';
 import { SettingsState } from '../../../core/settings/settings.model';
-import { provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 import SpyInstance = jest.SpyInstance;
 
 describe('SettingsComponent', () => {
@@ -46,10 +46,7 @@ describe('SettingsComponent', () => {
         NoopAnimationsModule,
         TranslateModule.forRoot()
       ],
-      providers: [
-        provideMockStore(),
-        provideExperimentalZonelessChangeDetection()
-      ],
+      providers: [provideMockStore(), provideZonelessChangeDetection()],
       declarations: [SettingsContainerComponent]
     }).compileComponents();
 

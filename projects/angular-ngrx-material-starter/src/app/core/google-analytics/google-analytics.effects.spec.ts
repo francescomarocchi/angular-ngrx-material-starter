@@ -1,9 +1,14 @@
 import * as assert from 'assert';
-import { NavigationEnd } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { getEffectsMetadata } from '@ngrx/effects';
 import { TestScheduler } from 'rxjs/testing';
 
 import { GoogleAnalyticsEffects } from './google-analytics.effects';
+import { TestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { AuthEffects } from '../auth/auth.effects';
+import { provideMockActions } from '@ngrx/effects/testing';
+import { LocalStorageService } from '../local-storage/local-storage.service';
 
 const scheduler = new TestScheduler((actual, expected) =>
   assert.deepStrictEqual(actual, expected)
@@ -11,6 +16,7 @@ const scheduler = new TestScheduler((actual, expected) =>
 
 describe('GoogleAnalyticsEffects', () => {
   let router: any;
+  let effect: GoogleAnalyticsEffects;
   const ga = (<any>window).ga;
 
   beforeEach(() => {
@@ -23,6 +29,16 @@ describe('GoogleAnalyticsEffects', () => {
       }
     };
 
+    TestBed.configureTestingModule({
+      providers: [
+        GoogleAnalyticsEffects,
+        provideZonelessChangeDetection(),
+        { provide: Router, useValue: router }
+      ]
+    });
+
+    effect = TestBed.inject(GoogleAnalyticsEffects);
+
     (<any>window).ga = jest.fn();
   });
 
@@ -31,7 +47,6 @@ describe('GoogleAnalyticsEffects', () => {
   });
 
   it('should not dispatch action', () => {
-    const effect = new GoogleAnalyticsEffects(router);
     const metadata = getEffectsMetadata(effect);
 
     expect(metadata.pageView?.dispatch).toEqual(false);
@@ -43,7 +58,6 @@ describe('GoogleAnalyticsEffects', () => {
 
       const routerEvent = new NavigationEnd(1, '', '');
       router.events = cold('a', { a: routerEvent });
-      const effect = new GoogleAnalyticsEffects(router);
 
       effect.pageView().subscribe(() => {
         expect((<any>window).ga).not.toHaveBeenCalled();

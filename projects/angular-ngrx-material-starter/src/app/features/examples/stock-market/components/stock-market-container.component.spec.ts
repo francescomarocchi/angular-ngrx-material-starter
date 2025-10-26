@@ -14,7 +14,7 @@ import { actionStockMarketRetrieve } from '../stock-market.actions';
 import { StockMarketContainerComponent } from './stock-market-container.component';
 import { selectStockMarket } from '../stock-market.selectors';
 import { StockMarketState } from '../stock-market.model';
-import { provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('StockMarketContainerComponent', () => {
   let retrieveStockSpy: jest.SpyInstance;
@@ -53,7 +53,7 @@ describe('StockMarketContainerComponent', () => {
         providers: [
           StockMarketService,
           provideMockStore(),
-          provideExperimentalZonelessChangeDetection()
+          provideZonelessChangeDetection()
         ],
         declarations: [StockMarketContainerComponent]
       }).compileComponents();

@@ -7,7 +7,7 @@
   <div class="row" [ngClass]="routeAnimationsElements" rtl>
     @if (stocks$ | async; as stocks) {
       <div class="col-md-6 col-lg-3">
-        <form autocomplete="false">
+        <form autocomplete="off">
           <mat-form-field>
             <input matInput [placeholder]="'anms.examples.stocks.symbol' | translate"
               [value]="stocks.symbol"
@@ -22,7 +22,7 @@
         </div>
         <div class="col-md-6 col-lg-4 offset-lg-1">
           @if (stocks.loading) {
-            <mat-spinner></mat-spinner>
+            <mat-spinner />
           }
           @if (stocks.stock) {
             <mat-card>
@@ -31,11 +31,11 @@
                 <p [ngClass]="{ negative: stocks.stock.changeNegative }">
                   @if (stocks.stock.changePositive) {
                     <fa-icon icon="caret-up"
-                    ></fa-icon>
+                     />
                   }
                   @if (stocks.stock.changeNegative) {
                     <fa-icon icon="caret-down"
-                    ></fa-icon>
+                     />
                   }
                   {{stocks.stock.change}} ({{stocks.stock.changePercent}}%)
                 </p>
@@ -45,7 +45,7 @@
           }
           @if (stocks.error) {
             <p class="error-state">
-              <fa-icon icon="exclamation-triangle" size="3x"></fa-icon>
+              <fa-icon icon="exclamation-triangle" size="3x" />
               <br><br>
               <span>
                 {{ 'anms.examples.stocks.error1' | translate }}

@@ -1,10 +1,12 @@
 import { Actions, getEffectsMetadata } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
+import { TestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 import { LocalStorageService } from '../../../core/core.module';
 
-import { FormEffects, FORM_KEY } from './form.effects';
+import { FORM_KEY, FormEffects } from './form.effects';
 import { Form } from './form.model';
 import { actionFormUpdate } from './form.actions';
 
@@ -14,17 +16,35 @@ const scheduler = new TestScheduler((actual, expected) =>
 
 describe('FormEffects', () => {
   let localStorageService: jest.Mocked<LocalStorageService>;
+  let actions$: ReplaySubject<Actions>;
+  let effect: FormEffects;
 
   beforeEach(() => {
+    actions$ = new ReplaySubject<Actions>(1);
     localStorageService = {
       setItem: jest.fn()
     } as unknown as jest.Mocked<LocalStorageService>;
+
+    TestBed.configureTestingModule({
+      providers: [
+        provideZonelessChangeDetection(),
+        FormEffects,
+        {
+          provide: LocalStorageService,
+          useValue: localStorageService
+        },
+        {
+          provide: Actions,
+          useValue: actions$
+        }
+      ]
+    });
+
+    effect = TestBed.inject(FormEffects);
   });
 
   describe('persistForm', () => {
     it('should not dispatch any action', () => {
-      const actions = new Actions(EMPTY);
-      const effect = new FormEffects(actions, localStorageService);
       const metadata = getEffectsMetadata(effect);
 
       expect(metadata.persistForm?.dispatch).toEqual(false);
@@ -45,8 +65,6 @@ describe('FormEffects', () => {
         };
         const action = actionFormUpdate({ form });
         const source = cold('a', { a: action });
-        const actions = new Actions(source);
-        const effect = new FormEffects(actions, localStorageService);
 
         effect.persistForm.subscribe(() => {
           expect(localStorageService.setItem).toHaveBeenCalledWith(FORM_KEY, {

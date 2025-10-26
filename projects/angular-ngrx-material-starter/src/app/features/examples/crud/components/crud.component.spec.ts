@@ -8,7 +8,7 @@ import { SharedModule } from '../../../../shared/shared.module';
 
 import { CrudComponent } from './crud.component';
 import { selectAllBooks, selectSelectedBook } from '../books.selectors';
-import { provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('CrudComponent', () => {
   let component: CrudComponent;
@@ -23,10 +23,7 @@ describe('CrudComponent', () => {
         RouterTestingModule,
         TranslateModule.forRoot()
       ],
-      providers: [
-        provideMockStore(),
-        provideExperimentalZonelessChangeDetection()
-      ],
+      providers: [provideMockStore(), provideZonelessChangeDetection()],
       declarations: [CrudComponent]
     }).compileComponents();
     store = TestBed.inject(MockStore);

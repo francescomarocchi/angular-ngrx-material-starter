@@ -1,15 +1,12 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { StockMarketService } from './stock-market.service';
-import { provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('StockMarketService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        StockMarketService,
-        provideExperimentalZonelessChangeDetection()
-      ]
+      providers: [StockMarketService, provideZonelessChangeDetection()]
     });
   });
 

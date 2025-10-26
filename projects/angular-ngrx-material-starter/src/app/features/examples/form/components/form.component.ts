@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  inject
+} from '@angular/core';
 import { Validators, UntypedFormBuilder } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { filter, take, tap } from 'rxjs/operators';
@@ -23,6 +28,11 @@ import { State } from '../../examples.state';
   standalone: false
 })
 export class FormComponent implements OnInit {
+  private fb = inject(UntypedFormBuilder);
+  private store = inject<Store<State>>(Store);
+  private translate = inject(TranslateService);
+  private notificationService = inject(NotificationService);
+
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
 
   form = this.fb.group({
@@ -44,13 +54,6 @@ export class FormComponent implements OnInit {
   });
 
   formValueChanges$: Observable<Form> | undefined;
-
-  constructor(
-    private fb: UntypedFormBuilder,
-    private store: Store<State>,
-    private translate: TranslateService,
-    private notificationService: NotificationService
-  ) {}
 
   ngOnInit() {
     this.formValueChanges$ = this.form.valueChanges.pipe(
