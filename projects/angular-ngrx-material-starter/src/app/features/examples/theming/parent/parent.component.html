@@ -1,3 +1,4 @@
+@let stagger = animationsService.stagger();
 <div class="container">
   <div class="row">
     <div class="col-12">
@@ -5,7 +6,7 @@
     </div>
   </div>
   <div class="row">
-    <div  class="col-md-6" [ngClass]="routeAnimationsElements">
+    <div  class="col-md-6" [animate.enter]="stagger" style="--index: 1;">
       <p rtl>
         {{ 'anms.examples.theming.parent.text1' | translate }} <code>stylesUrls</code>
         {{ 'anms.examples.theming.parent.text2' | translate }} <code>&#64;Component</code>
@@ -25,7 +26,7 @@
 {{themeSrc}}
       </pre>
     </div>
-    <div rtl class="col-md-6" [ngClass]="routeAnimationsElements">
+    <div rtl class="col-md-6" [animate.enter]="stagger" style="--index: 2;">
       <div class="example">
         <h1>{{ 'anms.examples.theming.parent.description' | translate }}</h1>
         <anms-child />

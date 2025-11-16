@@ -9,7 +9,7 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
+import { AnimationsService } from '../../../core/core.module';
 
 import {
   actionSettingsChangeAnimationsElements,
@@ -30,7 +30,7 @@ import { selectSettings } from '../../../core/settings/settings.selectors';
   standalone: false
 })
 export class SettingsContainerComponent implements OnInit {
-  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+  animationsService = inject(AnimationsService);
   settings$: Observable<SettingsState> | undefined;
 
   themes = [

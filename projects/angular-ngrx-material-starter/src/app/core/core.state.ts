@@ -36,8 +36,8 @@ export const selectAuthState = createFeatureSelector<AuthState>('auth');
 export const selectSettingsState =
   createFeatureSelector<SettingsState>('settings');
 
-export const selectRouterState =
-  createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');
+// export const selectRouterState =
+//   createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');
 
 export interface AppState {
   auth: AuthState;

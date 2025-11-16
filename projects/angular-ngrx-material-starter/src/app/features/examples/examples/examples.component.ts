@@ -7,10 +7,7 @@ import {
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import {
-  routeAnimations,
-  selectIsAuthenticated
-} from '../../../core/core.module';
+import { selectIsAuthenticated } from '../../../core/core.module';
 
 import { State } from '../examples.state';
 
@@ -18,7 +15,6 @@ import { State } from '../examples.state';
   selector: 'anms-examples',
   templateUrl: './examples.component.html',
   styleUrls: ['./examples.component.scss'],
-  animations: [routeAnimations],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })

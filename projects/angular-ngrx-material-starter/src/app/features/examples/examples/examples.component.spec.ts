@@ -13,6 +13,7 @@ import { Router, RouterModule, provideRouter } from '@angular/router';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { ExamplesComponent } from './examples.component';
+import { ViewTransitionScopeDirective } from '../../../core/router/transition-scope.directive';
 
 describe('ExamplesComponent', () => {
   let component: ExamplesComponent;
@@ -26,6 +27,7 @@ describe('ExamplesComponent', () => {
         SharedModule,
         NoopAnimationsModule,
         RouterModule,
+        ViewTransitionScopeDirective,
         TranslateModule.forRoot()
       ],
       providers: [

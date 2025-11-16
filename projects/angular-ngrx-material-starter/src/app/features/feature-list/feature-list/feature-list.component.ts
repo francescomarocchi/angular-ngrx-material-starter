@@ -1,6 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  inject
+} from '@angular/core';
 
-import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
+import { AnimationsService } from '../../../core/core.module';
 
 import { Feature, features } from '../feature-list.data';
 
@@ -12,7 +17,7 @@ import { Feature, features } from '../feature-list.data';
   standalone: false
 })
 export class FeatureListComponent implements OnInit {
-  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+  animationsService = inject(AnimationsService);
   features: Feature[] = features;
 
   ngOnInit() {}

@@ -12,7 +12,7 @@ import { take } from 'rxjs/operators';
 import { Observable, of as observableOf } from 'rxjs';
 
 import {
-  ROUTE_ANIMATIONS_ELEMENTS,
+  AnimationsService,
   NotificationService
 } from '../../../../core/core.module';
 
@@ -33,8 +33,8 @@ export class TodosContainerComponent implements OnInit {
   snackBar = inject(MatSnackBar);
   translateService = inject(TranslateService);
   private notificationService = inject(NotificationService);
+  animationsService = inject(AnimationsService);
 
-  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   todos$: Observable<Todo[]> | undefined;
   filter$: Observable<TodosFilter> | undefined;
   removeDoneDisabled$: Observable<boolean> = observableOf(false);

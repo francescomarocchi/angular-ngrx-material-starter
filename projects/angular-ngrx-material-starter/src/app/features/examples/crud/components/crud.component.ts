@@ -5,7 +5,7 @@ import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
+import { AnimationsService } from '../../../../core/core.module';
 
 import { State } from '../../examples.state';
 import { Book } from '../books.model';
@@ -23,8 +23,7 @@ export class CrudComponent {
   store = inject<Store<State>>(Store);
   fb = inject(UntypedFormBuilder);
   private router = inject(Router);
-
-  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+  animationsService = inject(AnimationsService);
 
   bookFormGroup = this.fb.group(CrudComponent.createBook());
   books$: Observable<Book[]> = this.store.pipe(select(selectAllBooks));

@@ -1,3 +1,4 @@
+@let stagger = animationsService.stagger();
 <div class="container">
   <div class="row" rtl>
     <div class="col-sm-12"><h1>{{ 'anms.settings.title' | translate }}</h1></div>
@@ -5,7 +6,7 @@
   <br>
     @if (settings$ | async; as settings) {
       <div class="row" rtl>
-        <div class="col-md-6 group" [ngClass]="routeAnimationsElements">
+        <div class="col-md-6 group" [animate.enter]="stagger" style="--index: 1;">
           <h2>{{ 'anms.settings.general.title' | translate }}</h2>
           <div class="icon-form-field">
             <mat-icon color="accent"><fa-icon icon="language" /></mat-icon>
@@ -39,7 +40,7 @@
         </div>
       </div>
       <div class="row"  rtl>
-        <div class="col-md-6 group" [ngClass]="routeAnimationsElements">
+        <div class="col-md-6 group" [animate.enter]="stagger" style="--index: 2;">
           <h2>{{ 'anms.settings.themes.title' | translate }}</h2>
           <div class="icon-form-field">
             <mat-icon color="accent"><fa-icon icon="paint-brush" color="accent" /></mat-icon>
@@ -64,7 +65,7 @@
               (change)="onAutoNightModeToggle($event)" />
           </div>
         </div>
-        <div class="col-md-6 group" [ngClass]="routeAnimationsElements">
+        <div class="col-md-6 group" [animate.enter]="stagger" style="--index: 3;">
           <h2>{{ 'anms.settings.animations.title' | translate }}</h2>
           <div class="icon-form-field">
             <mat-icon color="accent"><mat-icon color="accent"><fa-icon icon="window-maximize" /></mat-icon></mat-icon>

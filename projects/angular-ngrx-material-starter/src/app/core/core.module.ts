@@ -43,10 +43,6 @@ import {
   faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { AnimationsService } from './animations/animations.service';
-import {
-  ROUTE_ANIMATIONS_ELEMENTS,
-  routeAnimations
-} from './animations/route.animations';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { authLogin, authLogout } from './auth/auth.actions';
 import { selectAuth, selectIsAuthenticated } from './auth/auth.selectors';
@@ -70,8 +66,6 @@ export {
   authLogout,
   LocalStorageService,
   NotificationService,
-  ROUTE_ANIMATIONS_ELEMENTS,
-  routeAnimations,
   selectAuth,
   selectEffectiveTheme,
   selectIsAuthenticated,

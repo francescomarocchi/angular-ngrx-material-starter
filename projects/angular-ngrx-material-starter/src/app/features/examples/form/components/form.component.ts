@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
 import {
-  ROUTE_ANIMATIONS_ELEMENTS,
+  AnimationsService,
   NotificationService
 } from '../../../../core/core.module';
 
@@ -33,7 +33,7 @@ export class FormComponent implements OnInit {
   private translate = inject(TranslateService);
   private notificationService = inject(NotificationService);
 
-  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+  animationsService = inject(AnimationsService);
 
   form = this.fb.group({
     autosave: false,

@@ -34,6 +34,7 @@ import { ChildComponent } from './theming/child/child.component';
 import { ParentComponent } from './theming/parent/parent.component';
 import { TodosContainerComponent } from './todos/components/todos-container.component';
 import { TodosEffects } from './todos/todos.effects';
+import { ViewTransitionScopeDirective } from '../../core/router/transition-scope.directive';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -48,7 +49,8 @@ import { TodosEffects } from './todos/todos.effects';
     }),
     RouterLink,
     RouterLinkActive,
-    RouterOutlet
+    RouterOutlet,
+    ViewTransitionScopeDirective
   ],
   declarations: [
     ExamplesComponent,

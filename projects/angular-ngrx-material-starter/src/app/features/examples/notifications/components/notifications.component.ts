@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 
 import {
-  ROUTE_ANIMATIONS_ELEMENTS,
+  AnimationsService,
   NotificationService
 } from '../../../../core/core.module';
 
@@ -19,8 +19,7 @@ import {
 })
 export class NotificationsComponent implements OnInit {
   private readonly notificationService = inject(NotificationService);
-
-  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+  animationsService = inject(AnimationsService);
 
   ngOnInit() {}
 

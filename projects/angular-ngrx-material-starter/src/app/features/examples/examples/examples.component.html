@@ -1,28 +1,35 @@
-<nav mat-tab-nav-bar class="d-none d-sm-flex" [tabPanel]="tabPanel">
+<nav mat-tab-nav-bar
+     class="d-none d-sm-flex"
+     [tabPanel]="tabPanel">
   @for (e of examples; track e) {
     <a mat-tab-link
-      [routerLink]="e.link"
-      routerLinkActive #rla="routerLinkActive"
-      [active]="rla.isActive"
-      [disabled]="e.auth && !(isAuthenticated$ | async)">
-      {{e.label | translate}}
+       [routerLink]="e.link"
+       routerLinkActive
+       #rla="routerLinkActive"
+       [active]="rla.isActive"
+       [disabled]="e.auth && !(isAuthenticated$ | async)">
+      {{ e.label | translate }}
     </a>
   }
 </nav>
 
 <nav class="nav-responsive d-sm-none d-flex justify-content-center">
-  <mat-select [placeholder]="'anms.examples.title' | translate" [value]="'todos'">
+  <mat-select [placeholder]="'anms.examples.title' | translate"
+              [value]="'todos'">
     @for (e of examples; track e) {
       <mat-option
         [value]="e"
         [routerLink]="e.link"
         [disabled]="e.auth && !(isAuthenticated$ | async)">
-        {{e.label | translate}}
+        {{ e.label | translate }}
       </mat-option>
     }
   </mat-select>
 </nav>
 
-<mat-tab-nav-panel #tabPanel [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig?.path">
-  <router-outlet #o="outlet" />
+<!--<mat-tab-nav-panel #tabPanel [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig?.path">-->
+<mat-tab-nav-panel #tabPanel>
+  <div id="schiattamuort" anmsViewTransitionScope="examples-view" #vts="viewTransitionScope">
+    <router-outlet (activate)="vts.addViewTransitionName()"/>
+  </div>
 </mat-tab-nav-panel>

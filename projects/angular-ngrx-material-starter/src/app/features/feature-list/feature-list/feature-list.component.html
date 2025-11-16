@@ -1,3 +1,4 @@
+@let stagger = animationsService.stagger();
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -5,8 +6,8 @@
     </div>
   </div>
   <div class="row align-items-end">
-    @for (feature of features; track feature) {
-      <div class="col-md-6 col-lg-4" [ngClass]="routeAnimationsElements">
+    @for (feature of features; track feature; let i=$index) {
+      <div class="col-md-6 col-lg-4" [animate.enter]="stagger" [ngStyle]="{ '--index': i }">
         <mat-card>
           <mat-card-title>
             @if (feature.version) {

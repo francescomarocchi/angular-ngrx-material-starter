@@ -96,8 +96,9 @@
         </mat-toolbar>
       </div>
 
-      <div [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig?.data?.title" class="content">
-        <router-outlet #o="outlet" />
+<!--      <div [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig?.data?.title" class="content">-->
+      <div class="content" anmsViewTransitionScope="router-view" #vts="viewTransitionScope">
+        <router-outlet #o="outlet" (activate)="vts.addViewTransitionName()"/>
       </div>
 
       <div class="footer">

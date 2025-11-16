@@ -8,7 +8,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
+import { AnimationsService } from '../../../../core/core.module';
 
 import { selectStockMarket } from '../stock-market.selectors';
 import { actionStockMarketRetrieve } from '../stock-market.actions';
@@ -24,8 +24,8 @@ import { State } from '../../examples.state';
 })
 export class StockMarketContainerComponent implements OnInit {
   store = inject<Store<State>>(Store);
+  animationsService = inject(AnimationsService);
 
-  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   stocks$: Observable<StockMarketState> | undefined;
 
   ngOnInit() {

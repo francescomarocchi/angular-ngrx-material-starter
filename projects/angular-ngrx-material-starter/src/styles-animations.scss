@@ -1,0 +1,67 @@
+::view-transition-old(root) {
+  animation: fade-in 32ms ease-out both forwards;
+}
+::view-transition-new(root) {
+  animation: fade-out 32ms ease-in both forwards;
+}
+
+::view-transition-old(router-view) {
+  animation: slide-out 0.2s ease-in-out forwards;
+}
+::view-transition-new(router-view) {
+  animation: slide-in 0.5s ease-in-out forwards;
+}
+
+::view-transition-old(examples-view) {
+  animation: slide-out 0.2s ease-in-out forwards;
+}
+::view-transition-new(examples-view) {
+  animation: slide-in 0.5s ease-in-out forwards;
+}
+
+.stagger {
+  animation: slide-in 0.5s ease-in-out forwards;
+  animation-delay: calc(75ms * var(--index));
+  opacity: 0;
+  transform: translateY(-10%);
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-3%);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateY(-3%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

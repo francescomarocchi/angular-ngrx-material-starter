@@ -1,3 +1,4 @@
+@let stagger = animationsService.stagger();
 <div class="container">
   <div class="row">
     <div class="offset-md-2 col-md-8 entry">
@@ -84,9 +85,9 @@
             </ng-template>
           </mat-chip>
         </h2>
-        @for (todo of todos; track todo) {
+        @for (todo of todos; track todo; let i = $index) {
           <mat-card class="todo"
-                    [ngClass]="routeAnimationsElements">
+                    [animate.enter]="stagger" [ngStyle]="{ '--index': i }">
             <mat-checkbox class="todo-done"
                           [checked]="todo.done"
                           (change)="onToggleTodo(todo)" />
@@ -103,7 +104,7 @@
     }
     <div class="offset-md-1 col-md-5"
          rtl
-         [ngClass]="routeAnimationsElements">
+         [animate.enter]="stagger" style="--index: 1;">
       <h2>{{ 'anms.examples.todos.example' | translate }}</h2>
       <p>
         {{ 'anms.examples.todos.text1' | translate }}

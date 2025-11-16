@@ -1,10 +1,11 @@
+@let stagger = animationsService.stagger();
 <div class="container" rtl>
   <h1>{{ 'anms.examples.crud.title' | translate }}</h1>
   <div class="row">
     <div class="col-md-6">
       <h2>{{ 'anms.examples.crud.subtitle1' | translate }}</h2>
-      @for (book of (books$ | async); track book) {
-        <mat-card [ngClass]="routeAnimationsElements"
+      @for (book of (books$ | async); track book; let i = $index) {
+        <mat-card [animate.enter]="stagger" [ngStyle]="{ '--index': i }"
                   (click)=select(book)>
           <h3>{{ book.title }}</h3>
           <small>{{ book.author }}</small>
@@ -14,7 +15,7 @@
         <p>{{ 'anms.examples.crud.empty' | translate }}</p>
       }
       @if (!isEditing) {
-        <button type="button" mat-fab color="primary" class="add" [ngClass]="routeAnimationsElements"
+        <button type="button" mat-fab color="primary" class="add" [animate.enter]="stagger" style="--index: 1;"
                 (click)="addNew()">
           <fa-icon icon="plus" />
         </button>
@@ -46,7 +47,7 @@
       </span>
 
       <form [formGroup]="bookFormGroup" [style.display]="isEditing ? 'block' : 'none'"
-            [ngClass]="routeAnimationsElements">
+            [animate.enter]="stagger" style="--index: 2;">
         <div class="row">
           <mat-form-field class="col">
             <input matInput placeholder="{{ 'anms.examples.crud.placeholder1' | translate }}"
@@ -97,14 +98,14 @@
 
       @if (!isEditing) {
         @if (selectedBook$ | async; as selectedBook) {
-          <div [ngClass]="routeAnimationsElements">
+          <div [animate.enter]="stagger" style="--index: 3;">
             <h3>{{ selectedBook.title }}</h3>
             <mat-divider />
             <p>{{ selectedBook.description }}</p>
             <i>{{ selectedBook.author }}</i>
           </div>
         } @else {
-          <p [ngClass]="routeAnimationsElements">
+          <p [animate.enter]="stagger" style="--index: 4;">
             {{ 'anms.examples.crud.text' | translate }} <code>&#64;ngrx/entity</code>.
           </p>
         }

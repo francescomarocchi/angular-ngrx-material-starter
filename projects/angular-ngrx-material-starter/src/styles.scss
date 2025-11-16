@@ -8,6 +8,7 @@
 @use 'bootstrap/scss/bootstrap-grid';
 @use './styles-reset' as *;
 @use './styles-reset.scss-theme' as *;
+@use './styles-animations' as *;
 
 @use './themes/default-theme' as *;
 @use './themes/light-theme' as *;
@@ -61,8 +62,7 @@
   @include custom-components-theme($anms-nature-theme);
 }
 
-// Temporary fixes during upgrade to v15
-// padding has to be applied to internal components now :|
+// TODO: padding has to be applied to internal components now :|
 mat-card {
   padding: 1rem;
 }

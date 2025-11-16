@@ -1,6 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { environment as env } from '../../environments/environment';
@@ -20,10 +20,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   AppState,
-  LocalStorageService,
   authLogin,
   authLogout,
-  routeAnimations,
+  LocalStorageService,
   selectEffectiveTheme,
   selectIsAuthenticated,
   selectSettingsLanguage,
@@ -33,12 +32,13 @@ import {
   actionSettingsChangeAnimationsPageDisabled,
   actionSettingsChangeLanguage
 } from '../core/settings/settings.actions';
+import { ViewTransitionScopeDirective } from '../core/router/transition-scope.directive';
 
 @Component({
   selector: 'anms-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [routeAnimations],
+  // animations: [routeAnimations],
   imports: [
     CommonModule,
     FormsModule,
@@ -53,7 +53,8 @@ import {
     MatSnackBarModule,
     MatButtonModule,
     FontAwesomeModule,
-    TranslateModule
+    TranslateModule,
+    ViewTransitionScopeDirective
   ]
 })
 export class AppComponent implements OnInit {
@@ -81,10 +82,22 @@ export class AppComponent implements OnInit {
   private store = inject<Store<AppState>>(Store);
   private storageService = inject(LocalStorageService);
 
+  static isIeOrEdgeOrSafari() {
+    const userAgent = navigator.userAgent;
+    const isIE11 =
+      userAgent.includes('Trident/7.0') && userAgent.includes('rv:11.0');
+    const isEdgeLegacy =
+      userAgent.includes('Edge/') && !userAgent.includes('Edg/');
+    const isSafari =
+      userAgent.includes('Safari') && !userAgent.includes('Chrome');
+
+    return isIE11 || isEdgeLegacy || isSafari;
+  }
+
   ngOnInit(): void {
     this.storageService.testLocalStorage();
     if (AppComponent.isIeOrEdgeOrSafari()) {
-      this.store.dispatch(
+      this.store.dispatch(() =>
         actionSettingsChangeAnimationsPageDisabled({
           pageAnimationsDisabled: true
         })
@@ -98,28 +111,16 @@ export class AppComponent implements OnInit {
   }
 
   onLoginClick() {
-    this.store.dispatch(authLogin());
+    this.store.dispatch(() => authLogin());
   }
 
   onLogoutClick() {
-    this.store.dispatch(authLogout());
+    this.store.dispatch(() => authLogout());
   }
 
   onLanguageSelect(event: MatSelectChange) {
-    this.store.dispatch(
+    this.store.dispatch(() =>
       actionSettingsChangeLanguage({ language: event.value })
     );
-  }
-
-  static isIeOrEdgeOrSafari() {
-    const userAgent = navigator.userAgent;
-    const isIE11 =
-      userAgent.includes('Trident/7.0') && userAgent.includes('rv:11.0');
-    const isEdgeLegacy =
-      userAgent.includes('Edge/') && !userAgent.includes('Edg/');
-    const isSafari =
-      userAgent.includes('Safari') && !userAgent.includes('Chrome');
-
-    return isIE11 || isEdgeLegacy || isSafari;
   }
 }
