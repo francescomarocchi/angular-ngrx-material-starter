@@ -1,4 +1,4 @@
-import * as assert from 'assert';
+import { expect } from 'vitest';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { TranslateService } from '@ngx-translate/core';
 import { Actions } from '@ngrx/effects';
@@ -22,7 +22,7 @@ import { Router } from '@angular/router';
 import { provideMockActions } from '@ngrx/effects/testing';
 
 const scheduler = new TestScheduler((actual, expected) =>
-  assert.deepStrictEqual(actual, expected)
+  expect(actual).toEqual(expected)
 );
 
 describe('SettingsEffects', () => {

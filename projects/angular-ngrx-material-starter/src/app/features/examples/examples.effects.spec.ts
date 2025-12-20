@@ -1,4 +1,4 @@
-import * as assert from 'assert';
+import { expect } from 'vitest';
 import { ActivationEnd, Router } from '@angular/router';
 import { Actions, getEffectsMetadata } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,7 +16,7 @@ import { EMPTY } from 'rxjs';
 import { provideZonelessChangeDetection } from '@angular/core';
 
 const scheduler = new TestScheduler((actual, expected) =>
-  assert.deepStrictEqual(actual, expected)
+  expect(actual).toEqual(expected)
 );
 
 describe('SettingsEffects', () => {

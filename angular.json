@@ -119,6 +119,9 @@
               "devServerTarget": "angular-ngrx-material-starter:serve:production"
             }
           }
+        },
+        "test": {
+          "builder": "@analogjs/vitest-angular:test"
         }
       }
     }

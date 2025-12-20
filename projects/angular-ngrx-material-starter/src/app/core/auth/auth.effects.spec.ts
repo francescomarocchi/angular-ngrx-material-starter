@@ -1,4 +1,4 @@
-import * as assert from 'assert';
+import { expect } from 'vitest';
 import { Router } from '@angular/router';
 import { Actions, getEffectsMetadata } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
@@ -12,7 +12,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 
 const scheduler = new TestScheduler((actual, expected) =>
-  assert.deepStrictEqual(actual, expected)
+  expect(actual).toEqual(expected)
 );
 
 describe('AuthEffects', () => {

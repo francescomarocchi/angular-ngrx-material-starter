@@ -27,11 +27,13 @@ describe('FormComponent', () => {
   let loader: HarnessLoader;
 
   const getInput = async (fieldName: string): Promise<MatInputHarness> =>
-    (await loader.getHarness(
-      MatInputHarness.with({
-        selector: `[formControlName="${fieldName}"]`
-      } as any) as any
-    )) as unknown as MatInputHarness;
+    loader
+      .getAllHarnesses(MatInputHarness)
+      .then((harnesses) =>
+        harnesses.find(async (h) =>
+          (await h.host()).matchesSelector(`[formControlName="${fieldName}"]`)
+        )
+      ) as Promise<MatInputHarness>;
 
   const getSaveButton = () =>
     loader.getHarness(

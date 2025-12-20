@@ -1,4 +1,4 @@
-import * as assert from 'assert';
+import { expect } from 'vitest';
 import { Store } from '@ngrx/store';
 import { Actions, getEffectsMetadata } from '@ngrx/effects';
 import { EMPTY, of } from 'rxjs';
@@ -15,7 +15,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { TestBed } from '@angular/core/testing';
 
 const scheduler = new TestScheduler((actual, expected) =>
-  assert.deepStrictEqual(actual, expected)
+  expect(actual).toEqual(expected)
 );
 
 describe('TodosEffects', () => {

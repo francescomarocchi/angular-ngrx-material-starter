@@ -1,4 +1,4 @@
-import * as assert from 'assert';
+import { expect } from 'vitest';
 import { NavigationEnd, Router } from '@angular/router';
 import { getEffectsMetadata } from '@ngrx/effects';
 import { TestScheduler } from 'rxjs/testing';
@@ -11,7 +11,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 
 const scheduler = new TestScheduler((actual, expected) =>
-  assert.deepStrictEqual(actual, expected)
+  expect(actual).toEqual(expected)
 );
 
 describe('GoogleAnalyticsEffects', () => {

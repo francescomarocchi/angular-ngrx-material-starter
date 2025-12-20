@@ -47,7 +47,7 @@ describe('StockMarketEffects', () => {
     });
   });
 
-  it('should emit ActionStockMarketRetrieveSuccess on success', (done) => {
+  it('should emit ActionStockMarketRetrieveSuccess on success', async () => {
     scheduler.run((helpers: RunHelpers) => {
       const { cold, expectObservable } = helpers;
       const retrieveAction1 = actionStockMarketRetrieve({
@@ -92,14 +92,14 @@ describe('StockMarketEffects', () => {
         expected,
         values
       );
+    });
 
-      setTimeout(() => {
-        expect(localStorage.setItem).toHaveBeenCalledTimes(3);
-        expect(localStorage.setItem).toHaveBeenCalledWith(STOCK_MARKET_KEY, {
-          symbol
-        });
-        done();
-      });
+    // Wait for async operations to complete
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    expect(localStorage.setItem).toHaveBeenCalledTimes(3);
+    expect(localStorage.setItem).toHaveBeenCalledWith(STOCK_MARKET_KEY, {
+      symbol
     });
   });
 
