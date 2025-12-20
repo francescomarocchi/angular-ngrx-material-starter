@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
@@ -10,7 +9,11 @@ import { FormComponent } from './form.component';
 import { selectFormState } from '../form.selectors';
 import { Form } from '../form.model';
 
-import { HarnessLoader } from '@angular/cdk/testing';
+import {
+  ComponentHarness,
+  HarnessLoader,
+  HarnessQuery
+} from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
@@ -23,10 +26,12 @@ describe('FormComponent', () => {
   let dispatchSpy: jest.SpyInstance;
   let loader: HarnessLoader;
 
-  const getInput = (fieldName: string) =>
-    loader.getHarness(
-      MatInputHarness.with({ selector: `[formControlName="${fieldName}"]` })
-    );
+  const getInput = async (fieldName: string): Promise<MatInputHarness> =>
+    (await loader.getHarness(
+      MatInputHarness.with({
+        selector: `[formControlName="${fieldName}"]`
+      } as any) as any
+    )) as unknown as MatInputHarness;
 
   const getSaveButton = () =>
     loader.getHarness(
@@ -40,7 +45,7 @@ describe('FormComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()],
+      imports: [SharedModule, TranslateModule.forRoot()],
       declarations: [FormComponent],
       providers: [
         provideMockStore(),
