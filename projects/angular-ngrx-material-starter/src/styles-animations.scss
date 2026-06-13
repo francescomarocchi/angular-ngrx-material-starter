@@ -1,3 +1,8 @@
+// fundamental to keep header over the page slide in animation
+::view-transition-group(toolbar) {
+  z-index: 10;
+}
+
 ::view-transition-old(root) {
   animation: fade-in 32ms ease-out both forwards;
 }

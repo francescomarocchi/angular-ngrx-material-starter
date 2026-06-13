@@ -1,32 +1,31 @@
-import { selectTodosFilter } from './../todos.selectors';
 import {
-  Component,
-  OnInit,
   ChangeDetectionStrategy,
-  inject
+  Component,
+  inject,
+  OnInit
 } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { select, Store } from '@ngrx/store';
-import { take } from 'rxjs/operators';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Observable, of as observableOf } from 'rxjs';
-
+import { take } from 'rxjs/operators';
 import {
   AnimationsService,
   NotificationService
 } from '../../../../core/core.module';
-
+import { SharedModule } from '../../../../shared/shared.module';
+import { State } from '../../examples.state';
 import * as todoActions from '../todos.actions';
 import { Todo, TodosFilter } from '../todos.model';
-import { selectTodos, selectRemoveDoneTodosDisabled } from '../todos.selectors';
-import { State } from '../../examples.state';
+import { selectRemoveDoneTodosDisabled, selectTodos } from '../todos.selectors';
+import { selectTodosFilter } from './../todos.selectors';
 
 @Component({
   selector: 'anms-todos',
   templateUrl: './todos-container.component.html',
   styleUrls: ['./todos-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  imports: [TranslatePipe, SharedModule]
 })
 export class TodosContainerComponent implements OnInit {
   store = inject<Store<State>>(Store);

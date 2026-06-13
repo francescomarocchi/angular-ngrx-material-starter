@@ -10,13 +10,21 @@ import { Observable } from 'rxjs';
 import { selectIsAuthenticated } from '../../../core/core.module';
 
 import { State } from '../examples.state';
+import { TranslatePipe } from '@ngx-translate/core';
+import { SharedModule } from '../../../shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { ViewTransitionScopeDirective } from '../../../core/router/transition-scope.directive';
 
 @Component({
   selector: 'anms-examples',
   templateUrl: './examples.component.html',
   styleUrls: ['./examples.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  imports: [
+    TranslatePipe,
+    SharedModule,
+    RouterModule,
+    ViewTransitionScopeDirective
+  ]
 })
 export class ExamplesComponent {
   isAuthenticated$: Observable<boolean> | undefined;

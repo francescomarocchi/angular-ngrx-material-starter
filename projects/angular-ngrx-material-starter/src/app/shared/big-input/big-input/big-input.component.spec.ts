@@ -21,7 +21,6 @@ import { BigInputComponent } from './big-input.component';
     >
     </anms-big-input>
   `,
-  standalone: true,
   imports: [SharedModule]
 })
 class HostComponent {

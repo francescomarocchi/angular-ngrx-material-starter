@@ -1,14 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'anms-child',
   templateUrl: './child.component.html',
   styleUrls: ['./child.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  imports: [TranslatePipe]
 })
-export class ChildComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class ChildComponent {}

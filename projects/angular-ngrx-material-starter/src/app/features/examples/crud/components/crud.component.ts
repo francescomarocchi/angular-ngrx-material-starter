@@ -1,23 +1,22 @@
-import { v4 as uuid } from 'uuid';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
-import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
+import { v4 as uuid } from 'uuid';
 import { AnimationsService } from '../../../../core/core.module';
-
 import { State } from '../../examples.state';
-import { Book } from '../books.model';
 import { actionBooksDeleteOne, actionBooksUpsertOne } from '../books.actions';
-import { selectSelectedBook, selectAllBooks } from '../books.selectors';
+import { Book } from '../books.model';
+import { selectAllBooks, selectSelectedBook } from '../books.selectors';
+import { TranslatePipe } from '@ngx-translate/core';
+import { SharedModule } from '../../../../shared/shared.module';
 
 @Component({
   selector: 'anms-crud',
   templateUrl: './crud.component.html',
   styleUrls: ['./crud.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  imports: [TranslatePipe, SharedModule]
 })
 export class CrudComponent {
   store = inject<Store<State>>(Store);

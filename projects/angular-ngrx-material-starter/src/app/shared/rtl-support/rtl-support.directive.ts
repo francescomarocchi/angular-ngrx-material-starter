@@ -23,11 +23,11 @@ export class RtlSupportDirective implements OnInit, OnDestroy {
     const translate = this.translate;
 
     el.nativeElement.style.textAlign =
-      translate.currentLang === 'he' || translate.currentLang === 'ar'
+      translate.getCurrentLang() === 'he' || translate.getCurrentLang() === 'ar'
         ? 'right'
         : 'left';
     el.nativeElement.style.direction =
-      translate.currentLang === 'he' || translate.currentLang === 'ar'
+      translate.getCurrentLang() === 'he' || translate.getCurrentLang() === 'ar'
         ? 'rtl'
         : 'ltr';
   }

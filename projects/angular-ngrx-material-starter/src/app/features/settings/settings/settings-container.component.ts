@@ -21,13 +21,15 @@ import {
 } from '../../../core/settings/settings.actions';
 import { SettingsState, State } from '../../../core/settings/settings.model';
 import { selectSettings } from '../../../core/settings/settings.selectors';
+import { TranslatePipe } from '@ngx-translate/core';
+import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'anms-settings',
   templateUrl: './settings-container.component.html',
   styleUrls: ['./settings-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  imports: [SharedModule, TranslatePipe]
 })
 export class SettingsContainerComponent implements OnInit {
   animationsService = inject(AnimationsService);

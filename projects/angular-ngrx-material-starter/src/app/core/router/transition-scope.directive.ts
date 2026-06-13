@@ -12,8 +12,7 @@ import { AnimationsService } from '../core.module';
 
 @Directive({
   selector: '[anmsViewTransitionScope]',
-  exportAs: 'viewTransitionScope',
-  standalone: true
+  exportAs: 'viewTransitionScope'
 })
 export class ViewTransitionScopeDirective implements OnDestroy {
   private static readonly transitionNameProperty = 'view-transition-name';

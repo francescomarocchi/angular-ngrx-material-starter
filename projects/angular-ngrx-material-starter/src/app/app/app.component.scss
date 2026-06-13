@@ -16,6 +16,9 @@ mat-sidenav-container {
     display: flex;
     z-index: 10;
 
+    // fundamental to keep header over the page slide in animation
+    view-transition-name: toolbar;
+
     .nav-button {
       margin: 0 10px 0 0;
     }

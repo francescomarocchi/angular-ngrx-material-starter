@@ -1,23 +1,14 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  inject
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { AnimationsService } from '../../../core/core.module';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'anms-authenticated',
   templateUrl: './authenticated.component.html',
   styleUrls: ['./authenticated.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  imports: [TranslatePipe]
 })
-export class AuthenticatedComponent implements OnInit {
+export class AuthenticatedComponent {
   animationsService = inject(AnimationsService);
-
-  constructor() {}
-
-  ngOnInit() {}
 }

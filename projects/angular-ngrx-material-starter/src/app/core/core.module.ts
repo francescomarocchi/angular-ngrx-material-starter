@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
-  withFetch,
   withInterceptorsFromDi
 } from '@angular/common/http';
 import { ErrorHandler, inject, NgModule } from '@angular/core';
@@ -20,7 +19,7 @@ import {
   FontAwesomeModule
 } from '@fortawesome/angular-fontawesome';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { environment } from '../../environments/environment';
@@ -90,8 +89,8 @@ export {
     MatSnackBarModule,
     MatButtonModule,
     // 3rd party
-    FontAwesomeModule,
-    TranslateModule
+    FontAwesomeModule
+    // TranslateModule
   ],
   imports: [
     // angular
@@ -113,13 +112,7 @@ export {
           name: 'Angular NgRx Material Starter'
         }),
     // 3rd party
-    FontAwesomeModule,
-    TranslateModule.forRoot({
-      loader: provideTranslateHttpLoader({
-        prefix: `${environment.i18nPrefix}/assets/i18n/`,
-        suffix: '.json'
-      })
-    })
+    FontAwesomeModule
   ],
   providers: [
     {
@@ -128,7 +121,15 @@ export {
     },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: AppErrorHandler },
-    provideHttpClient(withInterceptorsFromDi(), withFetch())
+    provideHttpClient(withInterceptorsFromDi()),
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix: `${environment.i18nPrefix}/assets/i18n/`,
+        suffix: '.json'
+      }),
+      fallbackLang: 'en',
+      lang: 'en'
+    })
   ]
 })
 export class CoreModule {

@@ -1,33 +1,26 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  inject
-} from '@angular/core';
-import { Validators, UntypedFormBuilder } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { filter, take, tap } from 'rxjs/operators';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-
+import { filter, take, tap } from 'rxjs/operators';
 import {
   AnimationsService,
   NotificationService
 } from '../../../../core/core.module';
-
-import { actionFormReset, actionFormUpdate } from '../form.actions';
-import { selectFormState } from '../form.selectors';
-import { Form } from '../form.model';
 import { State } from '../../examples.state';
+import { actionFormReset, actionFormUpdate } from '../form.actions';
+import { Form } from '../form.model';
+import { selectFormState } from '../form.selectors';
+import { SharedModule } from '../../../../shared/shared.module';
 
 @Component({
   selector: 'anms-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  imports: [TranslatePipe, SharedModule]
 })
-export class FormComponent implements OnInit {
+export class FormComponent {
   private fb = inject(UntypedFormBuilder);
   private store = inject<Store<State>>(Store);
   private translate = inject(TranslateService);

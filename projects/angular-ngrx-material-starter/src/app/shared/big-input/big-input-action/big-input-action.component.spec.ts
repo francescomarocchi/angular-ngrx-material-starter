@@ -8,8 +8,7 @@ import { SharedModule } from '../../shared.module';
 @Component({
   selector: 'anms-host-for-test',
   template: '',
-  imports: [SharedModule],
-  standalone: true
+  imports: [SharedModule]
 })
 class HostComponent {
   actionHandler = () => {};

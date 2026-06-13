@@ -1,10 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  inject
-} from '@angular/core';
+import { Component, inject } from '@angular/core';
 
+import { TranslatePipe } from '@ngx-translate/core';
 import {
   AnimationsService,
   NotificationService
@@ -14,14 +10,11 @@ import {
   selector: 'anms-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  imports: [TranslatePipe]
 })
-export class NotificationsComponent implements OnInit {
+export class NotificationsComponent {
   private readonly notificationService = inject(NotificationService);
   animationsService = inject(AnimationsService);
-
-  ngOnInit() {}
 
   default() {
     this.notificationService.default('Default message');

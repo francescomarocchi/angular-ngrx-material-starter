@@ -1,7 +1,7 @@
 import { NgModule, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+// import { TranslateModule } from '@ngx-translate/core';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -56,7 +56,7 @@ import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
     CommonModule,
     FormsModule,
 
-    TranslateModule,
+    // TranslateModule,
 
     MatButtonModule,
     MatSelectModule,
@@ -86,7 +86,7 @@ import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
     FormsModule,
     ReactiveFormsModule,
 
-    TranslateModule,
+    // TranslateModule,
 
     MatButtonModule,
     MatMenuModule,

@@ -14,13 +14,14 @@ import { selectStockMarket } from '../stock-market.selectors';
 import { actionStockMarketRetrieve } from '../stock-market.actions';
 import { StockMarketState } from '../stock-market.model';
 import { State } from '../../examples.state';
+import { TranslatePipe } from '@ngx-translate/core';
+import { SharedModule } from '../../../../shared/shared.module';
 
 @Component({
   selector: 'anms-stock-market',
   templateUrl: './stock-market-container.component.html',
   styleUrls: ['./stock-market-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  imports: [TranslatePipe, SharedModule]
 })
 export class StockMarketContainerComponent implements OnInit {
   store = inject<Store<State>>(Store);

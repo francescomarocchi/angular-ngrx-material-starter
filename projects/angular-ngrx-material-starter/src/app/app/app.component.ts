@@ -1,23 +1,25 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-
-import { environment as env } from '../../environments/environment';
-
 import { CommonModule } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TranslateModule } from '@ngx-translate/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { environment as env } from '../../environments/environment';
 import {
   AppState,
   authLogin,
@@ -28,17 +30,19 @@ import {
   selectSettingsLanguage,
   selectSettingsStickyHeader
 } from '../core/core.module';
+import { ViewTransitionScopeDirective } from '../core/router/transition-scope.directive';
 import {
   actionSettingsChangeAnimationsPageDisabled,
   actionSettingsChangeLanguage
 } from '../core/settings/settings.actions';
-import { ViewTransitionScopeDirective } from '../core/router/transition-scope.directive';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'anms-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   // animations: [routeAnimations],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     CommonModule,
     FormsModule,
@@ -53,7 +57,7 @@ import { ViewTransitionScopeDirective } from '../core/router/transition-scope.di
     MatSnackBarModule,
     MatButtonModule,
     FontAwesomeModule,
-    TranslateModule,
+    TranslatePipe,
     ViewTransitionScopeDirective
   ]
 })

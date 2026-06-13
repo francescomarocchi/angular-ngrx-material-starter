@@ -1,20 +1,16 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  inject
-} from '@angular/core';
+import { Component, inject } from '@angular/core';
 
+import { TranslatePipe } from '@ngx-translate/core';
 import { AnimationsService } from '../../../../core/core.module';
+import { ChildComponent } from '../child/child.component';
 
 @Component({
   selector: 'anms-parent',
   templateUrl: './parent.component.html',
   styleUrls: ['./parent.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  imports: [TranslatePipe, ChildComponent]
 })
-export class ParentComponent implements OnInit {
+export class ParentComponent {
   themeSrc = `@use '@angular/material' as mat;
 
 @mixin anms-parent-component-theme($theme) {
@@ -35,8 +31,4 @@ export class ParentComponent implements OnInit {
   }
 }`;
   animationsService = inject(AnimationsService);
-
-  constructor() {}
-
-  ngOnInit() {}
 }
