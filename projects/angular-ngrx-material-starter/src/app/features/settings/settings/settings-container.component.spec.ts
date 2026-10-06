@@ -1,29 +1,29 @@
-import { By } from '@angular/platform-browser';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateModule } from '@ngx-translate/core';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { MemoizedSelector } from '@ngrx/store';
 import {
   FaIconLibrary,
   FontAwesomeModule
 } from '@fortawesome/angular-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { MemoizedSelector } from '@ngrx/store';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideTranslateService } from '@ngx-translate/core';
 
 import { SharedModule } from '../../../shared/shared.module';
 
-import { SettingsContainerComponent } from './settings-container.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 import {
   actionSettingsChangeAnimationsElements,
   actionSettingsChangeAnimationsPage,
   actionSettingsChangeAutoNightMode,
-  actionSettingsChangeTheme,
-  actionSettingsChangeStickyHeader
+  actionSettingsChangeStickyHeader,
+  actionSettingsChangeTheme
 } from '../../../core/settings/settings.actions';
-import { selectSettings } from '../../../core/settings/settings.selectors';
 import { SettingsState } from '../../../core/settings/settings.model';
-import { provideZonelessChangeDetection } from '@angular/core';
+import { selectSettings } from '../../../core/settings/settings.selectors';
+import { SettingsContainerComponent } from './settings-container.component';
 import SpyInstance = jest.SpyInstance;
 
 describe('SettingsComponent', () => {
@@ -44,10 +44,13 @@ describe('SettingsComponent', () => {
         FontAwesomeModule,
         SharedModule,
         NoopAnimationsModule,
-        TranslateModule.forRoot()
+        SettingsContainerComponent
       ],
-      providers: [provideMockStore(), provideZonelessChangeDetection()],
-      declarations: [SettingsContainerComponent]
+      providers: [
+        provideMockStore(),
+        provideZonelessChangeDetection(),
+        provideTranslateService()
+      ]
     }).compileComponents();
 
     TestBed.inject(FaIconLibrary).addIcons(faBars);

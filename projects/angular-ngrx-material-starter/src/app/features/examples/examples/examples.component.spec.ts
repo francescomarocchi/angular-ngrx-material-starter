@@ -9,11 +9,11 @@ import {
   withInterceptorsFromDi
 } from '@angular/common/http';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { Router, RouterModule, provideRouter } from '@angular/router';
+import { provideRouter, Router, RouterModule } from '@angular/router';
 import { provideMockStore } from '@ngrx/store/testing';
-import { TranslateModule } from '@ngx-translate/core';
-import { ExamplesComponent } from './examples.component';
+import { provideTranslateService } from '@ngx-translate/core';
 import { ViewTransitionScopeDirective } from '../../../core/router/transition-scope.directive';
+import { ExamplesComponent } from './examples.component';
 
 describe('ExamplesComponent', () => {
   let component: ExamplesComponent;
@@ -22,13 +22,12 @@ describe('ExamplesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ExamplesComponent],
       imports: [
         SharedModule,
         NoopAnimationsModule,
         RouterModule,
         ViewTransitionScopeDirective,
-        TranslateModule.forRoot()
+        ExamplesComponent
       ],
       providers: [
         provideMockStore({
@@ -41,7 +40,8 @@ describe('ExamplesComponent', () => {
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
         provideRouter([]),
-        provideZonelessChangeDetection()
+        provideZonelessChangeDetection(),
+        provideTranslateService()
       ]
     }).compileComponents();
   });

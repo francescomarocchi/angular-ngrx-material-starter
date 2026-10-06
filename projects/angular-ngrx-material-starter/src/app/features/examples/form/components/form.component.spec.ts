@@ -1,23 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TranslateModule } from '@ngx-translate/core';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideTranslateService } from '@ngx-translate/core';
 
 import { NotificationService } from '../../../../core/core.module';
 import { SharedModule } from '../../../../shared/shared.module';
 
-import { FormComponent } from './form.component';
-import { selectFormState } from '../form.selectors';
 import { Form } from '../form.model';
+import { selectFormState } from '../form.selectors';
+import { FormComponent } from './form.component';
 
-import {
-  ComponentHarness,
-  HarnessLoader,
-  HarnessQuery
-} from '@angular/cdk/testing';
+import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { MatInputHarness } from '@angular/material/input/testing';
-import { MatButtonHarness } from '@angular/material/button/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
+import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatInputHarness } from '@angular/material/input/testing';
 
 describe('FormComponent', () => {
   let store: MockStore;
@@ -47,12 +43,12 @@ describe('FormComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [SharedModule, TranslateModule.forRoot()],
-      declarations: [FormComponent],
+      imports: [SharedModule, FormComponent],
       providers: [
         provideMockStore(),
         NotificationService,
-        provideZonelessChangeDetection()
+        provideZonelessChangeDetection(),
+        provideTranslateService()
       ]
     });
 

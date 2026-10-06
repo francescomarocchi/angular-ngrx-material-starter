@@ -1,14 +1,14 @@
-import { RouterTestingModule } from '@angular/router/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { TranslateModule } from '@ngx-translate/core';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideTranslateService } from '@ngx-translate/core';
 
 import { SharedModule } from '../../../../shared/shared.module';
 
-import { CrudComponent } from './crud.component';
-import { selectAllBooks, selectSelectedBook } from '../books.selectors';
 import { provideZonelessChangeDetection } from '@angular/core';
+import { selectAllBooks, selectSelectedBook } from '../books.selectors';
+import { CrudComponent } from './crud.component';
 
 describe('CrudComponent', () => {
   let component: CrudComponent;
@@ -21,10 +21,13 @@ describe('CrudComponent', () => {
         SharedModule,
         NoopAnimationsModule,
         RouterTestingModule,
-        TranslateModule.forRoot()
+        CrudComponent
       ],
-      providers: [provideMockStore(), provideZonelessChangeDetection()],
-      declarations: [CrudComponent]
+      providers: [
+        provideMockStore(),
+        provideZonelessChangeDetection(),
+        provideTranslateService()
+      ]
     }).compileComponents();
     store = TestBed.inject(MockStore);
     store.overrideSelector(selectAllBooks, []);

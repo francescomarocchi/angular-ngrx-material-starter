@@ -1,16 +1,16 @@
-import { By } from '@angular/platform-browser';
 import {
   Component,
   DebugElement,
   provideZonelessChangeDetection
 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { By } from '@angular/platform-browser';
+import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 
-import { RtlSupportDirective } from './rtl-support.directive';
-import { BehaviorSubject, of } from 'rxjs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BehaviorSubject } from 'rxjs';
 import { SharedModule } from '../shared.module';
+import { RtlSupportDirective } from './rtl-support.directive';
 
 @Component({
   template: `
@@ -32,12 +32,13 @@ describe('RtlSupportDirective', () => {
   beforeEach(() => {
     languageSubject = new BehaviorSubject({ lang: 'he' });
     fixture = TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, TranslateModule.forRoot(), TestComponent],
+      imports: [NoopAnimationsModule, TestComponent],
       providers: [
         {
           provide: TranslateService,
           useValue: {
             currentLang: 'he',
+            getCurrentLang: () => 'he',
             onLangChange: languageSubject.asObservable()
           }
         },

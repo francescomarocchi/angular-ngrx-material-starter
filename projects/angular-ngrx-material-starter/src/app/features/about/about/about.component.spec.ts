@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService } from '@ngx-translate/core';
 
 import { SharedModule } from '../../../shared/shared.module';
 
-import { AboutComponent } from './about.component';
 import { provideZonelessChangeDetection } from '@angular/core';
+import { AboutComponent } from './about.component';
 
 describe('AboutComponent', () => {
   let component: AboutComponent;
@@ -13,9 +13,8 @@ describe('AboutComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()],
-      declarations: [AboutComponent],
-      providers: [provideZonelessChangeDetection()]
+      imports: [SharedModule, NoopAnimationsModule, AboutComponent],
+      providers: [provideZonelessChangeDetection(), provideTranslateService()]
     }).compileComponents();
   });
 

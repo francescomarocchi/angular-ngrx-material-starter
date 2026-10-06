@@ -7,7 +7,7 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatMenuHarness } from '@angular/material/menu/testing';
 import { MemoizedSelector } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService } from '@ngx-translate/core';
 
 import { SharedModule } from '../../../../shared/shared.module';
 
@@ -63,9 +63,12 @@ describe('TodosComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()],
-      declarations: [TodosContainerComponent],
-      providers: [provideMockStore(), provideZonelessChangeDetection()]
+      imports: [SharedModule, NoopAnimationsModule, TodosContainerComponent],
+      providers: [
+        provideMockStore(),
+        provideZonelessChangeDetection(),
+        provideTranslateService()
+      ]
     });
 
     store = TestBed.inject(MockStore);

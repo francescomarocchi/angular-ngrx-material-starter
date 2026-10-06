@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService } from '@ngx-translate/core';
 
 import { NotificationService } from '../../../../core/core.module';
 import { SharedModule } from '../../../../shared/shared.module';
 
-import { NotificationsComponent } from './notifications.component';
 import { provideZonelessChangeDetection } from '@angular/core';
+import { NotificationsComponent } from './notifications.component';
 
 describe('NotificationsComponent', () => {
   let component: NotificationsComponent;
@@ -14,9 +14,12 @@ describe('NotificationsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()],
-      providers: [NotificationService, provideZonelessChangeDetection()],
-      declarations: [NotificationsComponent]
+      imports: [SharedModule, NoopAnimationsModule, NotificationsComponent],
+      providers: [
+        NotificationService,
+        provideZonelessChangeDetection(),
+        provideTranslateService()
+      ]
     }).compileComponents();
   });
 

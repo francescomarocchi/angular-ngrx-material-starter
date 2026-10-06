@@ -2,7 +2,7 @@ import { By } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService, TranslateModule } from '@ngx-translate/core';
 import { MemoizedSelector } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { EMPTY } from 'rxjs';
@@ -48,14 +48,14 @@ describe('StockMarketContainerComponent', () => {
         imports: [
           SharedModule,
           NoopAnimationsModule,
-          TranslateModule.forRoot()
+          StockMarketContainerComponent
         ],
         providers: [
           StockMarketService,
           provideMockStore(),
-          provideZonelessChangeDetection()
-        ],
-        declarations: [StockMarketContainerComponent]
+          provideZonelessChangeDetection(),
+          provideTranslateService()
+        ]
       }).compileComponents();
 
       const stockMarketService =

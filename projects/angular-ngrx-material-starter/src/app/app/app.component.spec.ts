@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService, TranslateModule } from '@ngx-translate/core';
 
 import {
   selectEffectiveTheme,
@@ -19,10 +19,11 @@ describe('AppComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, TranslateModule.forRoot()],
+      imports: [NoopAnimationsModule],
       providers: [
         provideRouter([]),
         provideMockStore(),
+        provideTranslateService(),
         provideZonelessChangeDetection()
       ]
     }).compileComponents();
