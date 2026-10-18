@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Router } from '@angular/router';
 import { ofType, createEffect, Actions } from '@ngrx/effects';
 import { tap } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { authLogin, authLogout } from './auth.actions';
 
 export const AUTH_KEY = 'AUTH';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class AuthEffects {
   private actions$ = inject(Actions);
   private localStorageService = inject(LocalStorageService);

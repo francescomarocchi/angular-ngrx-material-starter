@@ -41,8 +41,6 @@ import { TranslatePipe } from '@ngx-translate/core';
   selector: 'anms-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  // animations: [routeAnimations],
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     CommonModule,
     FormsModule,

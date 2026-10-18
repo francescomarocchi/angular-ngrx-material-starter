@@ -1,14 +1,12 @@
 import { Title } from '@angular/platform-browser';
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs/operators';
 
 import { environment as env } from '../../../environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class TitleService {
   private translateService = inject(TranslateService);
   private title = inject(Title);

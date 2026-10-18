@@ -17,7 +17,6 @@ import {
   selector: 'anms-tables',
   templateUrl: './tables.component.html',
   styleUrls: ['./tables.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatTableModule, MatPaginatorModule, CdkDropList, CdkDrag]
 })
 export class TablesComponent {

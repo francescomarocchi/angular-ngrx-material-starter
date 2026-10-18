@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, debounceTime, map, switchMap, tap } from 'rxjs/operators';
@@ -14,7 +14,7 @@ import { StockMarketService } from './stock-market.service';
 
 export const STOCK_MARKET_KEY = 'EXAMPLES.STOCKS';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class StockMarketEffects {
   private actions$ = inject(Actions);
   private localStorageService = inject(LocalStorageService);

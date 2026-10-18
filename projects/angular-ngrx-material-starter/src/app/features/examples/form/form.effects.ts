@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, Service, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { tap } from 'rxjs/operators';
 
@@ -8,7 +8,7 @@ import { actionFormUpdate } from './form.actions';
 
 export const FORM_KEY = 'EXAMPLES.FORM';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class FormEffects {
   private actions$ = inject(Actions);
   private localStorageService = inject(LocalStorageService);

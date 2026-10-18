@@ -1,9 +1,7 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class NotificationService {
   private readonly snackBar = inject(MatSnackBar);
 

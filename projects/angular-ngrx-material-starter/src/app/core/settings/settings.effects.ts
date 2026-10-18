@@ -1,5 +1,5 @@
 import { ActivationEnd, Router } from '@angular/router';
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { select, Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -39,7 +39,7 @@ export const SETTINGS_KEY = 'SETTINGS';
 
 const INIT = of('anms-init-effect-trigger');
 
-@Injectable()
+@Service({ autoProvided: false })
 export class SettingsEffects {
   private actions$ = inject(Actions);
   private store = inject<Store<State>>(Store);
