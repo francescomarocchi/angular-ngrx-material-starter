@@ -136,15 +136,24 @@ export class FormComponent {
   }
 
   submit() {
-    return submit(this.form, async () => {
-      this.save();
-      this.notificationService.info(
-        (this.model().requestGift
-          ? this.translate.instant('anms.examples.form.text4')
-          : this.translate.instant('anms.examples.form.text5')) +
-          ' : ' +
-          this.translate.instant('anms.examples.form.text6')
-      );
+    return submit(this.form, {
+      action: async () => {
+        this.save();
+        this.notificationService.info(
+          (this.model().requestGift
+            ? this.translate.instant('anms.examples.form.text4')
+            : this.translate.instant('anms.examples.form.text5')) +
+            ' : ' +
+            this.translate.instant('anms.examples.form.text6')
+        );
+      },
+      ignoreValidators: 'none',
+      onInvalid(field) {
+        const errors = field().errorSummary();
+        if (errors.length > 0) {
+          errors[0].fieldTree().focusBoundControl();
+        }
+      }
     });
   }
 

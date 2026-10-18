@@ -28,7 +28,6 @@ import { SharedModule } from '../../../shared/shared.module';
   selector: 'anms-settings',
   templateUrl: './settings-container.component.html',
   styleUrls: ['./settings-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [SharedModule, TranslatePipe]
 })
 export class SettingsContainerComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -13,7 +13,7 @@ import {
 } from '../../core/core.module';
 import { actionSettingsChangeLanguage } from '../../core/settings/settings.actions';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class ExamplesEffects {
   private actions$ = inject(Actions);
   private store = inject<Store<AppState>>(Store);

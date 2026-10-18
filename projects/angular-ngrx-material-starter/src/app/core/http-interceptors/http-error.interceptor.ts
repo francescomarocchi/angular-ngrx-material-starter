@@ -1,4 +1,4 @@
-import { Injectable, Injector, ErrorHandler, inject } from '@angular/core';
+import { Injector, ErrorHandler, inject, Service } from '@angular/core';
 import {
   HttpEvent,
   HttpInterceptor,
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 /** Passes HttpErrorResponse to application-wide error handler */
-@Injectable()
+@Service({ autoProvided: false })
 export class HttpErrorInterceptor implements HttpInterceptor {
   private injector = inject(Injector);
 

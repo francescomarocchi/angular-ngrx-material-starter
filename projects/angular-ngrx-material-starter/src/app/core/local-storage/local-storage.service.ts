@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 
 const APP_PREFIX = 'ANMS-';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class LocalStorageService {
   constructor() {}
 

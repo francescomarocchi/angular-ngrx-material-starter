@@ -24,7 +24,6 @@ import { selectTodosFilter } from './../todos.selectors';
   selector: 'anms-todos',
   templateUrl: './todos-container.component.html',
   styleUrls: ['./todos-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [TranslatePipe, SharedModule]
 })
 export class TodosContainerComponent implements OnInit {

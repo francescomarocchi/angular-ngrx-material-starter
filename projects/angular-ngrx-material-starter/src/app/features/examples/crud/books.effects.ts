@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { tap, withLatestFrom } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { selectBooks } from './books.selectors';
 
 export const BOOKS_KEY = 'EXAMPLES.BOOKS';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class BooksEffects {
   private actions$ = inject(Actions);
   private store = inject<Store<State>>(Store);

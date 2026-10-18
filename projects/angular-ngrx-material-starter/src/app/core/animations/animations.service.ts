@@ -1,8 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { signal, Service } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class AnimationsService {
   stagger = signal<'stagger' | null>(null);
   page = signal<boolean>(false);

@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { Stock } from './stock-market.model';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class StockMarketService {
   constructor() {}
 

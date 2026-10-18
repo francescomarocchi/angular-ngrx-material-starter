@@ -15,7 +15,6 @@ import { SharedModule } from '../../../shared/shared.module';
   selector: 'anms-feature-list',
   templateUrl: './feature-list.component.html',
   styleUrls: ['./feature-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [SharedModule, TranslatePipe]
 })
 export class FeatureListComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { tap, withLatestFrom } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { selectTodosState } from './todos.selectors';
 
 export const TODOS_KEY = 'EXAMPLES.TODOS';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class TodosEffects {
   private actions$ = inject(Actions);
   private store = inject<Store<State>>(Store);

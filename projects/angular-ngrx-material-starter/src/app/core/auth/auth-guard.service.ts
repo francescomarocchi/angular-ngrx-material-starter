@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -6,9 +6,7 @@ import { Observable } from 'rxjs';
 import { selectIsAuthenticated } from './auth.selectors';
 import { AppState } from '../core.state';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class AuthGuardService {
   private store = inject<Store<AppState>>(Store);
 

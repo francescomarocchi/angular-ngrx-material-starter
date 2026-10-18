@@ -1,9 +1,9 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { createEffect } from '@ngrx/effects';
 import { tap, filter } from 'rxjs/operators';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class GoogleAnalyticsEffects {
   private router = inject(Router);
 
