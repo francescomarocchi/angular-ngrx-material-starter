@@ -40,7 +40,7 @@
   "anms.examples.form.text4": "礼物已发送！",
   "anms.examples.form.text5": "没有发送礼物",
   "anms.examples.form.text6": "鼓掌",
-  "anms.examples.form.title": "使用 FormBuilder 的响应式表单",
+  "anms.examples.form.title": "结合 NgRx 的 Signal Forms",
   "anms.examples.menu.auth": "鉴权",
   "anms.examples.menu.crud": "增删改查",
   "anms.examples.menu.form": "表单",

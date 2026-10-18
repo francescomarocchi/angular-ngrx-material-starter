@@ -40,7 +40,7 @@
   "anms.examples.form.text4": "تم إرسال الهدية!",
   "anms.examples.form.text5": "لم يتم إرسال هدية.",
   "anms.examples.form.text6": "صفق",
-  "anms.examples.form.title": "REACTIVE FORM باستخدام FORM BUILDER",
+  "anms.examples.form.title": "Signal Forms باستخدام NgRx",
   "anms.examples.menu.auth": "المصادقة",
   "anms.examples.menu.crud": "CRUD",
   "anms.examples.menu.form": "نموذج",

@@ -40,7 +40,7 @@
   "anms.examples.form.text4": "מתנה נשלחה!",
   "anms.examples.form.text5": "מתנה לא נשלחה.",
   "anms.examples.form.text6": "מחיאת כף",
-  "anms.examples.form.title": " טופס ריאקטיבי בעזרת form builder",
+  "anms.examples.form.title": "Signal Forms עם NgRx",
   "anms.examples.menu.auth": "אימות",
   "anms.examples.menu.crud": "קראד",
   "anms.examples.menu.form": "טופס",

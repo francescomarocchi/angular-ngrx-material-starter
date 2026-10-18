@@ -40,7 +40,7 @@
   "anms.examples.form.text4": "¡Regalo enviado!",
   "anms.examples.form.text5": "Ningún regalo enviado.",
   "anms.examples.form.text6": "Aplaudir",
-  "anms.examples.form.title": "Forma reactiva usando un generador de formas",
+  "anms.examples.form.title": "Signal Forms con NgRx",
   "anms.examples.menu.auth": "Autenticación",
   "anms.examples.menu.crud": "CRUD",
   "anms.examples.menu.form": "Formar",

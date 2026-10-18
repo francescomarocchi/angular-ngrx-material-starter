@@ -40,7 +40,7 @@
   "anms.examples.form.text4": "Presente enviado!",
   "anms.examples.form.text5": "Nenhum presente é enviado.",
   "anms.examples.form.text6": "Aplaudir",
-  "anms.examples.form.title": "Formulário reativo usando um construtor de formulários",
+  "anms.examples.form.title": "Signal Forms com NgRx",
   "anms.examples.menu.auth": "Auth",
   "anms.examples.menu.crud": "CRUD",
   "anms.examples.menu.form": "Formato",

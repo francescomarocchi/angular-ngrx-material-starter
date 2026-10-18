@@ -5,7 +5,7 @@ export interface Form {
   email: string;
   description: string;
   requestGift: boolean;
-  birthday: Date;
+  birthday: Date | null;
   rating: number;
 }
 
